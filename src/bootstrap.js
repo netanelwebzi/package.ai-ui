@@ -134,18 +134,13 @@ import jQuery from 'jquery';
 
 window.$ = window.jQuery = jQuery;
 
+// ui libraries
+require('flexboxgrid/css/flexboxgrid.min.css');
 
-/* ============
- * Bootstrap
- * ============
- *
- * Require bootstrap
- *
- * http://getbootstrap.com/
- */
-require('bootstrap');
-require('bootstrap/less/bootstrap.less');
-
+// element ui
+import ElementUI from 'element-ui'
+import locale from 'element-ui/lib/locale/lang/en'
+Vue.use(ElementUI, { locale })
 
 /* ============
  * Font Awesome
@@ -173,7 +168,7 @@ require('font-awesome/less/font-awesome.less');
  *
  * http://stylus-lang.com/
  */
-require('./assets/stylus/app.styl');
+require('./assets/scss/main.scss');
 
 
 export default {
