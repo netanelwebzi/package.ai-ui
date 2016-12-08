@@ -3,7 +3,7 @@ import logout from './logout';
 import register from './register';
 
 export default {
-  login,
-  logout,
-  register,
+	login,
+	logout,
+	register,
 };

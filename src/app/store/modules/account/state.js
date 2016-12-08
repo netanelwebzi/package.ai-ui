@@ -1,5 +1,5 @@
 export default {
-  email: null,
-  firstName: null,
-  lastName: null,
+	email: null,
+	firstName: null,
+	lastName: null,
 };
