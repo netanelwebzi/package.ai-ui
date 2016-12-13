@@ -1,0 +1,11 @@
+<app-layout>
+	<div class="row middle-md middle-xs middle-lg center-md center-xs center-lg" style="height:85vh;">
+		<div class="col-xs-6 col-md-4 col-lg-4">
+			<h1>Map Component</h1>
+		</div>
+	</div>	
+	<package-map
+	:center="{lat:0, lng:0}"
+	@g-click="clicked++"
+	></package-map>	
+</app-layout>

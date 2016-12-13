@@ -2,65 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f7a8030a-a580-4fc6-8207-7d65d438e0aa" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/app/layouts/auth/minimal.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/app/layouts/main/default.html" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/app/layouts/default/default.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/app/layouts/minimal/minimal.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/app/pages/account/index/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/app/pages/account/index/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/app/pages/account/index/index.vue" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/app/pages/register/index/index.html" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/app/pages/register/index/index.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/app/pages/register/index/index.vue" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/app/layouts/default/default.js" afterPath="$PROJECT_DIR$/src/app/layouts/main/default.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/app/layouts/default/default.vue" afterPath="$PROJECT_DIR$/src/app/layouts/main/default.vue" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/app/layouts/minimal/minimal.js" afterPath="$PROJECT_DIR$/src/app/layouts/auth/minimal.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/app/layouts/minimal/minimal.vue" afterPath="$PROJECT_DIR$/src/app/layouts/auth/minimal.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.babelrc" afterPath="$PROJECT_DIR$/.babelrc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.eslintrc.js" afterPath="$PROJECT_DIR$/.eslintrc.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/build.js" afterPath="$PROJECT_DIR$/build/build.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/dev-client.js" afterPath="$PROJECT_DIR$/build/dev-client.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/dev-server.js" afterPath="$PROJECT_DIR$/build/dev-server.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/utils.js" afterPath="$PROJECT_DIR$/build/utils.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/webpack.base.conf.js" afterPath="$PROJECT_DIR$/build/webpack.base.conf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/webpack.dev.conf.js" afterPath="$PROJECT_DIR$/build/webpack.dev.conf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/webpack.prod.conf.js" afterPath="$PROJECT_DIR$/build/webpack.prod.conf.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/dev.env.js" afterPath="$PROJECT_DIR$/config/dev.env.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/index.js" afterPath="$PROJECT_DIR$/config/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/prod.env.js" afterPath="$PROJECT_DIR$/config/prod.env.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/config/test.env.js" afterPath="$PROJECT_DIR$/config/test.env.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/index.vue" afterPath="$PROJECT_DIR$/src/app/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/locale/en/index.js" afterPath="$PROJECT_DIR$/src/app/locale/en/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/locale/index.js" afterPath="$PROJECT_DIR$/src/app/locale/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/mixins/slot.js" afterPath="$PROJECT_DIR$/src/app/mixins/slot.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/pages/home/index/index.html" afterPath="$PROJECT_DIR$/src/app/pages/home/index/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/pages/home/index/index.js" afterPath="$PROJECT_DIR$/src/app/pages/home/index/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/pages/login/index/index.html" afterPath="$PROJECT_DIR$/src/app/pages/login/index/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/pages/login/index/index.js" afterPath="$PROJECT_DIR$/src/app/pages/login/index/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/pages/login/index/index.vue" afterPath="$PROJECT_DIR$/src/app/pages/login/index/index.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/routes.js" afterPath="$PROJECT_DIR$/src/app/routes.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/services/account/find.js" afterPath="$PROJECT_DIR$/src/app/services/account/find.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/services/account/index.js" afterPath="$PROJECT_DIR$/src/app/services/account/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/services/auth/index.js" afterPath="$PROJECT_DIR$/src/app/services/auth/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/services/auth/login.js" afterPath="$PROJECT_DIR$/src/app/services/auth/login.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/services/auth/logout.js" afterPath="$PROJECT_DIR$/src/app/services/auth/logout.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/services/auth/register.js" afterPath="$PROJECT_DIR$/src/app/services/auth/register.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/store/actions.js" afterPath="$PROJECT_DIR$/src/app/store/actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/store/index.js" afterPath="$PROJECT_DIR$/src/app/store/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/store/modules/account/index.js" afterPath="$PROJECT_DIR$/src/app/store/modules/account/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/store/modules/account/mutations.js" afterPath="$PROJECT_DIR$/src/app/store/modules/account/mutations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/store/modules/account/state.js" afterPath="$PROJECT_DIR$/src/app/store/modules/account/state.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/store/modules/auth/index.js" afterPath="$PROJECT_DIR$/src/app/store/modules/auth/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/store/modules/auth/mutations.js" afterPath="$PROJECT_DIR$/src/app/store/modules/auth/mutations.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/store/modules/auth/state.js" afterPath="$PROJECT_DIR$/src/app/store/modules/auth/state.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/transformers/account.js" afterPath="$PROJECT_DIR$/src/app/transformers/account.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/app/transformers/transformer.js" afterPath="$PROJECT_DIR$/src/app/transformers/transformer.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/assets/scss/main.scss" afterPath="$PROJECT_DIR$/src/assets/scss/main.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/bootstrap.js" afterPath="$PROJECT_DIR$/src/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yarn.lock" afterPath="$PROJECT_DIR$/yarn.lock" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -81,8 +23,8 @@
       <file leaf-file-name="index.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/app/pages/login/index/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="23" column="52" lean-forward="false" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+            <state relative-caret-position="275">
+              <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#form#0;n#el-card#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
@@ -512,16 +454,16 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1481149284529</updated>
-      <workItem from="1481149287846" duration="5192000" />
+      <workItem from="1481149287846" duration="5831000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5192000" />
+    <option name="totallyTimeSpent" value="5831000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="805" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -532,7 +474,7 @@
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41304347" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.41304347" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -725,8 +667,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/app/pages/login/index/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="23" column="52" lean-forward="false" selection-start-line="23" selection-start-column="52" selection-end-line="23" selection-end-column="52" />
+        <state relative-caret-position="275">
+          <caret line="27" column="14" lean-forward="true" selection-start-line="27" selection-start-column="14" selection-end-line="27" selection-end-column="14" />
           <folding>
             <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#0;n#form#0;n#el-card#0;n#div#0;n#div#0;n#div#0;n#div#0;n#!!top" expanded="true" />

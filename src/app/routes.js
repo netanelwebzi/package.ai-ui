@@ -14,27 +14,37 @@
 export default [
 	// Home
 	{
-		path: '/home',
-		name: 'home.index',
-		component: require('pages/home/index/index.vue'),
+		path: '/dashboard',
+		name: 'app.dashboard',
+		component: require('pages/app/dashboard/dashboard.vue'),
 
 		// If the user needs to be authenticated to view this page
 		meta: {
-			auth: true,
+			guest: true,
 		},
 	},
 
 	// Login
 	{
 		path: '/login',
-		name: 'login.index',
-		component: require('pages/login/index/index.vue'),
+		name: 'auth.login',
+		component: require('pages/auth/login/login.vue'),
 
 		// If the user needs to be a guest to view this page
 		meta: {
 			guest: true,
 		},
 	},
+	{
+		path: '/forgot-password',
+		name: 'auth.forgot-password',
+		component: require('pages/auth/forgot-password/forgot-password.vue'),
+
+		// If the user needs to be a guest to view this page
+		meta: {
+			guest: true,
+		},
+	},	
 	{
 		path: '/',
 		redirect: '/home',

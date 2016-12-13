@@ -5,8 +5,8 @@
  * Page where the user can login
  */
 
-import authService from './../../../services/auth';
-
+import authService from './../../../services/auth'
+import AuthLayout from './../../../layouts/auth/auth.vue'
 export default {
 
 	data() {
@@ -14,6 +14,7 @@ export default {
 			user: {
 				username: null,
 				password: null,
+				remember: true
 			},
 			loading: false,
 			checked: true
@@ -27,5 +28,6 @@ export default {
 	},
 
 	components: {
+		authLayout: AuthLayout
 	},
 };

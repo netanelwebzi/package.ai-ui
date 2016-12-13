@@ -83,7 +83,7 @@ router.beforeEach((to, from, next) => {
 		 * a page that requires authentication, redirect to the login page
 		 */
 		next({
-			name: 'login.index',
+			name: 'auth.login',
 		});
 	} else if (to.matched.some(m => m.meta.guest) && store.state.auth.authenticated) {
 		/*
@@ -91,7 +91,7 @@ router.beforeEach((to, from, next) => {
 		 * an guest page, redirect to the dashboard page
 		 */
 		next({
-			name: 'home.index',
+			name: 'app.dashboard',
 		});
 	} else {
 		next();
@@ -137,11 +137,16 @@ window.$ = window.jQuery = jQuery;
 // ui libraries
 require('flexboxgrid/dist/flexboxgrid.min.css');
 
-// element ui
-import ElementUI from 'element-ui'
-import ElementUILocale from 'element-ui/lib/locale/lang/en'
-import 'element-ui/lib/theme-default/index.css'
-Vue.use(ElementUI, {ElementUILocale})
+// vue material
+import VueMaterial from 'vue-material'
+import 'vue-material/dist/vue-material.css'
+Vue.use(VueMaterial)
+Vue.material.theme.register('default', {
+  primary: 'indigo',
+  accent: 'blue', // default is pink
+  warn: 'deep-orange',
+  background: 'grey'
+})
 
 /* ============
  * Font Awesome
@@ -157,17 +162,6 @@ require('font-awesome/less/font-awesome.less');
 /* ============
  * Styling
  * ============
- *
- * Require the application styling.
- * Stylus is used for this boilerplate.
- *
- * If you don't want to use Stylus, that's fine!
- * Replace the stylus directory with the CSS preprocessor you want.
- * Require the entry point here & install the webpack loader.
- *
- * It's that easy...
- *
- * http://stylus-lang.com/
  */
 require('./assets/scss/main.scss');
 

@@ -1,0 +1,27 @@
+<div class="layout" v-md-theme="'default'">
+	<md-toolbar id="app-toolbar">
+		<a href="/#/dashboard"><img src="~assets/img/logo.png" alt=""></a>
+		<div class="pull-right">
+			<strong>
+				Today, 13/12/2016
+			</strong>
+			<md-icon>dashboard</md-icon>
+			<md-avatar class="md-avatar-icon md-primary md-raised">
+			<md-icon>face</md-icon>
+			</md-avatar>			
+			Netanel Edri
+		</div>
+	</md-toolbar>	
+	<md-toolbar id="app-sub-toolbar" class="md-accent">
+		<h2 class="md-title" style="flex: 1">
+			Route ID <strong>12312312</strong>
+		</h2>
+		<md-button class="md-raised">
+			<md-icon>favorite</md-icon>
+			RUN Jenny, RUN !
+		</md-button>		
+	</md-toolbar>
+	<div class="container-fluid wrap">		
+		<slot></slot>
+	</div>
+</div>					
