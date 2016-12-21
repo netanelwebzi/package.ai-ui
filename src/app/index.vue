@@ -35,7 +35,7 @@
       if (this.$store.state.auth.authenticated) {
         accountService.find();
       }
-    },
+    }
   };
 
 

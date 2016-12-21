@@ -11,7 +11,19 @@
 import authService from './../../services/auth';
 
 export default {
+	data() {
+		const d = new Date();
+		return {
+			showDropdownBox: false,
+			todayDate: d.getDate() + '/' + parseInt(d.getMonth() + 1) + '/' + d.getFullYear()
+		}
+	},
 	methods: {
+		onLogoutConfirmClose(button) {
+			if(button == 'ok'){
+				this.$router.push({name: 'auth.login'})
+			}
+		},
 		logout() {
 			authService.logout();
 		},

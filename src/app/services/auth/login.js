@@ -7,7 +7,7 @@ const success = (token) => {
 	store.dispatch('login', token);
 	accountService.find();
 	Vue.router.push({
-		name: 'home.index',
+		name: 'app.dashboard',
 	});
 };
 

@@ -50,3 +50,37 @@ body {
 .text-center {
   text-align: center;
 }
+
+.jenny-button {
+  background: url('~assets/img/jenny_button_icon.png') no-repeat 5px bottom;
+  padding-left: 50px;
+  font-weight: bold;
+  padding: 5px 10px 5px 50px;
+}
+
+.md-dialog {
+  background: #fff;
+}
+
+.jenny-dialog {
+  text-align: center;
+
+  h3 {
+    color: #2196F3;
+    font-size: 19px;
+  }
+
+  p {
+    line-height: 24px;
+    padding-bottom: 20px;
+  }
+
+  .md-dialog-content > strong {
+    font-size: 20px;
+  }
+
+  .md-dialog-actions {
+    display: block;
+    text-align: center;
+  }
+}

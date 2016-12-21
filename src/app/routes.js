@@ -47,10 +47,10 @@ export default [
 	},	
 	{
 		path: '/',
-		redirect: '/home',
+		redirect: '/dashboard',
 	},
 	{
 		path: '/*',
-		redirect: '/home',
+		redirect: '/dashboard',
 	},
 ];

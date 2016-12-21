@@ -1,27 +1,67 @@
-<div class="layout" v-md-theme="'default'">
+<div class="layout" v-md-theme="'indigo_yellow'">
+	<md-dialog :md-click-outside-to-close="false" :md-esc-to-close="false" ref="jennyDialog" class="jenny-dialog">
+		<md-dialog-content>
+			<img src="~assets/img/jenny_dialog_icon.png" alt="">
+			<h3>Hi, John Doe</h3>
+			<p>
+				I'm about to contact <strong>123</strong> recipients and<br />
+				export the route to the driver.
+			</p>
+			<strong>Are you sure you want me to go ahead ?</strong>
+		</md-dialog-content>
+		<md-dialog-actions>
+			<md-button v-md-theme="'default'" class="md-raised" @click="$refs.jennyDialog.close()">Cancel</md-button>
+			<md-button v-md-theme="'default'" class="md-raised md-primary" @click="$refs.jennyDialog.close()">Yes</md-button>
+		</md-dialog-actions>
+	</md-dialog>
+	<md-dialog-confirm
+			md-title="Just a second"
+			:md-content-html="'Are you sure you want to logout ?'"
+			md-ok-text="Yes, take me out"
+			md-cancel-text="Nope, Im staying"
+			@close="onLogoutConfirmClose"
+			ref="logoutConfirmDialog">
+	</md-dialog-confirm>
 	<md-toolbar id="app-toolbar">
 		<a href="/#/dashboard"><img src="~assets/img/logo.png" alt=""></a>
-		<div class="pull-right">
-			<strong>
-				Today, 13/12/2016
-			</strong>
-			<md-icon>dashboard</md-icon>
-			<md-avatar class="md-avatar-icon md-primary md-raised">
-			<md-icon>face</md-icon>
-			</md-avatar>			
-			Netanel Edri
+		<transition name="fade">
+			<md-whiteframe md-elevation="2" id="dropdown-box" v-if="showDropdownBox">2dp</md-whiteframe>
+		</transition>
+		<div class="pull-right" id="right-actions">
+			<ul>
+				<li>
+					<strong>Today, {{ todayDate }}</strong>
+				</li>
+				<li>
+					<md-button class="md-icon-button md-raised" @click="showDropdownBox=!showDropdownBox">
+						<md-icon>dashboard</md-icon>
+					</md-button>
+				</li>
+				<li>
+					<md-menu :md-offset-x="10" md-offset-y="60">
+						<md-button md-menu-trigger>
+							<span>Netanel Edri</span>
+							<md-avatar class="md-avatar-icon md-raised">
+								<md-icon>face</md-icon>
+							</md-avatar>		  
+						</md-button>
+
+						<md-menu-content>
+							<md-menu-item>Profile</md-menu-item>
+							<md-menu-item @click="$refs.logoutConfirmDialog.open()">Sign out</md-menu-item>
+						</md-menu-content>
+					</md-menu>											
+				</li>
+			</ul>		
 		</div>
 	</md-toolbar>	
 	<md-toolbar id="app-sub-toolbar" class="md-accent">
 		<h2 class="md-title" style="flex: 1">
 			Route ID <strong>12312312</strong>
 		</h2>
-		<md-button class="md-raised">
-			<md-icon>favorite</md-icon>
+		<md-button class="md-raised md-accent jenny-button" id="jenny-button" @click="$refs.jennyDialog.open()">
 			RUN Jenny, RUN !
 		</md-button>		
 	</md-toolbar>
-	<div class="container-fluid wrap">		
-		<slot></slot>
-	</div>
+	<slot></slot>
 </div>					

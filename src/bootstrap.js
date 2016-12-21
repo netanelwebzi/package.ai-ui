@@ -141,11 +141,19 @@ require('flexboxgrid/dist/flexboxgrid.min.css');
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.css'
 Vue.use(VueMaterial)
-Vue.material.theme.register('default', {
-  primary: 'indigo',
-  accent: 'blue', // default is pink
-  warn: 'deep-orange',
-  background: 'grey'
+Vue.material.theme.registerAll({
+	indigo_pink: {
+		primary: 'indigo',
+		accent: 'pink', // default is pink
+		warn: 'deep-orange',
+		background: 'grey'
+	},
+	indigo_yellow: {
+		primary: 'indigo',
+		accent: 'yellow', // default is pink
+		warn: 'deep-orange',
+		background: 'grey'
+	}
 })
 
 /* ============

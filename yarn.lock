@@ -4854,6 +4854,10 @@ vm-browserify@0.0.4:
   dependencies:
     indexof "0.0.1"
 
+vue-animate@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/vue-animate/-/vue-animate-0.0.4.tgz#bf7afcdfec4694e4d19147a75f6761ecf3735f8f"
+
 vue-google-maps@^0.1.21:
   version "0.1.21"
   resolved "https://registry.yarnpkg.com/vue-google-maps/-/vue-google-maps-0.1.21.tgz#19b6fa3df39ff293dca1cf3925f4f287d0f95bac"
@@ -4867,6 +4871,23 @@ vue-hot-reload-api@^2.0.1:
 vue-i18n@^4.6.0:
   version "4.7.1"
   resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-4.7.1.tgz#2ea8e2528274c4d389bc918a0cf8c601fae77929"
+
+vue-loader@^10.0.0:
+  version "10.0.2"
+  resolved "https://registry.yarnpkg.com/vue-loader/-/vue-loader-10.0.2.tgz#6fe7bcefb32c5439bd0338464aa22673ad62299c"
+  dependencies:
+    consolidate "^0.14.0"
+    hash-sum "^1.0.2"
+    js-beautify "^1.6.3"
+    loader-utils "^0.2.10"
+    lru-cache "^4.0.1"
+    object-assign "^4.0.0"
+    postcss "^5.0.10"
+    postcss-selector-parser "^2.0.0"
+    source-map "^0.5.6"
+    vue-hot-reload-api "^2.0.1"
+    vue-style-loader "^1.0.0"
+    vue-template-es2015-compiler "^1.2.2"
 
 vue-loader@^9.4.0:
   version "9.8.1"
@@ -4896,6 +4917,10 @@ vue-router@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/vue-router/-/vue-router-2.0.1.tgz#88b83cdc9497bad5b20b579e847a7e7240e221dd"
 
+vue-spinner@^1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vue-spinner/-/vue-spinner-1.0.2.tgz#682e84c26494a43d045ada1ff2a95a29d4080880"
+
 vue-style-loader@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/vue-style-loader/-/vue-style-loader-1.0.0.tgz#abeb7bd0f46313083741244d3079d4f14449e049"
@@ -4912,6 +4937,16 @@ vue-template-compiler@^2.0.4:
 vue-template-es2015-compiler@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.1.1.tgz#ae1ddcf9f6c7eb95df304560ba9a803f3ec9ffb4"
+
+vue-template-es2015-compiler@^1.2.2:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.4.0.tgz#7b88853ca4bf8d84ae54ab9e56771de271e60198"
+
+vue2-google-maps@^0.4.4:
+  version "0.4.4"
+  resolved "https://registry.yarnpkg.com/vue2-google-maps/-/vue2-google-maps-0.4.4.tgz#3858362593919b6a4b99a64cbbfe246d25466af7"
+  dependencies:
+    vue-loader "^10.0.0"
 
 vue@^2.0.3:
   version "2.0.5"

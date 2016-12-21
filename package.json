@@ -40,10 +40,13 @@
 		"node-sass": "^3.13.0",
 		"sass-loader": "^4.0.2",
 		"vue": "^2.0.3",
+		"vue-animate": "^0.0.4",
 		"vue-google-maps": "^0.1.21",
 		"vue-i18n": "^4.6.0",
 		"vue-material": "^0.4.1",
 		"vue-router": "^2.0.1",
+		"vue-spinner": "^1.0.2",
+		"vue2-google-maps": "^0.4.4",
 		"vuex": "^2.0.0",
 		"vuex-router-sync": "^3.0.0"
 	},
