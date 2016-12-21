@@ -32,7 +32,23 @@
 				</div>
 			</transition>
 			<div class="col-xs">
-				<!-- Map -->
+        <gmap-map
+          :center="center"
+          :zoom="7"
+        >
+          <gmap-marker
+            v-for="m in markers"
+            :position="m.position"
+            :clickable="true"
+            :draggable="false"
+            @click.native="showPopup(m, $event)"
+          >
+            <gmap-info-window
+              :opened="m.opened"
+              :content="m.text"
+            ></gmap-info-window>
+          </gmap-marker>
+        </gmap-map>
 			</div>
 		</div>
 	</div>
