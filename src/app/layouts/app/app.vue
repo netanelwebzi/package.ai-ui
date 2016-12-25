@@ -28,6 +28,19 @@
 		    transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
 	    }
 
+	    #dropdown-box::after {
+		    height: 0px;
+		    width: 0px;
+		    border-bottom: 10px solid #fff;
+		    border-left: 10px solid transparent;
+		    border-right: 10px solid transparent;
+		    position: absolute;
+		    left: 50%;
+		    top: -10px;
+		    margin-left: -10px;
+		    content: ' ';
+	    }
+
         #right-actions {
             .md-menu button {
                 margin-top: 1px;

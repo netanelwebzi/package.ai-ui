@@ -37,6 +37,7 @@
     "flexboxgrid": "^6.3.1",
     "font-awesome": "^4.6.3",
     "jquery": "^3.1.0",
+    "marker-clusterer-plus": "^2.1.4",
     "node-sass": "^3.13.0",
     "sass-loader": "^4.0.2",
     "vue": "2.1.6",
@@ -45,6 +46,7 @@
     "vue-material": "^0.4.1",
     "vue-router": "^2.0.1",
     "vue-spinner": "^1.0.2",
+    "vue2-google-maps": "^0.4.10",
     "vuex": "^2.0.0",
     "vuex-router-sync": "^3.0.0"
   },

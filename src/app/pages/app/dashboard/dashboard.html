@@ -35,17 +35,22 @@
         <gmap-map
           :center="center"
           :zoom="7"
+		  :zoomControl="true"
+		  :scaleControl="true"
+		  :draggable="true"
+		  :options="options"
         >
           <gmap-marker
             v-for="m in markers"
             :position="m.position"
             :clickable="true"
             :draggable="false"
-            @click.native="showPopup(m, $event)"
+            @click="m.opened=true"
           >
             <gmap-info-window
-              :opened="m.opened"
               :content="m.text"
+              :opened="m.opened"
+              @closeclick="m.opened=false"
             ></gmap-info-window>
           </gmap-marker>
         </gmap-map>
