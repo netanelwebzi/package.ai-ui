@@ -4,17 +4,26 @@
 		<div class="row">
 			<div class="col-xs-4">
 				<md-whiteframe md-tag="section" id="list-panel">
-					<md-list class="custom-list md-triple-line">
-						<md-list-item v-for="n in 10" @click="selectedItem=n" :class="{selected: selectedItem == n}">
+					<div class="file-drop" @click="fileUploaded()" v-if="setup.step === 1">
+						<!--<file-upload ref="fileUploader" :events="fileUploadedEvents" post-action="https://httpbin.org/post" :drop="true"></file-upload>-->
+						<div>
+							<div>
+								<md-icon>backup</md-icon>
+								<div>
+									Drag & drop your delivery list here
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<md-list class="custom-list md-triple-line" v-if="setup.step === 2 || setup.step === 3">
+						<md-list-item v-for="item in setup.items" @click="selectItem(item)" :class="{ selected: setup.selectedItem === item }">
 							<div class="md-list-text-container">
-								<span>Ali Connors</span>
-								<span>Brunch this weekend?</span>
-								<p>I'll be in your neighborhood doing errands...</p>
+								<h1>{{ item.title }}</h1>
+								<h2>{{ item.address }}</h2>
+								<p>{{ item.description }}</p>
 							</div>
 
-							<md-button class="md-icon-button md-list-action">
-								<md-icon class="md-primary">star</md-icon>
-							</md-button>
 							<md-button class="md-icon-button md-list-action">
 								<md-icon class="md-primary">star</md-icon>
 							</md-button>
@@ -24,13 +33,44 @@
 					</md-list>
 				</md-whiteframe>
 			</div>
-			<transition name="fade">
-				<div class="col-xs" v-if="selectedItem !== null">
+			<!--<transition name="fade">-->
+				<div class="col-xs" v-if="setup.step === 3">
 					<md-whiteframe md-tag="section" id="chat-panel">
-
+						<div class="item-details">
+							<div class="row">
+								<div class="col-xs-8">
+									<div class="title">
+										{{ setup.selectedItem.title }}
+									</div>
+									<div class="spacer-20"></div>
+									
+									<md-input-container>
+										<label>Address</label>
+										<md-input v-model="setup.selectedItem.address"></md-input>
+									</md-input-container>
+									<md-input-container>
+										<label>Time slot</label>
+										<md-input v-model="setup.selectedItem.timeSlot"></md-input>
+									</md-input-container>
+								</div>
+								<div class="col-xs-4">
+									<div class="status">
+										<md-icon class="md-primary">done</md-icon>
+										<div>
+											Done!
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="cancel">
+								<md-button class="md-primary md-icon-button" @click="unselectItem()">
+									<md-icon>clear</md-icon>
+								</md-button>
+							</div>
+						</div>
 					</md-whiteframe>
 				</div>
-			</transition>
+			<!--</transition>-->
 			<div class="col-xs">
         <gmap-map
           :center="center"

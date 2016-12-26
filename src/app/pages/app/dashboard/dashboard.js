@@ -6,7 +6,9 @@
  */
 
 import AppLayout from './../../../layouts/app/app.vue'
-import * as VueGoogleMaps from 'vue2-google-maps';
+import * as VueGoogleMaps from 'vue2-google-maps'
+import FileUpload from 'vue-upload-component'
+import store from '../../../utils/store'
 import Vue from 'vue';
 
 Vue.use(VueGoogleMaps, {
@@ -18,6 +20,12 @@ Vue.use(VueGoogleMaps, {
 export default {
 	data() {
 		return {
+			setup: store.getters.setup,
+			fileUploadedEvents: {
+				add: (file, component) => {
+					component.active = true
+				}
+			},
 			popup: {
 				opened: false,
 				position: {}
@@ -44,12 +52,46 @@ export default {
 	},
 	components: {
 		appLayout: AppLayout,
-		components: {
+			FileUpload: FileUpload,
 			gmapMap: VueGoogleMaps.Map,
 			gmapMarker: VueGoogleMaps.Marker
-		}
 	},
 	methods: {
+		fileUploaded() {
+			this.setup = {
+				step: 2,
+				items: [
+					{
+						id: 1,
+						title: 'Lorem Ipsum bla bla bla...',
+						description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
+						address: 'BlaBla 7, Tel Aviv, Israel',
+						phoneNumber: '050-1231231',
+						status: 'in-progress',
+						date: new Date(),
+						timeSlot: '14:00 - 14:15'
+					},
+					{
+						id: 2,
+						title: 'Lorem Ipsum bla bla bla 2...',
+						description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
+						address: 'BlaBla 7, Tel Aviv, Israel',
+						phoneNumber: '050-1231231',
+						status: 'in-progress',
+						date: new Date(),
+						timeSlot: '14:00 - 14:15'
+					}
+				]
+			}
+		},
+		selectItem(item) {
+			this.setup.step = 3
+			this.$set(this.setup, 'selectedItem', item)
+		},
+		unselectItem() {
+			this.setup.step = 2
+			delete this.setup.selectedItem			
+		},
 		onMarkerClicked: function ($event) {
 			console.log($event)
 		},
