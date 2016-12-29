@@ -13,7 +13,7 @@
 			<md-dialog-actions>
 
 				<md-button class="md-raised" @click="$refs.jennyDialog.close()">Cancel</md-button>
-				<md-button md-theme="indigo_pink" class="md-raised md-primary" @click="$refs.jennyDialog.close()">Yes</md-button>
+				<md-button md-theme="indigo_pink" class="md-raised md-primary" @click="onJennyOK">Yes</md-button>
 			</md-dialog-actions>
 		</md-dialog>
 		<md-dialog-confirm
@@ -26,6 +26,7 @@
 		</md-dialog-confirm>
 		<md-toolbar id="app-toolbar">
 			<a href="/#/dashboard"><img src="~assets/img/logo.png" alt=""></a>
+			<span id="toolbar-phase">{{ phaseLabel }}</span>
 			<transition name="fade">
 				<md-whiteframe md-elevation="2" id="dropdown-box" v-if="showDropdownBox">
 					<div class="row">
@@ -79,10 +80,14 @@
 			</div>
 		</md-toolbar>
 		<md-toolbar id="app-sub-toolbar" class="md-accent">
-			<h2 class="md-title" style="flex: 1">
+			<h2 class="md-title" v-show="phase != 'planning.upload'" style="flex: 1">
 				Route ID <strong>12312312</strong>
 			</h2>
-			<md-button class="md-raised md-accent jenny-button" md-theme="indigo_yellow" id="jenny-button" @click="$refs.jennyDialog.open()">
+			<md-button class="md-raised" v-show="phase == 'planning.edit'" @click="phase='planning.schedule'">
+				<md-icon>date_range</md-icon>
+				Create delivery schedule
+			</md-button>
+			<md-button class="md-raised md-accent jenny-button" md-theme="indigo_yellow" id="jenny-button" @click="$refs.jennyDialog.open()" v-show="phase == 'planning.schedule'">
 				RUN Jenny, RUN !
 			</md-button>
 		</md-toolbar>
@@ -90,8 +95,19 @@
 	</div>
 </template>
 
-<script>
+<script lang="babel">
+function capitalize(s)
+{
+    return s && s[0].toUpperCase() + s.slice(1);
+}
 export default {
+	store: ['phase', 'displayOverlay'],
+	computed: {
+		phaseLabel: function(){
+			const x = this.phase.split('.')
+			return capitalize(x[0]) + ': ' + capitalize(x[1])
+		}
+	},
 	data() {
 		const d = new Date();
 		return {
@@ -99,11 +115,21 @@ export default {
 			todayDate: this.moment().format('dddd, D/MM/YYYY')
 		}
 	},
+	watch: {
+		phase: function(){
+			this.displayOverlay = true
+			setTimeout(() => this.displayOverlay = false, 2000)
+		}
+	},
 	methods: {
 		onLogoutConfirmClose(button) {
 			if(button == 'ok'){
 				this.$router.push({name: 'auth.login'})
 			}
+		},
+		onJennyOK: function(){
+			this.$refs.jennyDialog.close()
+			this.phase = 'monitoring'
 		},
 		logout() {
 			authService.logout();
@@ -126,6 +152,24 @@ export default {
 		position: relative;
 		z-index: 99999;
 
+		> a {
+			display: block;
+			float: left;
+		}
+
+		#toolbar-phase {
+			color: #2196F3;
+			float: left;
+			display: block;
+			border: 2px solid darken(#2196F3, 20%);
+			background: #fff;
+			border-radius: 20px;
+			padding: 5px 10px;
+			font-size: 16px;
+			font-weight: bold;
+			margin-top: 12px;
+		}
+
 		#dropdown-box {
 			height: 240px;
 			width: 300px;
@@ -135,7 +179,7 @@ export default {
 			display: block;
 			padding: 20px 10px 0px 25px;
 			right: 115px;
-			margin-top: 5px;
+			margin-top: 64px;
 			transition-property: all;
 			transition-duration: .5s;
 			transition-timing-function: cubic-bezier(0, 1, 0.5, 1);

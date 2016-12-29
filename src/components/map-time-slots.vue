@@ -2,25 +2,40 @@
 	<div class="map-time-slots">
 		<transition name="fade">
 			<div v-show="toggled">
-				<div class="has-ripple time-slot-circle" v-for="(timeSlot, index) in timeSlots" :class="{active: active.indexOf('slot-' + index) !== -1}" @click="toggleSlot(index)">
-					<md-ink-ripple></md-ink-ripple>
-					<span>{{ timeSlot.start }}</span>
-					<md-icon>arrow_drop_down</md-icon>
-					<span>{{ timeSlot.end }}</span>
+				<div class="time-slot-circle" v-for="(timeSlot, index) in timeSlots" :class="{active: active.indexOf('slot-' + index) !== -1}" @click="toggleSlot(index)">
+					<div>
+						<md-ink-ripple></md-ink-ripple>
+						<span>{{ timeSlot.start }}</span>
+						<md-icon>arrow_drop_down</md-icon>
+						<span>{{ timeSlot.end }}</span>
+					</div>
 				</div>
 			</div>
 		</transition>
 		<md-button class="md-icon-button md-raised md-dense" @click="toggled=!toggled" :class="{'md-primary': !toggled, 'md-accent': toggled}">
 			<md-icon>{{ toggled ? 'close' : 'access_time' }}</md-icon>
+			<md-tooltip :md-direction="toggled ? 'left' : 'top'">{{ toggled ? 'Hide time slots' : 'Show time slots' }}</md-tooltip>
 		</md-button>
 	</div>
 </template>
 
 <script>
 export default {
+	store: ['phase'],
+	watch: {
+		phase: function() {
+			if(this.phase == 'planning.schedule'){
+				this.toggled = true
+			}
+		}
+	},
 	props: {
 		timeSlots: {
 			default: [
+				{
+					start: '09:00',
+					end: '10:00'
+				},
 				{
 					start: '10:00',
 					end: '11:00'
@@ -69,7 +84,7 @@ export default {
 		position: absolute;
 		bottom: 35px;
 		right: 30px;
-		z-index: 999999999999;
+		z-index: 30;
 		width: 70px;
 
 		.md-button {

@@ -12,8 +12,6 @@ const router = new Router({
 			path: '/app/dashboard',
 			name: 'app.dashboard',
 			component: load('app/dashboard'),
-
-			// If the user needs to be authenticated to view this page
 			meta: {
 				guest: true,
 			},
@@ -24,8 +22,6 @@ const router = new Router({
 			path: '/auth/login',
 			name: 'auth.login',
 			component: load('auth/login'),
-
-			// If the user needs to be a guest to view this page
 			meta: {
 				guest: true,
 			},
@@ -34,8 +30,6 @@ const router = new Router({
 			path: '/auth/forgot-password',
 			name: 'auth.forgot-password',
 			component: load('auth/forgot-password'),
-
-			// If the user needs to be a guest to view this page
 			meta: {
 				guest: true,
 			},

@@ -29,6 +29,7 @@
 
 <script>
 export default {
+	store: ['displayOverlay'],
 	data() {
 		return {
 			user: {
@@ -77,7 +78,9 @@ export default {
 			}
 
 			if(!this.errors.username && !this.errors.password && this.user.username == 'admin' && this.user.password == '123'){
-				this.$router.push({name: 'app.dashboard'});
+				this.displayOverlay = true
+				setTimeout(() => this.displayOverlay = false, 2000)
+				this.$router.push({name: 'app.dashboard'})
 			} else {
 				this.$refs.errorDialog.open();
 			}
