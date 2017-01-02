@@ -56,6 +56,28 @@
 					<li>
 					<strong>{{ todayDate }}</strong>
 					</li>
+          <li>
+            <div class="top-info">
+              <img src="~assets/img/round.png">
+              <div class="top-content">
+                <div class="top">
+                  <span class="big">72%</span><span class="small">(115)</span>
+                </div>
+                <div class="bottom">Missdelivered</div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="top-info">
+              <img src="~assets/img/cancel.png">
+              <div class="top-content">
+                <div class="top">
+                  <span class="big">72%</span><span class="small">(115)</span>
+                </div>
+                <div class="bottom">Missdelivered</div>
+              </div>
+            </div>
+          </li>
 					<li>
 						<md-button class="md-icon-button md-raised" @click="showDropdownBox=!showDropdownBox">
 							<md-icon>dashboard</md-icon>
@@ -241,7 +263,7 @@ export default {
 						padding-bottom: 2px;
 					}
 
-					&:nth-child(2){
+					&:nth-child(4), &:nth-child(3), &:nth-child(2){
 						padding-left: 15px;
 					}
 
@@ -265,5 +287,36 @@ export default {
 		color: #fff;
 		width: 100%;
 	}
+
+  .top-info {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    img {
+      height: 35px;
+      margin-right: 5px;
+    }
+    .top-content {
+      display: flex;
+      flex-flow: column;
+      .top {
+        line-height: 1em;
+        .big {
+          font-size: 20px;
+          color: #2196F3;
+        }
+        .small {
+          color: rgb(80, 80, 80);
+        }
+      }
+      .bottom {
+        line-height: 1em;
+        color: #fff;
+        margin-top: 2px;
+      }
+    }
+  }
 
 </style>
