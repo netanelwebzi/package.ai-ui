@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac872419-97f0-44e2-af38-c7a9fe3615ce" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/img/cancel.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/assets/img/round.png" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/app-layout.vue" afterPath="$PROJECT_DIR$/src/components/app-layout.vue" />
     </list>
@@ -23,9 +21,17 @@
       <file leaf-file-name="app-layout.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="298" column="23" lean-forward="false" selection-start-line="298" selection-start-column="23" selection-end-line="298" selection-end-column="23" />
-              <folding />
+            <state relative-caret-position="375">
+              <caret line="161" column="12" lean-forward="false" selection-start-line="161" selection-start-column="12" selection-end-line="161" selection-end-column="12" />
+              <folding>
+                <element signature="n#md-dialog#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="n#md-dialog-confirm#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="n#div#1;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="n#div#2;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="n#div#3;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="n#div#4;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+                <element signature="n#div#5;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -53,7 +59,7 @@
       <file leaf-file-name="list-panel.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/list-panel.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="16">
+            <state relative-caret-position="1488">
               <caret line="93" column="8" lean-forward="false" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="17" />
               <folding />
             </state>
@@ -104,8 +110,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>setup =</find>
-      <find>store</find>
       <find>step</find>
       <find>AppLa</find>
       <find>md-theme</find>
@@ -134,6 +138,8 @@
       <find>VueGoogleM</find>
       <find>~assets/img/logo.png</find>
       <find>top-content</find>
+      <find>app-sub-toolbar</find>
+      <find>md-select</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -282,46 +288,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="package.ai-ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="package.ai-ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="package.ai-ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="package.ai-ui" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="img" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -435,12 +401,12 @@
       <workItem from="1482861281338" duration="12414000" />
       <workItem from="1482921664325" duration="13829000" />
       <workItem from="1483391808826" duration="41000" />
-      <workItem from="1483391883408" duration="2163000" />
+      <workItem from="1483391883408" duration="4527000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28447000" />
+    <option name="totallyTimeSpent" value="30811000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -498,7 +464,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1392">
           <caret line="87" column="32" lean-forward="false" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="32" />
-          <folding />
+          <folding>
+            <element signature="n#md-dialog#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#md-dialog-confirm#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -578,7 +552,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1392">
           <caret line="87" column="32" lean-forward="true" selection-start-line="87" selection-start-column="32" selection-end-line="87" selection-end-column="32" />
-          <folding />
+          <folding>
+            <element signature="n#md-dialog#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#md-dialog-confirm#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -647,7 +629,15 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2166">
           <caret line="114" column="0" lean-forward="false" selection-start-line="114" selection-start-column="0" selection-end-line="119" selection-end-column="5" />
-          <folding />
+          <folding>
+            <element signature="n#md-dialog#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#md-dialog-confirm#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -810,22 +800,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/item-edit-panel.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="70" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/list-panel.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="93" column="8" lean-forward="false" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/map-panel.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="32">
@@ -842,6 +816,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/list-panel.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1488">
+          <caret line="93" column="8" lean-forward="false" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/item-edit-panel.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="69" column="0" lean-forward="false" selection-start-line="69" selection-start-column="0" selection-end-line="70" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/auth-layout.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="112">
@@ -852,9 +842,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="298" column="23" lean-forward="false" selection-start-line="298" selection-start-column="23" selection-end-line="298" selection-end-column="23" />
-          <folding />
+        <state relative-caret-position="375">
+          <caret line="161" column="12" lean-forward="false" selection-start-line="161" selection-start-column="12" selection-end-line="161" selection-end-column="12" />
+          <folding>
+            <element signature="n#md-dialog#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#md-dialog-confirm#0;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#1;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#2;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#3;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#4;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+            <element signature="n#div#5;n#md-toolbar#1;n#div#0;n#template#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
