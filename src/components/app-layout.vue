@@ -77,6 +77,28 @@
 					<li>
 					<strong>{{ todayDate }}</strong>
 					</li>
+          <li>
+            <div class="top-info" v-show="phase == 'monitoring'">
+              <img src="~assets/img/round.png">
+              <div class="top-content">
+                <div class="top">
+                  <span class="big">72%</span><span class="small">(115)</span>
+                </div>
+                <div class="bottom">Missdelivered</div>
+              </div>
+            </div>
+          </li>
+          <li>
+            <div class="top-info" v-show="phase == 'monitoring'">
+              <img src="~assets/img/cancel.png">
+              <div class="top-content">
+                <div class="top">
+                  <span class="big">72%</span><span class="small">(115)</span>
+                </div>
+                <div class="bottom">Missdelivered</div>
+              </div>
+            </div>
+          </li>
 					<li>
 						<md-button class="md-icon-button md-raised" @click="showDropdownBox=!showDropdownBox">
 							<md-icon>dashboard</md-icon>
@@ -104,6 +126,61 @@
 			<h2 class="md-title" v-show="phase != 'planning.upload'" style="flex: 1">
 				Route ID <strong>12312312</strong>
 			</h2>
+      <div class="md-select-container" v-show="phase == 'monitoring'">
+        <md-select name="delivery" v-model="delivery" placeholder="All deliveries">
+          <md-option value="option1">Option1</md-option>
+        </md-select>
+      </div>
+      <div v-show="phase == 'monitoring'" class="top-info">
+        <img src="~assets/img/cancel.png">
+        <div class="value">15</div>
+        <div class="top-content">
+          <div class="top">
+            Different
+          </div>
+          <div class="bottom">Day</div>
+        </div>
+      </div>
+      <div v-show="phase == 'monitoring'" class="top-info">
+        <img src="~assets/img/cancel.png">
+        <div class="value">15</div>
+        <div class="top-content">
+          <div class="top">
+            Different
+          </div>
+          <div class="bottom">Day</div>
+        </div>
+      </div>
+      <div v-show="phase == 'monitoring'" class="top-info">
+        <img src="~assets/img/cancel.png">
+        <div class="value">15</div>
+        <div class="top-content">
+          <div class="top">
+            Different
+          </div>
+          <div class="bottom">Day</div>
+        </div>
+      </div>
+      <div v-show="phase == 'monitoring'" class="top-info">
+        <img src="~assets/img/cancel.png">
+        <div class="value">15</div>
+        <div class="top-content">
+          <div class="top">
+            Different
+          </div>
+          <div class="bottom">Day</div>
+        </div>
+      </div>
+      <div v-show="phase == 'monitoring'" class="top-info">
+        <img src="~assets/img/cancel.png">
+        <div class="value">15</div>
+        <div class="top-content">
+          <div class="top">
+            Different
+          </div>
+          <div class="bottom">Day</div>
+        </div>
+      </div>
 			<md-button class="md-raised" v-show="phase == 'planning.edit'" @click="phase='planning.schedule'">
 				<md-icon>date_range</md-icon>
 				Create delivery schedule
@@ -314,6 +391,74 @@ export default {
 		background: #2196F3 !important;
 		color: #fff;
 		width: 100%;
+    .md-select-container, .top-info {
+      flex: 1;
+      padding-left: 20px;
+      padding-right: 20px;
+      position: relative;
+      justify-content: center;
+      &>* {
+        margin-left: 3px;
+        margin-right: 3px;
+      }
+      .value {
+        font-size: 34px;
+        color: #fff;
+      }
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 64px;
+        background-color: #666;
+        width: 1px;
+        content: '';
+        margin-top: -14px;
+      }
+    }
+    .md-select-container {
+      .md-select {
+        border-bottom: 1px solid #ccc;
+      }
+      &:before {
+        height: 100%;
+        width: 0;
+        border-left: 1px dashed #fff;
+        background-color: transparent;
+        margin-top: 0;
+      }
+    }
 	}
+
+  .top-info {
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    img {
+      height: 35px;
+      margin-right: 5px;
+    }
+    .top-content {
+      display: flex;
+      flex-flow: column;
+      .top {
+        line-height: 1em;
+        .big {
+          font-size: 20px;
+          color: #2196F3;
+        }
+        .small {
+          color: rgb(80, 80, 80);
+        }
+      }
+      .bottom {
+        line-height: 1em;
+        color: #fff;
+        margin-top: 2px;
+      }
+    }
+  }
 
 </style>
