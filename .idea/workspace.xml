@@ -2,20 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac872419-97f0-44e2-af38-c7a9fe3615ce" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/list-panel.vue" afterPath="$PROJECT_DIR$/src/components/list-panel.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/app/dashboard.vue" afterPath="$PROJECT_DIR$/src/views/app/dashboard.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/map-time-slots.vue" afterPath="$PROJECT_DIR$/src/components/map-time-slots.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/item-edit-panel.vue" afterPath="$PROJECT_DIR$/src/components/item-edit-panel.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/map-panel.vue" afterPath="$PROJECT_DIR$/src/components/map-panel.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/app-layout.vue" afterPath="$PROJECT_DIR$/src/components/app-layout.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yarn.lock" afterPath="$PROJECT_DIR$/yarn.lock" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/item-chat-panel.vue" afterPath="$PROJECT_DIR$/src/components/item-chat-panel.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/store.js" afterPath="$PROJECT_DIR$/src/core/store.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/file-upload-panel.vue" afterPath="$PROJECT_DIR$/src/components/file-upload-panel.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/app-layout.vue" afterPath="$PROJECT_DIR$/src/components/app-layout.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/file-upload-panel.vue" afterPath="$PROJECT_DIR$/src/components/file-upload-panel.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/item-chat-panel.vue" afterPath="$PROJECT_DIR$/src/components/item-chat-panel.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/item-edit-panel.vue" afterPath="$PROJECT_DIR$/src/components/item-edit-panel.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/list-panel.vue" afterPath="$PROJECT_DIR$/src/components/list-panel.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/map-panel.vue" afterPath="$PROJECT_DIR$/src/components/map-panel.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/map-time-slots.vue" afterPath="$PROJECT_DIR$/src/components/map-time-slots.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/router.js" afterPath="$PROJECT_DIR$/src/core/router.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/store.js" afterPath="$PROJECT_DIR$/src/core/store.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/views/app/dashboard.vue" afterPath="$PROJECT_DIR$/src/views/app/dashboard.vue" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/yarn.lock" afterPath="$PROJECT_DIR$/yarn.lock" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -410,11 +410,12 @@
       <workItem from="1483022948735" duration="322000" />
       <workItem from="1483321214114" duration="7682000" />
       <workItem from="1483385060925" duration="1433000" />
+      <workItem from="1483397567256" duration="97000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="36106000" />
+    <option name="totallyTimeSpent" value="36203000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="812" extended-state="6" />
