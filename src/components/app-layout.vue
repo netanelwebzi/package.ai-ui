@@ -25,28 +25,49 @@
 				ref="logoutConfirmDialog">
 		</md-dialog-confirm>
 		<md-toolbar id="app-toolbar">
+			<div id="right-bg"></div>
 			<a href="/#/dashboard"><img src="~assets/img/logo.png" alt=""></a>
 			<span id="toolbar-phase">{{ phaseLabel }}</span>
 			<transition name="fade">
 				<md-whiteframe md-elevation="2" id="dropdown-box" v-if="showDropdownBox">
 					<div class="row">
 						<div class="col-xs-4 left-none top-none">
+							<a href="">
+								<md-ink-ripple></md-ink-ripple>
 
+								<i class="fa fa-dashboard"></i>
+								Dashboard
+							</a>
 						</div>
 						<div class="col-xs-4 top-none left-none">
-
+							<a>
+								<i class="fa fa-truck"></i>
+								Route Planning
+							</a>
 						</div>
 						<div class="col-xs-4 top-none right-none left-none">
-
+							<a>
+								<i class="fa fa-plus-square"></i>
+								New Deliveries
+							</a>
 						</div>
 						<div class="col-xs-4 left-none top-none bottom-none">
-
+							<a>
+								<i class="fa fa-clock-o"></i>
+								Scheduled Deliveries
+							</a>
 						</div>
 						<div class="col-xs-4 top-none bottom-none left-none">
-
+							<a>
+								<i class="fa fa-dashboard"></i>
+								Assist
+							</a>
 						</div>
 						<div class="col-xs-4 right-none bottom-none top-none left-none">
-
+							<a>
+								<i class="fa fa-line-chart"></i>
+								Reports
+							</a>
 						</div>
 					</div>
 				</md-whiteframe>
@@ -104,15 +125,20 @@ export default {
 	store: ['phase', 'displayOverlay'],
 	computed: {
 		phaseLabel: function(){
-			const x = this.phase.split('.')
-			return capitalize(x[0]) + ': ' + capitalize(x[1])
+			if(this.phase === 'monitoring'){
+				return 'Monitoring'
+			}
+			{
+				const x = this.phase.split('.')
+				return capitalize(x[0]) + ': ' + capitalize(x[1])
+			}
 		}
 	},
 	data() {
 		const d = new Date();
 		return {
 			showDropdownBox: false,
-			todayDate: this.moment().format('dddd, D/MM/YYYY')
+			todayDate: this.moment().format('dddd, DD/MM/YYYY')
 		}
 	},
 	watch: {
@@ -151,6 +177,15 @@ export default {
 		display: block !important;
 		position: relative;
 		z-index: 99999;
+
+		#right-bg {
+			background: url('~assets/img/toolbar_right_bg.png') no-repeat;
+			position: absolute;
+			bottom: 0px;
+			right: 0px;
+			height: 23px;
+			width: 817px;
+		}
 
 		> a {
 			display: block;
@@ -191,6 +226,21 @@ export default {
 					border: 1px dashed gray;
 					height: 100px;
 					padding: 5px;
+
+					a , a:visited {
+						margin-top: 5px;
+						color: #000;
+						display: block;
+						text-align: center;
+						font-size: 15px;
+						cursor: pointer;
+						text-decoration: none;
+
+						i {
+							display: block;
+							font-size: 40px;
+						}
+					}
 
 					&.left-none {
 						border-left-width: 0px;

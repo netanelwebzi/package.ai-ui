@@ -2,12 +2,13 @@
 	<div class="col-xs">
 		<map-time-slots v-show="phase == 'planning.schedule' || phase == 'monitoring'"></map-time-slots>
 		<gmap-map
-				:center="center"
+				:center="mapCenter"
 				:zoom="7"
 				:zoomControl="true"
 				:scaleControl="true"
 				:draggable="true"
-				:options="options">
+				id="map"
+				:options="options" @resize="onMapResize">
 			<gmap-marker
 					v-for="(m, index) in markers"
 					:position="m.position"
@@ -36,7 +37,7 @@
 	})
 
 	export default {
-		store: ['setup', 'phase'],
+		store: ['setup', 'phase', 'mapCenter'],
 		components: {
 			gmapMap: VueGoogleMaps.Map,
 			gmapMarker: VueGoogleMaps.Marker,
@@ -57,7 +58,7 @@
 				options: {
 					zoomControl: true,
 					scaleControl: true,
-					streetViewControl: true,
+					streetViewControl: false,
 					fullScreeenControl: true
 				}
 			}
@@ -71,6 +72,10 @@
 			selectItem(item) {
 				this.setup.step = 3
 				this.$set(this.setup, 'selectedItem', item)
+				this.mapCenter = {lat: 10.0, lng: 10.0}
+			},
+			onMapResize() {
+				console.log('cool resize')
 			}
 		}
 

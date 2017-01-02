@@ -2,7 +2,7 @@
 	<div class="map-time-slots">
 		<transition name="fade">
 			<div v-show="toggled">
-				<div class="time-slot-circle" v-for="(timeSlot, index) in timeSlots" :class="{active: active.indexOf('slot-' + index) !== -1}" @click="toggleSlot(index)">
+				<div class="time-slot-circle" v-for="(timeSlot, index) in timeSlots" :class="{active: active == index}" @click="toggleSlot(index)">
 					<div>
 						<md-ink-ripple></md-ink-ripple>
 						<span>{{ timeSlot.start }}</span>
@@ -29,9 +29,19 @@ export default {
 			}
 		}
 	},
-	props: {
-		timeSlots: {
-			default: [
+	methods: {
+		toggleSlot(index) {
+			if(this.active == index)
+				this.active = null
+			else
+				this.active = index
+		}
+	},
+	data() {
+		return {
+			active: null,
+			toggled: false,
+			timeSlots : [
 				{
 					start: '09:00',
 					end: '10:00'
@@ -57,21 +67,6 @@ export default {
 					end: '15:00'
 				}
 			]
-		}
-	},
-	methods: {
-		toggleSlot(index) {
-			const i = this.active.indexOf('slot-' + index)
-			if(i !== -1)
-				this.active.splice(i, 1)
-			else
-				this.active.push('slot-' + index)
-		}
-	},
-	data() {
-		return {
-			active: [],
-			toggled: false
 		}
 	}
 }

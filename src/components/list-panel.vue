@@ -1,26 +1,6 @@
 <template>
 	<div class="col-xs-4">
 		<md-whiteframe md-tag="section" id="list-panel">
-			<div class="file-drop" v-if="setup.step === 1">
-<!--
-				<file-upload ref="fileUploader" post-action="/upload" :events="events"
-				             :extensions="extensions" :files="files" :title="'Choose csv file'"
-				             drop=".file-drop" class="md-button md-primary md-raised"></file-upload>
--->
-
-				<div>
-				<div>
-				<md-icon>backup</md-icon>
-				<div>
-				Drag & drop your delivery list here
-				<br />
-				OR
-				<br />
-				</div>
-				</div>
-				</div>
-			</div>
-
 			<div v-if="setup.step >= 2" style="padding:0px 15px;">
 				<div class="row">
 					<div class="col-xs-1" style="padding-top:25px;">
@@ -56,7 +36,7 @@
 
 <script lang="babel">
 	export default {
-		store: ['setup'],
+		store: ['setup', 'mapCenter'],
 
 		data() {
 			return {
@@ -78,6 +58,7 @@
 			selectItem(item) {
 				this.setup.step = 3
 				this.$set(this.setup, 'selectedItem', item)
+				this.mapCenter = {lat: 10.0, lng: 10.0}
 			},
 			unselectItem() {
 				this.setup.step = 2

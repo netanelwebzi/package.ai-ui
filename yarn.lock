@@ -1300,6 +1300,10 @@ domutils@1.5.1:
     dom-serializer "0"
     domelementtype "1"
 
+dropzone@^4.3.0:
+  version "4.3.0"
+  resolved "https://registry.yarnpkg.com/dropzone/-/dropzone-4.3.0.tgz#48b0b8f2ad092872e4b535b672a7c3f1a1d67c91"
+
 ecc-jsbn@~0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ecc-jsbn/-/ecc-jsbn-0.1.1.tgz#0fc73a9ed5f0d53c38193398523ef7e543777505"
@@ -3958,13 +3962,26 @@ vue-upload-component@next:
   version "2.0.0-beta.5"
   resolved "https://registry.yarnpkg.com/vue-upload-component/-/vue-upload-component-2.0.0-beta.5.tgz#df77fcaf71673fbb9ae305bfc3075ec518718884"
 
+vue2-dropzone@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/vue2-dropzone/-/vue2-dropzone-2.1.2.tgz#eaa51ad90ecb1f7868387c00970dd83970825d15"
+  dependencies:
+    dropzone "^4.3.0"
+    vue "^2.0.0"
+
 vue2-google-maps@^0.4.10:
   version "0.4.10"
   resolved "https://registry.yarnpkg.com/vue2-google-maps/-/vue2-google-maps-0.4.10.tgz#e92587b30b33ddeb219f138d01b93fde76804dd3"
   dependencies:
     vue-loader "^10.0.0"
 
-vue@^2.1.0, vue@^2.1.7:
+vue2-timepicker@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/vue2-timepicker/-/vue2-timepicker-0.1.4.tgz#0809d9b07e9c8642de360044b6a14c2b7f203815"
+  dependencies:
+    vue "^2.0.1"
+
+vue@^2.0.0, vue@^2.0.1, vue@^2.1.0, vue@^2.1.7:
   version "2.1.8"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.1.8.tgz#ae30aa86024fccf5535292ce414e7b4c221a1756"
 

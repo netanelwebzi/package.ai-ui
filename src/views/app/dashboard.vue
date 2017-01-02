@@ -66,7 +66,7 @@ export default {
 				case 'monitoring':
 					return {
 						ListPanel: ListPanel,
-						ItemEditPanel: ItemEditPanel,
+						ItemChatPanel: ItemChatPanel,
 						MapPanel: MapPanel
 					}
 					break;

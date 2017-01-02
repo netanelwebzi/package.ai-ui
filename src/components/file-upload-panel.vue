@@ -1,12 +1,12 @@
 <template>
 	<div class="col-xs-4">
 		<md-whiteframe md-tag="section" id="upload-panel">
-			<div class="file-drop" @click="phase='planning.edit'">
+			<div class="file-drop">
 								<!--<file-upload ref="fileUploader" post-action="/upload" :events="events"-->
 											 <!--:extensions="extensions" :files="files" :title="'Choose csv file'"-->
 											 <!--drop=".file-drop" class="md-button md-primary md-raised"></file-upload>-->
 
-				<div>
+<!--				<div>
 					<div>
 						<md-icon>backup</md-icon>
 						<div>
@@ -16,7 +16,8 @@
 							<br />
 						</div>
 					</div>
-				</div>
+				</div>-->
+				<dropzone id="file-dropzone" @vdropzone-success="onFileUploaded" url="https://httpbin.org/post" :useCustomDropzoneOptions="useCustomDropzoneOptions" :dropzoneOptions="dropzoneOptions"></dropzone>
 			</div>
 		</md-whiteframe>
 	</div>
@@ -24,7 +25,7 @@
 
 <script lang="babel">
 	import FileUpload from 'vue-upload-component'
-
+	import Dropzone from 'vue2-dropzone'
 	export default {
 
 		store: ['setup', 'phase'],
@@ -40,18 +41,26 @@
 				},
 				events: {
 
-				}
+				},
+				dropzoneOptions: {
+					dictDefaultMessage: '<i class="md-icon material-icons md-theme-default">backup</i>Drag & Drop your delivery list here'
+				},
+				useCustomDropzoneOptions: true
 			}
 		},
-
+		methods: {
+			onFileUploaded: function(){
+				setTimeout(() => this.phase = 'planning.edit', 3000)
+			}
+		},
 		components: {
-			FileUpload: FileUpload
+			Dropzone
 		}
 
 	}
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 	.col-xs, .col-xs-4 {
 		padding-right: 0px;
 		padding-left: 0px;
@@ -110,5 +119,30 @@
 
 	.md-whiteframe {
 		height: 100%;
+	}
+
+	.dropzone {
+		height: 100%;
+		min-height: 100%;
+		font-size: 30px;
+		border: 0px;
+
+		.dz-message {
+			margin: 6em 0 !important;
+			color: #000;
+
+			i {
+				color: #00baff;
+				display: block;
+				font-size: 50px;
+				padding-bottom: 50px;
+				padding-left: 0px;
+				margin: auto;
+			}
+		}
+
+		.dz-preview {
+			position: static !important;
+		}
 	}
 </style>

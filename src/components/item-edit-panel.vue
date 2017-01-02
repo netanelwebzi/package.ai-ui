@@ -1,5 +1,5 @@
 <template>
-	<div class="col-xs" v-if="setup.step === 3">
+	<div class="col-xs" v-if="setup.selectedItem !== undefined">
 		<md-whiteframe md-tag="section" id="edit-panel">
 			<div class="item-details">
 				<div class="row">
@@ -8,18 +8,17 @@
 							{{ setup.selectedItem.title }}
 						</div>
 						<div class="spacer-20"></div>
-
-						<md-input-container>
+						<div id="places-input">
 							<label>Address</label>
-							<md-input v-model="setup.selectedItem.address"></md-input>
-						</md-input-container>
-						<md-input-container>
+							<place-input placeholder="Search location"></place-input>
+						</div>
+						<div id="timeslot-picker">
 							<label>Time slot</label>
-							<md-input v-model="setup.selectedItem.timeSlot"></md-input>
-						</md-input-container>
+							<vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
+						</div>
 						<md-input-container>
 							<label>Phone</label>
-							<md-input v-model="setup.selectedItem.phoneNumber" disabled></md-input>
+							<md-input v-model="setup.selectedItem.phoneNumber"></md-input>
 						</md-input-container>
 						<md-input-container>
 							<label>ID</label>
@@ -46,9 +45,25 @@
 </template>
 
 <script lang="babel">
+	import * as VueGoogleMaps from 'vue2-google-maps'
+	import Vue from 'vue'
+	import VueTimepicker from 'vue2-timepicker'
+
+	Vue.use(VueGoogleMaps, {
+		load: {
+			key: 'AIzaSyBzlLYISGjL_ovJwAehh6ydhB56fCCpPQw',
+			libraries: 'places'
+		},
+	})
+
 	export default {
 
 		store: ['setup'],
+
+		components: {
+			PlaceInput: VueGoogleMaps.PlaceInput,
+			VueTimepicker: VueTimepicker
+		},
 
 		data() {
 			return {
@@ -58,7 +73,6 @@
 
 		methods: {
 			unselectItem() {
-				this.setup.step = 2
 				delete this.setup.selectedItem
 			}
 		}
@@ -66,7 +80,7 @@
 	}
 </script>
 
-<style scoped lang="scss">
+<style lang="scss">
 	.md-whiteframe {
 		height: 100%;
 
@@ -113,5 +127,49 @@
 		padding-right: 0px;
 		padding-left: 0px;
 		height: calc(100vh - 64px * 2);
+	}
+
+	#timeslot-picker {
+		label {
+			font-size: 12px;
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		margin-bottom: 20px;
+
+		input {
+			border: 0px;
+			border-bottom: 1px solid #ddd;
+			width: 100%;
+		}
+
+		.time-picker {
+			display: block;
+			width: 100%;
+		}
+	}
+
+	#places-input {
+		label {
+			font-size: 12px;
+			display: block;
+			margin-bottom: 5px;
+		}
+
+		input {
+			outline: 0;
+			border:0px;
+			width:100%;
+			border-bottom: 1px solid #ddd;
+			font-size: 16px;
+
+			&:focus {
+				border-bottom-color: #3F51B5;
+				border-bottom-width: 2px;
+			}
+		}
+
+		margin-bottom: 20px;
 	}
 </style>

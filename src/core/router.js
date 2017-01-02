@@ -36,13 +36,14 @@ const router = new Router({
 		},
 		{
 			path: '/',
-			redirect: '/app/dashboard',
+			redirect: '/auth/login',
 		},
 		{
 			path: '/*',
 			redirect: '/app/dashboard',
 		}
 	]
+
 
 })
 
