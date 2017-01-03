@@ -18,14 +18,21 @@
 			<md-list class="custom-list md-triple-line" v-if="setup.step === 2 || setup.step === 3">
 				<md-list-item v-for="item in filteredItems" @click="selectItem(item)"
 				              :class="{ selected: setup.selectedItem === item }">
-					<div class="md-list-text-container">
-						<h1>{{ item.title }}</h1>
-						<p>{{ item.description }}</p>
-					</div>
+          <div class="item-container">
+            <div class="md-list-text-container">
+              <h1>{{ item.title }}</h1>
+              <p>{{ item.description }}</p>
+            </div>
 
-					<md-button class="md-icon-button md-list-action">
-						<md-icon class="md-primary">star</md-icon>
-					</md-button>
+            <md-button class="md-icon-button md-list-action">
+              <md-icon class="md-primary">star</md-icon>
+            </md-button>
+
+            <div class="container-action-icons">
+              <img src="~assets/img/truck.png">
+              <img src="~assets/img/truck.png">
+            </div>
+          </div>
 
 					<md-divider class="md-inset"></md-divider>
 				</md-list-item>
@@ -93,6 +100,36 @@
 					}
 				}
 			}
+
+      .item-container {
+        display: flex;
+        flex-flow: row;
+        align-items: stretch;
+        .md-list-action {
+          align-self: center;
+        }
+        .container-action-icons {
+          display: flex;
+          flex-flow: column;
+          justify-content: space-around;
+          flex-basis: 50px;
+          align-items: center;
+          position: relative;
+          padding-left: 10px;
+          img {
+            max-height: 40px;
+            position: relative;
+          }
+          &:before {
+            content: '';
+            position: absolute;
+            top: 10%;
+            left: 0;
+            height: 80%;
+            border-left: 1px dashed #ddd;
+          }
+        }
+      }
 		}
 
 		&#chat-panel {
