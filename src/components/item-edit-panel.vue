@@ -3,35 +3,30 @@
 		<md-whiteframe md-tag="section" id="edit-panel">
 			<div class="item-details">
 				<div class="row">
-					<div class="col-xs-8">
-						<div class="title">
-							{{ setup.selectedItem.title }}
-						</div>
-						<div class="spacer-20"></div>
-						<div id="places-input">
-							<label>Address</label>
+					<div class="col-xs-8 principal">
+						<div class="title">{{ setup.selectedItem.title }}</div>
+						<div id="places-input" class="item-detail">
+              <md-icon>location_on</md-icon>
 							<place-input placeholder="Search location"></place-input>
 						</div>
-						<div id="timeslot-picker">
-							<label>Time slot</label>
-							<vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
-						</div>
-						<md-input-container>
-							<label>Phone</label>
+						<md-input-container class="item-detail">
+              <md-icon>call</md-icon>
 							<md-input v-model="setup.selectedItem.phoneNumber"></md-input>
 						</md-input-container>
-						<md-input-container>
-							<label>ID</label>
+						<md-input-container class="item-detail">
+              <i class="fa fa-truck"></i>
 							<md-input v-model="setup.selectedItem.id" disabled></md-input>
 						</md-input-container>
 					</div>
-					<div class="col-xs-4">
+					<div class="col-xs-4 secondary">
 						<div class="status">
 							<md-icon class="md-primary">done</md-icon>
-							<div>
-								Done!
-							</div>
+							<div>Done!</div>
 						</div>
+            <div class="item-detail">Mon, 08/11/2016</div>
+            <div id="timeslot-picker" class="item-detail">
+              <vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
+            </div>
 					</div>
 				</div>
 				<div class="cancel">
@@ -67,13 +62,12 @@
 
 		data() {
 			return {
-
 			}
 		},
 
 		methods: {
 			unselectItem() {
-				delete this.setup.selectedItem
+			    this.setup.selectedItem = void 0;
 			}
 		}
 
@@ -91,35 +85,93 @@
 				background: #fff;
 				padding: 20px;
 
+        .secondary {
+          margin-top: -10px;
+          .item-detail {
+            margin-top: 5px;
+          }
+          .item-detail, .item-detail input {
+            font-size: 12px;
+          }
+        }
+
 				.title {
-					line-height: 36px;
-					color: #2196F3;
-					font-size: 36px;
+					line-height: 1.1em;
+					color: #00baff;
+          font-size: 18px;
+          font-weight: 200;
+          font-family: 'overpass', arial;
 				}
 
 				.status {
 					text-align: center;
-					margin-top: 10px;
-
+					margin-top: 0;
+          padding-bottom: 10px;
+          position: relative;
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 60%;
+            margin-left: -30%;
+            border-bottom: 1px dashed #a8a8a8;
+          }
+          $size-md-icon-here: 50px;
 					.md-icon {
-						width: 60px;
-						max-width: 60px;
-						height: 60px;
-						max-height: 60px;
-						font-size: 60px;
+						width: $size-md-icon-here;
+						max-width: $size-md-icon-here;
+						height: $size-md-icon-here;
+						max-height: $size-md-icon-here;
+						font-size: $size-md-icon-here;
 					}
 
 					div {
-						font-size: 32px;
+						font-size: 16px;
+            line-height: 1em;
 					}
 				}
 
 				.cancel {
 					position: absolute;
-					top: 10px;
-					right: 10px;
+					top: 0px;
+					right: -2px;
 				}
-			}
+
+        .item-detail, .item-detail input{
+          margin: 0;
+          padding: 0;
+          color: #777;
+          font-size: 15px;
+          height: auto;
+          min-height: auto;
+          line-height:1.1em;
+        }
+        .item-detail {
+          margin-top: 10px;
+          padding-top: 2px;
+          padding-bottom: 2px;
+          margin-left: 24px;
+          position: relative;
+          label {
+            margin: 0;
+            padding: 0;
+          }
+          .md-icon, i.fa{
+            left: -27px;
+            top: -3px;
+            position: absolute;
+          }
+          i.fa {
+            font-size: 22px;
+          }
+          input, &::after{
+            border: none;
+            background-color: transparent;
+            background-image: none;
+          }
+        }
+      }
 		}
 	}
 
