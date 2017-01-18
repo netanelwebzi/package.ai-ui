@@ -27,6 +27,10 @@ export default {
 			if(this.phase == 'planning.schedule'){
 				this.toggled = true
 			}
+
+			if(this.phase == 'monitoring'){
+				this.toggled = false
+			}
 		}
 	},
 	methods: {

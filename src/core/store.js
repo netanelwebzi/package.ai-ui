@@ -1,15 +1,23 @@
 import LocalStorage from './local-storage'
-
+import JWTDecode from 'jwt-decode'
+import Vue from 'vue'
+import moment from 'moment'
 let $localStorage = new LocalStorage
+Vue.use($localStorage)
 
 let phase = ''
 let user = false
+let authenticated = false
+let token = null
+let currentDate = null
 
 if($localStorage.has('phase')){
 	phase = $localStorage.get('phase')
 } else {
-	$localStorage.set('phase', 'planning.upload')
-	phase = 'planning.upload'
+	$localStorage.set('phase', 'upload')
+	phase = 'upload'
+	// $localStorage.set('phase', 'monitoring')
+	// phase = 'monitoring'
 }
 
 if($localStorage.has('user')){
@@ -18,165 +26,37 @@ if($localStorage.has('user')){
 	$localStorage.set('user', false)
 }
 
-export default {
-	user: {
-		id: 0,
-		name: 'Netanel Edri'
-	},
-	mapCenter: {lat: 10.0, lng: 10.0},
-	displayOverlay: true,
-	setup: {
-		step: 2,
-		// selectedItem: {
-		// 	id: 1,
-		// 	title: 'Consumer 1',
-		// 	description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-		// 	address: 'BlaBla 7, Tel Aviv, Israel',
-		// 	phoneNumber: '050-1231231',
-		// 	status: 'in-progress',
-		// 	date: new Date(),
-		// 	timeSlot: '14:00 - 14:15'
-		// },
-		items: [
-			{
-				id: 1,
-				title: 'Consumer 1',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			},
-			{
-				id: 2,
-				title: 'Consumer 2',
-				description: 'Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... Lorem Ipsum bla bla bla... ',
-				address: 'BlaBla 7, Tel Aviv, Israel',
-				phoneNumber: '050-1231231',
-				status: 'in-progress',
-				date: new Date(),
-				timeSlot: '14:00 - 14:15'
-			}
+if(user !== false && user.token.length > 0 && typeof JWTDecode(user.token).iss !== undefined){
+	authenticated = true
+}
 
-		]
+if(!$localStorage.has('currentDate')){
+	currentDate = moment().format('dddd, DD/MM/YYYY')
+	$localStorage.set('currentDate', currentDate)
+} else {
+	currentDate = $localStorage.get('currentDate')
+}
+
+export default {
+	user: user,
+	selectedItem: null,
+	authenticated: authenticated,
+	mapCenter: {
+		lat: 10.0,
+		lng: 10.0
 	},
+	metrics: {},
+	routePlan: {},
+	deliveries: [],
+	displayOverlay: true,
+	currentDate: currentDate,
+	overlayMessage: 'Hold tight',
+	phases: [
+		'upload',
+		'route',
+		'export',
+		'jenny',
+		'monitoring'
+	],
 	phase: phase
-	/**
-	 * planning.upload
-	 * planning.edit
-	 * planning.schedule
-	 * planning.ready
-	 * monitoring
-	 */
 }

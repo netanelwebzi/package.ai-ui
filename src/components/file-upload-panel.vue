@@ -2,59 +2,89 @@
 	<div class="col-xs-4">
 		<md-whiteframe md-tag="section" id="upload-panel">
 			<div class="file-drop">
-								<!--<file-upload ref="fileUploader" post-action="/upload" :events="events"-->
-											 <!--:extensions="extensions" :files="files" :title="'Choose csv file'"-->
-											 <!--drop=".file-drop" class="md-button md-primary md-raised"></file-upload>-->
-
-<!--				<div>
-					<div>
-						<md-icon>backup</md-icon>
-						<div>
-							Drag & drop your delivery list here
-							<br />
-							OR
-							<br />
-						</div>
-					</div>
-				</div>-->
-				<dropzone id="file-dropzone" @vdropzone-success="onFileUploaded" url="https://httpbin.org/post" :useCustomDropzoneOptions="useCustomDropzoneOptions" :dropzoneOptions="dropzoneOptions"></dropzone>
+				<dropzone ref="dropzoneUploader" id="file-dropzone" @vdropzone-sending="onFileSending" @vdropzone-success="onFileUploaded" :url="endpointUrl" :useCustomDropzoneOptions="useCustomDropzoneOptions" :dropzoneOptions="dropzoneOptions"></dropzone>
 			</div>
 		</md-whiteframe>
+		<md-dialog-alert
+				md-content="Invalid deliveries found on this file. Please try to upload a valid deliveries file"
+				md-ok-text="OK, I will try again"
+				ref="failedDialog">
+		</md-dialog-alert>
 	</div>
 </template>
 
 <script lang="babel">
 	import FileUpload from 'vue-upload-component'
 	import Dropzone from 'vue2-dropzone'
+	import config from '../core/config'
 	export default {
 
-		store: ['setup', 'phase'],
+		store: ['setup', 'phase', 'currentDate', 'displayOverlay', 'overlayMessage', 'currentDate'],
 
 		data() {
+			let date = this.currentDate
 			return {
+				resourceId: null,
 				files: [],
 				extensions: ['xls', 'xlsx', 'csv'],
-				fileUploadedEvents: {
-					add: (file, component) => {
-						component.active = true
-					}
-				},
-				events: {
-
-				},
+				endpointUrl: `${config.api.baseUrl}deliveries/upload`,
 				dropzoneOptions: {
+					init: function(){
+						this.on('sending', function(file, xhr, formData){
+							formData.append('data', JSON.stringify({date: date}))
+						})
+					},
+					paramName: 'uploaded_file',
 					dictDefaultMessage: '<i class="md-icon material-icons md-theme-default">backup</i>Drag & Drop your delivery list here'
 				},
 				useCustomDropzoneOptions: true
 			}
 		},
 		methods: {
-			onFileUploaded: function(){
-				setTimeout(() => this.phase = 'planning.edit', 3000)
+			onFileUploaded: function(file, response){
+				console.log(file, response)
+				this.resourceId = response.uploadId
+				this.listen()
+				this.displayOverlay = true
+				this.overlayMessage = 'Processing deliveries...'
+//				setTimeout(() => this.phase = 'route', 3000)
+			},
+			onFileSending: function(file, xhr, formData){
+				formData.append('date', 'test')
+				console.log('added', file, xhr, formData)
+			},
+			listen() {
+				let that = this
+				let channel = this.$services.pusher.subscribe(`private-only_tenant.dev.deliveries_uploads.${this.resourceId}.demo`)
+				channel.bind_global((event, data) => {
+					switch(event)
+					{
+						case 'FAILED':
+							// @TODO data.payload.error : need to decide what to display
+							this.$refs.dropzoneUploader.removeAllFiles()
+							this.resourceId = null
+							this.$refs.failedDialog.open()
+							break;
+
+						case 'SUCCESS':
+							this.overlayMessage = 'Hold tight'
+							this.phase = 'route'
+							break;
+
+						default:
+
+							break;
+					}
+					this.displayOverlay = false
+					console.log('the event ' + event + ' fired !', data)
+				})
 			}
 		},
 		components: {
 			Dropzone
+		},
+
+		created() {
 		}
 
 	}
@@ -126,7 +156,7 @@
 		min-height: 100%;
 		font-size: 30px;
 		border: 0px;
-
+		border: 0px !important;
 		.dz-message {
 			margin: 6em 0 !important;
 			color: #000;

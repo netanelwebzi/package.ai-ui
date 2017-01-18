@@ -1,7 +1,7 @@
 <template>
 	<div class="col-xs-4">
 		<md-whiteframe md-tag="section" id="list-panel">
-			<div v-if="setup.step >= 2" style="padding:0px 15px;">
+			<div style="padding:0px 15px;">
 				<div class="row">
 					<div class="col-xs-1" style="padding-top:25px;">
 						<md-icon>search</md-icon>
@@ -15,24 +15,19 @@
 				</div>
 			</div>
 
-			<md-list class="custom-list md-triple-line" v-if="setup.step === 2 || setup.step === 3">
+			<md-list class="custom-list md-triple-line">
 				<md-list-item v-for="item in filteredItems" @click="selectItem(item)"
-				              :class="{ selected: setup.selectedItem === item }">
-          <div class="item-container">
-            <div class="md-list-text-container">
-              <h1>{{ item.title }}</h1>
-              <p>{{ item.description }}</p>
-            </div>
+				              :class="{ selected: selectedItem === item }">
+					<div class="item-container">
+						<div class="md-list-text-container">
+							<h1>{{ item.recipient.firstName + ' ' + item.recipient.lastName }}</h1>
+							<p>{{ item.address.formattedAddress }}</p>
+						</div>
 
-            <md-button class="md-icon-button md-list-action">
-              <md-icon class="md-primary">star</md-icon>
-            </md-button>
-
-            <div class="container-action-icons">
-              <img src="~assets/img/truck.png">
-              <img src="~assets/img/truck.png">
-            </div>
-          </div>
+						<div class="container-action-icons">
+							<img src="~assets/img/status_icon_1.png">
+						</div>
+					</div>
 
 					<md-divider class="md-inset"></md-divider>
 				</md-list-item>
@@ -43,34 +38,39 @@
 
 <script lang="babel">
 	export default {
-		store: ['setup', 'mapCenter'],
+		store: ['setup', 'mapCenter', 'selectedItem', 'deliveries'],
 
 		data() {
 			return {
-				itemsSearch: '',
-				selectedItem: null
+				itemsSearch: ''
 			}
 		},
 
 		computed: {
-			filteredItems: function(){
+			filteredItems: function () {
 				let search = this.itemsSearch
-				return this.setup.items.filter(function(item){
-					return item.title.indexOf(search) !== -1 || item.description.indexOf(search) !== -1
+				return this.deliveries.filter(function (item) {
+					return item.recipient.firstName.indexOf(search) !== -1 || item.recipient.lastName.indexOf(search) !== -1 || item.address.formattedAddress.indexOf(search) !== -1
 				})
 			}
 		},
 
 		methods: {
 			selectItem(item) {
-				this.setup.step = 3
-				this.$set(this.setup, 'selectedItem', item)
-				this.mapCenter = {lat: 10.0, lng: 10.0}
+				this.selectedItem = item
 			},
 			unselectItem() {
-				this.setup.step = 2
-				delete this.setup.selectedItem
+				this.selectedItem = null
 			}
+		},
+
+		created() {
+//			this.$services.Conversations.get().then((response) => {
+//				console.log('convs', response)
+//			})
+//			this.$services.Deliveries.get().then((response) => {
+//				this.deliveries = response
+//			})
 		}
 
 	}
@@ -101,35 +101,36 @@
 				}
 			}
 
-      .item-container {
-        display: flex;
-        flex-flow: row;
-        align-items: stretch;
-        .md-list-action {
-          align-self: center;
-        }
-        .container-action-icons {
-          display: flex;
-          flex-flow: column;
-          justify-content: space-around;
-          flex-basis: 50px;
-          align-items: center;
-          position: relative;
-          padding-left: 10px;
-          img {
-            max-height: 40px;
-            position: relative;
-          }
-          &:before {
-            content: '';
-            position: absolute;
-            top: 10%;
-            left: 0;
-            height: 80%;
-            border-left: 1px dashed #ddd;
-          }
-        }
-      }
+			.item-container {
+				display: flex;
+				width: 100%;
+				flex-flow: row;
+				align-items: stretch;
+				.md-list-action {
+					align-self: center;
+				}
+				.container-action-icons {
+					display: flex;
+					flex-flow: column;
+					justify-content: space-around;
+					flex-basis: 50px;
+					align-items: center;
+					position: relative;
+					padding-left: 10px;
+					img {
+						max-height: 40px;
+						position: relative;
+					}
+					&:before {
+						content: '';
+						position: absolute;
+						top: 10%;
+						left: 0;
+						height: 80%;
+						border-left: 1px dashed #ddd;
+					}
+				}
+			}
 		}
 
 		&#chat-panel {

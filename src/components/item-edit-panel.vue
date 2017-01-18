@@ -1,32 +1,38 @@
 <template>
-	<div class="col-xs" v-if="setup.selectedItem !== undefined">
+	<div class="col-xs" v-if="selectedItem !== null">
 		<md-whiteframe md-tag="section" id="edit-panel">
 			<div class="item-details">
 				<div class="row">
 					<div class="col-xs-8 principal">
-						<div class="title">{{ setup.selectedItem.title }}</div>
+						<div class="title">{{ selectedItem.recipient.firstName + ' ' + selectedItem.recipient.lastName }}</div>
 						<div id="places-input" class="item-detail">
-              <md-icon>location_on</md-icon>
-							<place-input placeholder="Search location"></place-input>
+							<md-icon>location_on</md-icon>
+							<place-input placeholder="Search location" :default-place="selectedItem.address.formattedAddress" @place_changed="onPlaceChange"></place-input>
 						</div>
 						<md-input-container class="item-detail">
-              <md-icon>call</md-icon>
-							<md-input v-model="setup.selectedItem.phoneNumber"></md-input>
+							<md-icon>call</md-icon>
+							<md-input v-model="selectedItem.recipient.phone"></md-input>
 						</md-input-container>
 						<md-input-container class="item-detail">
-              <i class="fa fa-truck"></i>
-							<md-input v-model="setup.selectedItem.id" disabled></md-input>
+							<md-icon>inbox</md-icon>
+							<md-input v-model="selectedItem.parcel.retailerId" disabled></md-input>
+						</md-input-container>
+						<md-input-container class="item-detail">
+							<i class="fa fa-truck"></i>
+							<md-input v-model="selectedItem.id" disabled></md-input>
 						</md-input-container>
 					</div>
 					<div class="col-xs-4 secondary">
-						<div class="status">
-							<md-icon class="md-primary">done</md-icon>
-							<div>Done!</div>
+						<div class="status" style="margin-top:13px;">
+							<img src="~assets/img/status_icon_1.png">
+							<div style="color:#9a67d9;font-size:12px;padding-top:5px;">In Progress</div>
 						</div>
-            <div class="item-detail">Mon, 08/11/2016</div>
-            <div id="timeslot-picker" class="item-detail">
-              <vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
-            </div>
+						<div class="item-detail">{{selectedItem.shippingDate}}</div>
+						<div id="timeslot-picker" class="item-detail">
+							<vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
+							<span style="display:inline-block;margin-top:3px;">{{ timeSlotEnd }}<md-tooltip
+									md-direction="bottom">Time slot end</md-tooltip></span>
+						</div>
 					</div>
 				</div>
 				<div class="cancel">
@@ -46,14 +52,18 @@
 
 	Vue.use(VueGoogleMaps, {
 		load: {
+			language: 'en',
 			key: 'AIzaSyBzlLYISGjL_ovJwAehh6ydhB56fCCpPQw',
-			libraries: 'places'
+			libraries: 'places',
+			options: {
+				language: 'en'
+			}
 		},
 	})
 
 	export default {
 
-		store: ['setup'],
+		store: ['selectedItem'],
 
 		components: {
 			PlaceInput: VueGoogleMaps.PlaceInput,
@@ -61,13 +71,31 @@
 		},
 
 		data() {
-			return {
-			}
+			return {}
 		},
 
 		methods: {
 			unselectItem() {
-			    this.setup.selectedItem = void 0;
+				this.selectedItem = null;
+			},
+			onPlaceChange: function(){
+				console.log('changed', arguments)
+			}
+		},
+
+		computed: {
+			place: function(){
+				return {
+					name: this.selectedItem.address.formattedAddress
+				}
+			},
+			timeSlotEnd: function () {
+				/**var h = parseInt(this.selectedItem.timeSlotStart.hh);
+				h = parseInt(h + 2)
+				if (h < 10) {
+					h = '0' + h
+				}
+				return h + ':' + this.selectedItem.timeSlotStart.mm;**/
 			}
 		}
 
@@ -85,39 +113,39 @@
 				background: #fff;
 				padding: 20px;
 
-        .secondary {
-          margin-top: -10px;
-          .item-detail {
-            margin-top: 5px;
-          }
-          .item-detail, .item-detail input {
-            font-size: 12px;
-          }
-        }
+				.secondary {
+					margin-top: -10px;
+					.item-detail {
+						margin-top: 5px;
+					}
+					.item-detail, .item-detail input {
+						font-size: 12px;
+					}
+				}
 
 				.title {
 					line-height: 1.1em;
 					color: #00baff;
-          font-size: 18px;
-          font-weight: 200;
-          font-family: 'overpass', arial;
+					font-size: 18px;
+					font-weight: 200;
+					font-family: 'overpass', arial;
 				}
 
 				.status {
 					text-align: center;
 					margin-top: 0;
-          padding-bottom: 10px;
-          position: relative;
-          &::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            width: 60%;
-            margin-left: -30%;
-            border-bottom: 1px dashed #a8a8a8;
-          }
-          $size-md-icon-here: 50px;
+					padding-bottom: 10px;
+					position: relative;
+					&::after {
+						content: '';
+						position: absolute;
+						bottom: 0;
+						left: 50%;
+						width: 60%;
+						margin-left: -30%;
+						border-bottom: 1px dashed #a8a8a8;
+					}
+					$size-md-icon-here: 50px;
 					.md-icon {
 						width: $size-md-icon-here;
 						max-width: $size-md-icon-here;
@@ -128,7 +156,7 @@
 
 					div {
 						font-size: 16px;
-            line-height: 1em;
+						line-height: 1em;
 					}
 				}
 
@@ -138,40 +166,52 @@
 					right: -2px;
 				}
 
-        .item-detail, .item-detail input{
-          margin: 0;
-          padding: 0;
-          color: #777;
-          font-size: 15px;
-          height: auto;
-          min-height: auto;
-          line-height:1.1em;
-        }
-        .item-detail {
-          margin-top: 10px;
-          padding-top: 2px;
-          padding-bottom: 2px;
-          margin-left: 24px;
-          position: relative;
-          label {
-            margin: 0;
-            padding: 0;
-          }
-          .md-icon, i.fa{
-            left: -27px;
-            top: -3px;
-            position: absolute;
-          }
-          i.fa {
-            font-size: 22px;
-          }
-          input, &::after{
-            border: none;
-            background-color: transparent;
-            background-image: none;
-          }
-        }
-      }
+				.item-detail, .item-detail input {
+					margin: 0;
+					padding: 0;
+					color: #777;
+					font-size: 15px;
+					height: auto;
+					min-height: auto;
+					line-height: 1.1em;
+				}
+				.item-detail {
+					margin-top: 10px;
+					padding-top: 2px;
+					padding-bottom: 2px;
+					margin-left: 24px;
+					position: relative;
+					label {
+						margin: 0;
+						padding: 0;
+					}
+					.md-icon, i.fa {
+						left: -27px;
+						top: -3px;
+						position: absolute;
+					}
+					i.fa {
+						font-size: 22px;
+					}
+					input, &::after {
+						border: 0px;
+						background-color: transparent;
+						background-image: none;
+					}
+
+					input {
+						border: 0px;
+						padding-bottom: 5px !important;
+						border-bottom: 1px solid #ddd;
+						width: 93%;
+
+						&:focus {
+							border-bottom-color: #3F51B5;
+							border-bottom-width: 2px;
+						}
+					}
+				}
+			}
 		}
 	}
 
@@ -199,6 +239,7 @@
 		.time-picker {
 			display: block;
 			width: 100%;
+			margin-top: 11px;
 		}
 	}
 
@@ -211,8 +252,8 @@
 
 		input {
 			outline: 0;
-			border:0px;
-			width:100%;
+			border: 0px;
+			width: 100% !important;
 			border-bottom: 1px solid #ddd;
 			font-size: 16px;
 

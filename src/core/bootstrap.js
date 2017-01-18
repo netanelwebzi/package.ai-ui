@@ -5,12 +5,15 @@ import VueStash from 'vue-stash'
 import VueRouter from 'vue-router'
 import VeeValidate from 'vee-validate'
 import VueMaterial from 'vue-material'
+import Pusher from 'pusher-js'
 import VueLocalStorage from './local-storage'
 import moment from 'moment'
 import Axios from 'axios'
+import config from './config'
 import App from '../App'
 import store from './store'
 import router from './router'
+import componentMixin from './component-mixin'
 import 'vue-material/dist/vue-material.css'
 
 // Install plugins
@@ -19,30 +22,28 @@ Vue.use(VueStash)
 Vue.use(VeeValidate)
 Vue.use(VueMaterial)
 
-// Axios
-Axios.defaults.baseURL = ''
-Axios.defaults.headers.common.Accept = 'application/json'
-Vue.prototype.$http = Axios
+// Global mixins
+Vue.mixin(componentMixin)
+
+// Pusher
+Pusher.logToConsole = true
+let pusher = new Pusher(config.pusher.key, {
+	encrypted: true,
+	cluster: config.pusher.cluster,
+	authEndpoint: config.api.baseUrl + 'hooks/pusher/auth'
+})
+
+
+// Services
+import * as services from './services'
+services.pusher = pusher
+Vue.prototype.$services = services
 
 // Moment
 Vue.prototype.moment = moment
 
-
 // Vue Material
-Vue.material.registerTheme({
-	indigo_pink: {
-		primary: 'indigo',
-		accent: 'pink', // default is pink
-		warn: 'deep-orange',
-		background: 'grey'
-	},
-	indigo_yellow: {
-		primary: 'indigo',
-		accent: 'yellow', // default is pink
-		warn: 'deep-orange',
-		background: 'grey'
-	}
-})
+Vue.material.registerTheme(config.themes)
 
 // Global components
 import AuthLayoutComponent from '../components/auth-layout'

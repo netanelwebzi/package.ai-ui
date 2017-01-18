@@ -1,5 +1,5 @@
 <template>
-	<div class="layout" v-md-theme="'default'">
+	<div class="layout" md-theme="default">
 		<div class="container-fluid wrap">
 			<div class="row middle-md middle-xs middle-lg center-md center-xs center-lg" style="height:100vh;">
 				<div class="col-xs-6 col-md-4 col-lg-4">

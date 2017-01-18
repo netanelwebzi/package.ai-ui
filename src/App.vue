@@ -4,7 +4,7 @@
 			<div id="overlay" v-show="displayOverlay">
 				<div>
 					<md-spinner :md-size="150" md-indeterminate></md-spinner>
-					<span>Hold tight...</span>
+					<span>{{ overlayMessage }}</span>
 				</div>
 			</div>
 		</transition>
@@ -14,7 +14,7 @@
 
 <script>
 	export default {
-		store: ['displayOverlay'],
+		store: ['displayOverlay', 'overlayMessage'],
 		mounted() {
 			setTimeout(() => this.displayOverlay = false, 2000)
 		}

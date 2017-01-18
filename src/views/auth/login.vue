@@ -27,66 +27,73 @@
 	</auth-layout>
 </template>
 
-<script>
-export default {
-	store: ['displayOverlay'],
-	data() {
-		return {
-			user: {
-				username: null,
-				password: null,
-				remember: true
+<script lang="babel">
+	import {Auth} from '../../core/services'
+
+	export default {
+		store: ['displayOverlay'],
+		data() {
+			return {
+				user: {
+					username: null,
+					password: null,
+					remember: true
+				},
+				errors: {
+					username: false,
+					password: false
+				},
+				loading: false,
+				checked: true
+			};
+		},
+		watch: {
+			'user.username': function () {
+				if (this.user.username == null || this.user.username == '' || this.user.username.length < 2) {
+					this.errors.username = true;
+				} else {
+					this.errors.username = false;
+				}
 			},
-			errors: {
-				username: false,
-				password: false
-			},
-			loading: false,
-			checked: true
-		};
-	},
-	watch: {
-		'user.username': function () {
-			console.log('changed');
-			if(this.user.username == null || this.user.username == '' || this.user.username.length < 2){
-				this.errors.username = true;
-			} else {
-				this.errors.username = false;
+			'user.password': function () {
+				if (this.user.password == null || this.user.password == '' || this.user.password.length < 2) {
+					this.errors.password = true;
+				} else {
+					this.errors.password = false;
+				}
 			}
 		},
-		'user.password': function() {
-			if(this.user.password == null || this.user.password == '' || this.user.password.length < 2){
-				this.errors.password = true;
-			} else {
-				this.errors.password = false;
-			}
+		methods: {
+			login() {
+				if (this.user.username == null || this.user.username == '' || this.user.username.length < 2) {
+					this.errors.username = true;
+				} else {
+					this.errors.username = false;
+				}
+
+				if (this.user.password == null || this.user.password == '' || this.user.password.length < 2) {
+					this.errors.password = true;
+				} else {
+					this.errors.password = false;
+				}
+
+				if (!this.errors.username && !this.errors.password) {
+					this.displayOverlay = true
+//					setTimeout(() => this.displayOverlay = false, 2000)
+					this.$services.Auth.login(this.user.username, this.user.password).then(() => {
+						this.displayOverlay = false
+						this.$router.push({name: 'app.dashboard'})
+					}, () => {
+						this.displayOverlay = false
+						this.$refs.errorDialog.open()
+					})
+				} else {
+					this.$refs.errorDialog.open()
+				}
+			},
 		}
-	},
-	methods: {
-		login() {
-			// authService.login(user);
-			if(this.user.username == null || this.user.username == '' || this.user.username.length < 2){
-				this.errors.username = true;
-			} else {
-				this.errors.username = false;
-			}
-
-			if(this.user.password == null || this.user.password == '' || this.user.password.length < 2){
-				this.errors.password = true;
-			} else {
-				this.errors.password = false;
-			}
-
-			if(!this.errors.username && !this.errors.password && this.user.username == 'admin' && this.user.password == '123'){
-				this.displayOverlay = true
-				setTimeout(() => this.displayOverlay = false, 2000)
-				this.$router.push({name: 'app.dashboard'})
-			} else {
-				this.$refs.errorDialog.open();
-			}
-		},
 	}
-}
+
 </script>
 
 <style>
@@ -97,4 +104,6 @@ export default {
 	small {
 		font-size: 13px;
 	}
+
+
 </style>

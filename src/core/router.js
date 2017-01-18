@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import {Auth} from './services'
 
 Vue.use(Router)
 
@@ -11,28 +12,19 @@ const router = new Router({
 		{
 			path: '/app/dashboard',
 			name: 'app.dashboard',
-			component: load('app/dashboard'),
-			meta: {
-				guest: true,
-			},
+			component: load('app/dashboard')
 		},
 
 		// Login
 		{
 			path: '/auth/login',
 			name: 'auth.login',
-			component: load('auth/login'),
-			meta: {
-				guest: true,
-			},
+			component: load('auth/login')
 		},
 		{
 			path: '/auth/forgot-password',
 			name: 'auth.forgot-password',
-			component: load('auth/forgot-password'),
-			meta: {
-				guest: true,
-			},
+			component: load('auth/forgot-password')
 		},
 		{
 			path: '/',
@@ -48,9 +40,19 @@ const router = new Router({
 })
 
 router.beforeEach((to, from, next) => {
-
-	next()
-
+	if(Auth.check()){
+		if(to.name.startsWith('auth.')){
+			next('/app/dashboard')
+		} else {
+			next()
+		}
+	} else {
+		if(to.name.startsWith('app.')){
+			next('/auth/login')
+		} else {
+			next()
+		}
+	}
 })
 
 
