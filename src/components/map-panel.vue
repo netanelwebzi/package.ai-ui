@@ -70,7 +70,6 @@
 			}
 		},
 		data() {
-
 			return {
 				center: {lat: 10.0, lng: 10.0},
 				options: {

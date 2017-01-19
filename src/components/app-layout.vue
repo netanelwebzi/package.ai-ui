@@ -1,5 +1,13 @@
 <template>
 	<div class="layout" md-theme="indigo_yellow">
+		<md-dialog-confirm
+				md-title="Hold on"
+				md-content="Are you sure ?"
+				md-ok-text="Yes, do it"
+				md-cancel-text="Cancel"
+				@close="onDialog5Close"
+				ref="dialog5">
+		</md-dialog-confirm>
 		<md-dialog :md-click-outside-to-close="false" :md-esc-to-close="false" ref="jennyDialog" class="jenny-dialog">
 			<md-dialog-content>
 				<img src="~assets/img/jenny_dialog_icon.png" alt="">
@@ -194,7 +202,7 @@
 					<div class="bottom">Response</div>
 				</div>
 			</div>
-			<md-button class="md-raised" v-show="onPhaseRoute()" @click="phase='export'">
+			<md-button class="md-raised" v-show="onPhaseRoute()" @click="createDeliverySchedule()">
 				<md-icon>date_range</md-icon>
 				Create delivery schedule
 			</md-button>
@@ -224,7 +232,7 @@
 		components: {
 			DatePicker
 		},
-		store: ['phase', 'displayOverlay', 'user', 'phases', 'metrics', 'routePlan', 'deliveries'],
+		store: ['phase', 'displayOverlay', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage'],
 		data() {
 			const d = new Date();
 			return {
@@ -269,6 +277,9 @@
 			}
 		},
 		methods: {
+			onDialog5Close(type) {
+				console.log(type)
+			},
 			onLogoutConfirmClose(button) {
 				if (button == 'ok') {
 					this.$services.Auth.forget().then(() => {
@@ -279,6 +290,10 @@
 			onJennyOK: function () {
 				this.$refs.jennyDialog.close()
 				this.phase = 'monitoring'
+			},
+			createDeliverySchedule() {
+				this.displayOverlay = true
+				this.overlayMessage = 'Preparing route plan...'
 			},
 			logout() {
 

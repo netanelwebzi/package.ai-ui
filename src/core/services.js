@@ -146,6 +146,16 @@ class Plans
 	}
 }
 
+class Recipients
+{
+	static update(id, body)
+	{
+		return Axios.put(`recipients/${id}`, body).then((response) => {
+			return response.data
+		})
+	}
+}
+
 class Deliveries
 {
 	static get(date)
@@ -158,7 +168,7 @@ class Deliveries
 	static update(id, body)
 	{
 		return Axios.put(`deliveries/${id}`, body).then((response) => {
-
+			return response.data
 		})
 	}
 
@@ -200,5 +210,6 @@ export {
 	Plans,
 	Deliveries,
 	Conversations,
+	Recipients,
 	init
 }

@@ -4,31 +4,39 @@
 			<div class="item-details">
 				<div class="row">
 					<div class="col-xs-8 principal">
-						<div class="title">{{ selectedItem.recipient.firstName + ' ' + selectedItem.recipient.lastName }}</div>
-						<div id="places-input" class="item-detail">
-							<md-icon>location_on</md-icon>
-							<place-input placeholder="Search location" :default-place="selectedItem.address.formattedAddress" @place_changed="onPlaceChange"></place-input>
+						<div class="title">{{ selectedItem.recipient.firstName + ' ' + selectedItem.recipient.lastName
+							}}
 						</div>
+						<div id="places-input" class="item-detail" v-if="onPhaseRoute()">
+							<md-icon>location_on</md-icon>
+							<place-input placeholder="Search location"
+							             :default-place="selectedItem.address.formattedAddress"
+							             @place_changed="onPlaceChange" ref="placeComponent"></place-input>
+						</div>
+						<md-input-container class="item-detail" v-else>
+							<md-icon>location_on</md-icon>
+							<md-input v-model="selectedItem.address.formattedAddress" disabled></md-input>
+						</md-input-container>
 						<md-input-container class="item-detail">
 							<md-icon>call</md-icon>
-							<md-input v-model="selectedItem.recipient.phone"></md-input>
+							<md-input v-model="selectedItem.recipient.phone" :disabled="!onPhaseRoute()"></md-input>
 						</md-input-container>
 						<md-input-container class="item-detail">
 							<md-icon>inbox</md-icon>
-							<md-input v-model="selectedItem.parcel.retailerId" disabled></md-input>
+							<md-input v-model="selectedItem.retailer.name" disabled></md-input>
 						</md-input-container>
 						<md-input-container class="item-detail">
 							<i class="fa fa-truck"></i>
-							<md-input v-model="selectedItem.id" disabled></md-input>
+							<md-input v-model="selectedItem.barcode" disabled></md-input>
 						</md-input-container>
 					</div>
 					<div class="col-xs-4 secondary">
 						<div class="status" style="margin-top:13px;">
 							<img src="~assets/img/status_icon_1.png">
-							<div style="color:#9a67d9;font-size:12px;padding-top:5px;">In Progress</div>
+							<div style="color:#9a67d9;font-size:12px;padding-top:5px;">{{selectedItem.state}}</div>
 						</div>
 						<div class="item-detail">{{selectedItem.shippingDate}}</div>
-						<div id="timeslot-picker" class="item-detail">
+						<div id="timeslot-picker" class="item-detail" v-if="!onPhaseRoute()">
 							<vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
 							<span style="display:inline-block;margin-top:3px;">{{ timeSlotEnd }}<md-tooltip
 									md-direction="bottom">Time slot end</md-tooltip></span>
@@ -70,6 +78,12 @@
 			VueTimepicker: VueTimepicker
 		},
 
+		watch: {
+			'selectedItem.recipient.phone': function(){
+				this.onPhoneChange()
+			}
+		},
+
 		data() {
 			return {}
 		},
@@ -78,24 +92,40 @@
 			unselectItem() {
 				this.selectedItem = null;
 			},
-			onPlaceChange: function(){
-				console.log('changed', arguments)
+			onPlaceChange(value) {
+				const newFormattedAddress = value.formatted_address
+				this.$services.Deliveries.update(this.selectedItem.id, {
+					id: this.selectedItem.id,
+					address: {
+						formattedAddress: newFormattedAddress
+					}
+				}).then((response) => {
+					console.log('updated', response)
+				})
+			},
+			onPhoneChange() {
+				this.$services.Recipients.update(this.selectedItem.recipientId, {
+					id: this.selectedItem.recipientId,
+					phone: this.selectedItem.recipient.phone
+				}).then((response) => {
+					console.log('updated', response)
+				})
 			}
 		},
 
 		computed: {
-			place: function(){
+			place: function () {
 				return {
 					name: this.selectedItem.address.formattedAddress
 				}
 			},
 			timeSlotEnd: function () {
 				/**var h = parseInt(this.selectedItem.timeSlotStart.hh);
-				h = parseInt(h + 2)
-				if (h < 10) {
+				 h = parseInt(h + 2)
+				 if (h < 10) {
 					h = '0' + h
 				}
-				return h + ':' + this.selectedItem.timeSlotStart.mm;**/
+				 return h + ':' + this.selectedItem.timeSlotStart.mm;**/
 			}
 		}
 

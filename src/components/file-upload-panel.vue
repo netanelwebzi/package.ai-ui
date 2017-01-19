@@ -22,7 +22,7 @@
 		store: ['setup', 'phase', 'currentDate', 'displayOverlay', 'overlayMessage', 'currentDate'],
 
 		data() {
-			let date = this.currentDate
+			let that = this
 			return {
 				resourceId: null,
 				files: [],
@@ -31,6 +31,7 @@
 				dropzoneOptions: {
 					init: function(){
 						this.on('sending', function(file, xhr, formData){
+							const date = that.moment(that.currentDate, 'dddd, DD/MM/YYYY').format('YYYY-MM-DD')
 							formData.append('data', JSON.stringify({date: date}))
 						})
 					},
