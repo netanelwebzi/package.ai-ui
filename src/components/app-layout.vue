@@ -1,5 +1,10 @@
 <template>
-	<div class="layout" md-theme="indigo_yellow">
+	<div class="layout" md-theme="blue">
+		<md-dialog-alert
+				md-content="Access denied"
+				md-ok-text="OK"
+				ref="uploadNewDeliversErrorDialog">
+		</md-dialog-alert>
 		<md-dialog-confirm
 				md-title="Hold on"
 				md-content="Are you sure ?"
@@ -8,19 +13,27 @@
 				@close="onDialog5Close"
 				ref="dialog5">
 		</md-dialog-confirm>
+		<md-dialog-confirm
+				md-title="Hold on"
+				md-content="Are you sure ?"
+				md-ok-text="Yes, do it"
+				md-cancel-text="Cancel"
+				@close="onNewDeliversConfirmDialogClose"
+				ref="newDeliveriesConfirmDialog">
+		</md-dialog-confirm>
 		<md-dialog :md-click-outside-to-close="false" :md-esc-to-close="false" ref="jennyDialog" class="jenny-dialog">
 			<md-dialog-content>
 				<img src="~assets/img/jenny_dialog_icon.png" alt="">
-				<h3>Hi, John Doe</h3>
+				<h3 style="margin-bottom:5px;">Hi, John Doe</h3>
 				<p>
-					I'm about to contact <strong>123</strong> recipients and<br/>
-					export the route to the driver.
+					I'm about to contact <strong>123</strong> recipients<br/>
+					and export the route to the driver.
 				</p>
-				<strong>Are you sure you want me to go ahead ?</strong>
+				<strong style="height:17px;">Are you sure you want me to go ahead ?</strong>
 			</md-dialog-content>
 			<md-dialog-actions>
 				<md-button class="md-raised" @click="$refs.jennyDialog.close()">Cancel</md-button>
-				<md-button md-theme="indigo_pink" class="md-raised md-primary" @click="onJennyOK">Yes</md-button>
+				<md-button md-theme="blue" class="md-raised md-primary" @click="onJennyOK">Yes</md-button>
 			</md-dialog-actions>
 		</md-dialog>
 		<md-dialog-confirm
@@ -34,9 +47,10 @@
 		<md-toolbar id="app-toolbar">
 			<a href="/#/dashboard"><img src="~assets/img/logo.png" alt=""></a>
 			<div id="phases-progress" v-if="!onPhaseMonitoring()">
-				<div v-for="phaseLabel in phases" :class="{current: phase == phaseLabel}">
-					{{phaseLabel}}
-				</div>
+				<!--<div v-for="phaseLabel in phases" :class="{current: phase == phaseLabel}">-->
+					<!--{{phaseLabel}}-->
+				<!--</div>-->
+				<phase-progress-bar></phase-progress-bar>
 			</div>
 			<div v-else id="phases-progress">
 				<div class="current">
@@ -61,7 +75,7 @@
 							</a>
 						</div>
 						<div class="col-xs-4 top-none right-none left-none">
-							<a>
+							<a @click.prevent="uploadNewDeliveries">
 								<i class="fa fa-plus-square"></i>
 								New Deliveries
 							</a>
@@ -90,15 +104,14 @@
 			<div class="pull-right" id="right-actions">
 				<ul>
 					<li>
-						<date-picker :date="startTime" :option="option" :limit="limit"></date-picker>
-						<!--<strong>{{ todayDate }}</strong>-->
+						<inline-date-picker format="D, dd/MM/yyyy" v-model="startTime.time"></inline-date-picker>
 					</li>
 					<li>
 						<div class="top-info" v-show="onPhaseMonitoring()">
 							<img src="~assets/img/round.png">
 							<div class="top-content">
 								<div class="top">
-									<span class="big">20%</span><span class="small">(115)</span>
+									<span class="big">{{ Math.round((metrics.delivered / metrics.totalDeliveries) * 100) }}%</span><span class="small">({{ metrics.delivered }})</span>
 								</div>
 								<div class="bottom">Delivered</div>
 							</div>
@@ -109,7 +122,7 @@
 							<img src="~assets/img/cancel.png">
 							<div class="top-content">
 								<div class="top">
-									<span class="big">80%</span><span class="small">(115)</span>
+									<span class="big">{{ Math.round((metrics.misdelivered / metrics.totalDeliveries) * 100) }}%</span><span class="small">({{ metrics.misdelivered }})</span>
 								</div>
 								<div class="bottom">Missdelivered</div>
 							</div>
@@ -127,7 +140,7 @@
 								<md-avatar class="md-avatar-icon md-raised">
 									<md-icon>face</md-icon>
 								</md-avatar>
-								<span>{{ user.name }}</span>
+
 							</md-button>
 
 							<md-menu-content>
@@ -153,8 +166,9 @@
 				</md-select>
 			</div>
 			<div v-show="!onPhaseUpload()" class="top-info" style="justify-content: flex-start">
-				<img src="~assets/img/cancel.png">
-				<div class="value">{{ deliveries.length }}</div>
+				<img src="~assets/img/UploadDeliveryList_LeftPanel.png">
+				<div class="value" v-if="onPhaseMonitoring()">{{ metrics.totalDeliveries }}</div>
+				<div class="value" v-else>{{ deliveries.length }}</div>
 				<div class="top-content">
 					<div class="top">
 						Today
@@ -164,7 +178,7 @@
 			</div>
 			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #88db5f">
 				<img src="~assets/img/toolbar_status_icon_2.png">
-				<div class="value">115</div>
+				<div class="value">{{ metrics.confirmed }}</div>
 				<div class="top-content">
 					<div class="top">
 						Confirmed
@@ -174,7 +188,7 @@
 			</div>
 			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #ffb73a">
 				<img src="~assets/img/toolbar_status_icon_3.png">
-				<div class="value">2</div>
+				<div class="value">{{ metrics.postponed }}</div>
 				<div class="top-content">
 					<div class="top">
 						Different
@@ -184,7 +198,7 @@
 			</div>
 			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #9a67d9">
 				<img src="~assets/img/toolbar_status_icon_4.png">
-				<div class="value">5</div>
+				<div class="value">{{ metrics.conversing }}</div>
 				<div class="top-content">
 					<div class="top">
 						In
@@ -194,7 +208,7 @@
 			</div>
 			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #f75252">
 				<img src="~assets/img/toolbar_status_icon_5.png">
-				<div class="value">1</div>
+				<div class="value">{{ metrics.noResponse }}</div>
 				<div class="top-content">
 					<div class="top">
 						No
@@ -206,11 +220,11 @@
 				<md-icon>date_range</md-icon>
 				Create delivery schedule
 			</md-button>
-			<md-button class="md-raised" v-show="onPhaseExport()" @click="phase='jenny'">
+			<md-button class="md-raised" v-show="onPhaseExport()" @click="exportSchedule()">
 				<md-icon>send</md-icon>
 				Export schedule
 			</md-button>
-			<md-button class="md-raised md-accent jenny-button" md-theme="indigo_yellow" id="jenny-button"
+			<md-button class="md-raised md-accent jenny-button" md-theme="yellow" id="jenny-button"
 			           @click="$refs.jennyDialog.open()" v-show="onPhaseJenny()">
 				RUN Jenny, RUN !
 			</md-button>
@@ -221,6 +235,8 @@
 
 <script lang="babel">
 	import DatePicker from './datepicker'
+	import PhaseProgressBar from './phase-progress'
+	import InlineDatePicker from 'vuejs-datepicker'
 	import LocalStorage from '../core/local-storage'
 	let $localStorage = new LocalStorage
 
@@ -230,9 +246,11 @@
 
 	export default {
 		components: {
-			DatePicker
+			DatePicker,
+			InlineDatePicker,
+			PhaseProgressBar
 		},
-		store: ['phase', 'displayOverlay', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage'],
+		store: ['phase', 'displayOverlay', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage', 'currentDate', 'metrics'],
 		data() {
 			const d = new Date();
 			return {
@@ -258,10 +276,6 @@
 					overlayOpacity: 0.8, // 0.5 as default
 					dismissible: true // as true as default
 				},
-				limit: [{
-					type: 'weekday',
-					available: [1, 2, 3, 4, 5, 6, 7]
-				}],
 			}
 		},
 		watch: {
@@ -273,10 +287,40 @@
 			phase: function () {
 				this.displayOverlay = true
 				this.$localStorage.set('phase', this.phase)
+
+				if(this.phase == 'monitoring'){
+					this.listenForUpdates()
+					this.$services.Plans.metrics(this.routePlan.id).then((metrics) => {
+						this.metrics = metrics
+					})
+				}
+
 				setTimeout(() => this.displayOverlay = false, 2000)
 			}
 		},
 		methods: {
+			listenForUpdates() {
+				let channel = this.$services.pusher.subscribe(`private-only_tenant.dev.plans.${this.routePlan.id}.demo`)
+				// @TODO listen for deliveries/conversations updates
+			},
+			onNewDeliversConfirmDialogClose(button) {
+				if(button == 'ok'){
+					this.phase = 'upload'
+				}
+			},
+			uploadNewDeliveries() {
+				if(this.routePlan == null || this.routePlan == undefined || this.routePlan.state == undefined){
+					this.$refs.newDeliveriesConfirmDialog.open();
+				} else {
+					if(this.routePlan.state == 'CONTACTED' || this.routePlan.state == 'EXPORTED'){
+						this.$refs.uploadNewDeliversErrorDialog.open()
+					} else {
+						this.$refs.newDeliveriesConfirmDialog.open();
+					}
+				}
+
+				this.showDropdownBox = false
+			},
 			onDialog5Close(type) {
 				console.log(type)
 			},
@@ -289,11 +333,47 @@
 			},
 			onJennyOK: function () {
 				this.$refs.jennyDialog.close()
-				this.phase = 'monitoring'
+				this.displayOverlay = true
+				this.overlayMessage = 'Running...'
+				this.$services.Plans.run(this.routePlan.id).then((response) => {
+					console.log('done', response)
+					this.phase = 'monitoring'
+					this.displayOverlay = false
+				})
+			},
+			listen(routePlanId) {
+				let that = this
+				let channel = this.$services.pusher.subscribe(`private-only_tenant.dev.plans.${routePlanId}.demo`)
+				channel.bind_global((event, data) => {
+					switch (event)
+					{
+						case 'UPDATED':
+							this.$services.Plans.get(this.moment(this.currentDate).format('YYYY-MM-DD')).then((plan) => {
+								this.routePlan = plan
+								this.phase = 'export'
+								this.displayOverlay = false
+							})
+							break;
+					}
+				})
+			},
+			exportSchedule() {
+				this.displayOverlay = true
+				this.overlayMessage = 'Exporting...'
+				this.$services.Plans.export(this.routePlan.id).then((response) => {
+					this.phase = 'jenny'
+					this.displayOverlay = false
+				})
 			},
 			createDeliverySchedule() {
 				this.displayOverlay = true
 				this.overlayMessage = 'Preparing route plan...'
+				this.$services.Plans.schedule(this.moment(this.currentDate).format('YYYY-MM-DD')).then((response) => {
+					this.listen(response.routePlanId)
+				}).catch((error) => {
+					this.displayOverlay = false
+					alert(error.response.data.message)
+				})
 			},
 			logout() {
 
@@ -334,24 +414,9 @@
 		#phases-progress {
 			display: block;
 			float: left;
-			margin-top: 15px;
+			max-width: 600px;
+			margin-top: 25px;
 			margin-left: 20px;
-			div {
-				color: gray;
-				float: left;
-				padding: 5px 15px;
-				font-size: 18px;
-				text-transform: capitalize;
-				line-height: 35px;
-				&.current {
-					height: 49px;
-					background: #2196F3;
-					color: #fff;
-					font-weight:bold;
-					border-top-right-radius: 10px;
-					border-top-left-radius: 10px;
-				}
-			}
 		}
 
 		/*#phases-progress {*/
@@ -405,7 +470,7 @@
 			z-index: 9999999999;
 			display: block;
 			padding: 20px 10px 0px 25px;
-			right: 127px;
+			right: 82px;
 			margin-top: 64px;
 			transition-property: all;
 			transition-duration: .5s;
@@ -583,6 +648,10 @@
 				font-weight: bold;
 			}
 		}
+	}
+
+	.jenny-dialog .md-dialog {
+		padding: 0px 30px;
 	}
 
 </style>

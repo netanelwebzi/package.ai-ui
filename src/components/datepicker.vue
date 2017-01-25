@@ -174,7 +174,7 @@ table {
 }
 .cov-date-caption {
   width: 60%;
-  padding: 50px 0!important;
+  padding: 19px 0!important;
   box-sizing: border-box;
   font-size: 24px;
 }
@@ -329,7 +329,7 @@ table {
 		     v-bind:style="{'background' : option.overlayOpacity? 'rgba(0,0,0,'+option.overlayOpacity+')' : 'rgba(0,0,0,0.5)'}">
 			<div class="cov-date-body" :style="{'background-color': option.color ? option.color.header : '#3f51b5'}">
 				<strong style="color:#fff;text-align:center;display:block;width:100%;margin-top:10px;font-size:20px;">Choose
-					deliveries date</strong>
+					Deliveries Date</strong>
 				<div class="cov-date-monthly">
 					<div class="cov-date-previous" @click="nextMonth('pre')">«</div>
 					<div class="cov-date-caption" :style="{'color': option.color ? option.color.headerText : '#fff'}">

@@ -15,7 +15,7 @@
 				</div>
 			</div>
 
-			<md-list class="custom-list md-triple-line">
+			<md-list class="custom-list md-triple-line" v-if="!onPhaseMonitoring()">
 				<md-list-item v-for="item in filteredItems" @click="selectItem(item)"
 				              :class="{ selected: selectedItem === item }">
 					<div class="item-container">
@@ -25,7 +25,27 @@
 						</div>
 
 						<div class="container-action-icons">
-							<img src="~assets/img/status_icon_1.png">
+							<img src="~assets/img/AlertIcon.png" v-if="item.errors.length > 0">
+							<img src="~assets/img/Calendar_Orange_LeftPanel.png" v-if="item.errors.length == 0 && item.state == 'POSTPONED'">
+							<span v-if="item.errors.length == 0 && item.state == 'POSTPONED'">{{ item.startTime + '-' + item.finishTime }}</span>
+						</div>
+					</div>
+
+					<md-divider class="md-inset"></md-divider>
+				</md-list-item>
+			</md-list>
+			<md-list class="custom-list md-triple-line" v-else>
+				<md-list-item v-for="item in filteredConversations" @click="selectItem(item)"
+				              :class="{ selected: selectedItem === item }">
+					<div class="item-container">
+						<div class="md-list-text-container">
+							<h1>{{ item.recipientFirstName + ' ' + item.recipientLastName }}</h1>
+							<p v-if="item.lastMessageText !== undefined && item.lastMessageText !== null && item.lastMessageText.length > 0"><strong v-if="item.lastMessageDirection == 'OUTGOING'">Jenny: </strong>{{ item.lastMessageText.substring(0,47) }}...</p>
+							<p v-else>-- Not started --</p>
+						</div>
+
+						<div class="container-action-icons">
+							<!--<img src="~assets/img/status_icon_1.png">-->
 						</div>
 					</div>
 
@@ -37,8 +57,10 @@
 </template>
 
 <script lang="babel">
+	import _ from 'underscore'
+
 	export default {
-		store: ['setup', 'mapCenter', 'selectedItem', 'deliveries'],
+		store: ['setup', 'mapCenter', 'selectedItem', 'deliveries', 'conversations'],
 
 		data() {
 			return {
@@ -49,15 +71,45 @@
 		computed: {
 			filteredItems: function () {
 				let search = this.itemsSearch
-				return this.deliveries.filter(function (item) {
+				let results = this.deliveries.filter(function (item) {
 					return item.recipient.firstName.indexOf(search) !== -1 || item.recipient.lastName.indexOf(search) !== -1 || item.address.formattedAddress.indexOf(search) !== -1
 				})
+
+				if(this.onPhaseRoute()) {
+					let list = _.sortBy(results, (item) => {
+						return item.errors.length
+					})
+				} else {
+					// @TODO sort by error & positionInRoute
+				}
+
+				return list
+			},
+			filteredConversations: function(){
+				let search = this.itemsSearch
+				let results = this.conversations.filter(function(item){
+					return item.recipientFirstName.indexOf(search) !== -1 || item.recipientLastName.indexOf(search) !== -1
+				})
+
+				let list = _.sortBy(results, (item) => {
+					return this.moment(item.updated)
+				})
+
+				return list.reverse()
 			}
 		},
 
 		methods: {
 			selectItem(item) {
-				this.selectedItem = item
+				if(this.onPhaseMonitoring()){
+					this.$services.Conversations.getMessages(item.id).then((messages) => {
+						item.chatMessages = messages
+						console.log(messages)
+						this.selectedItem = item
+					})
+				} else {
+					this.selectedItem = item
+				}
 			},
 			unselectItem() {
 				this.selectedItem = null

@@ -43,7 +43,8 @@ Vue.prototype.$services = services
 Vue.prototype.moment = moment
 
 // Vue Material
-Vue.material.registerTheme(config.themes)
+Vue.material.registerTheme('default', config.themes.default)
+Vue.material.setCurrentTheme('default')
 
 // Global components
 import AuthLayoutComponent from '../components/auth-layout'

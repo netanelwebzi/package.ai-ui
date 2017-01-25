@@ -99,3 +99,22 @@ body {
   padding-left: 0px;
   padding-right: 0px;
 }
+
+.md-button {
+  box-shadow: 0px 0px !important;
+  border-radius: 0px !important;
+}
+
+.datepicker input {
+  background: transparent;
+  color: #fff;
+  border: 0px;
+  border-bottom: 2px solid #2196f3;
+  padding-bottom: 3px;
+  font-size: 14px;
+}
+
+.calendar .cell.selected, .calendar .cell.selected.highlighted, .calendar .cell.selected:hover {
+  background: #2196f3;
+  color: #fff;
+}

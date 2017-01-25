@@ -31,7 +31,7 @@ if(user !== false && user.token.length > 0 && typeof JWTDecode(user.token).iss !
 }
 
 if(!$localStorage.has('currentDate')){
-	currentDate = moment().format('dddd, DD/MM/YYYY')
+	currentDate = moment()
 	$localStorage.set('currentDate', currentDate)
 } else {
 	currentDate = $localStorage.get('currentDate')
@@ -42,12 +42,15 @@ export default {
 	selectedItem: null,
 	authenticated: authenticated,
 	mapCenter: {
-		lat: 10.0,
-		lng: 10.0
+		lat: 51.5287352,
+		lng: 0.1785845
 	},
 	metrics: {},
 	routePlan: {},
 	deliveries: [],
+	items: [],
+	metrics: {},
+	conversations: [],
 	displayOverlay: true,
 	currentDate: currentDate,
 	overlayMessage: 'Hold tight',

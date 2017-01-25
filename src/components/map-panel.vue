@@ -3,7 +3,7 @@
 		<map-time-slots v-show="phase == 'planning.schedule' || phase == 'monitoring'"></map-time-slots>
 		<gmap-map
 				:center="mapCenter"
-				:zoom="2"
+				:zoom="8"
 				:zoomControl="true"
 				:scaleControl="true"
 				:draggable="true"
@@ -16,7 +16,7 @@
 					:clickable="true"
 					:draggable="false"
 					:icon="m.icon"
-					@click="onMarkerClick(m, index)" v-if="phase !== 'planning.upload'">
+					@click="onMarkerClick(m, index)">
 				<gmap-info-window
 						:content="m.text"
 						:opened="m.opened"
@@ -44,7 +44,7 @@
 	})
 
 	export default {
-		store: ['setup', 'phase', 'mapCenter', 'selectedItem', 'deliveries'],
+		store: ['setup', 'phase', 'mapCenter', 'selectedItem', 'deliveries', 'routePlan', 'conversations'],
 		components: {
 			gmapMap: VueGoogleMaps.Map,
 			gmapMarker: VueGoogleMaps.Marker,
@@ -54,16 +54,40 @@
 			markers() {
 				let markers = []
 
-				for(var i in this.deliveries){
-					var delivery = this.deliveries[i]
-					markers.push({
-						position: {lat: delivery.address.coordinates.latitude, lng: delivery.address.coordinates.longitude},
-						opened: false,
-						text: delivery.id,
-						icon: {
-							url: 'https://s27.postimg.org/nw2j43dbn/marker_in_progress_icon.png'
+				if(!this.onPhaseUpload() && !this.onPhaseMonitoring()) {
+					for (var i in this.deliveries) {
+						var delivery = this.deliveries[i]
+						markers.push({
+							position: {
+								lat: delivery.address.coordinates.latitude,
+								lng: delivery.address.coordinates.longitude
+							},
+							opened: false,
+							text: delivery.recipient.firstName + ' ' + delivery.recipient.lastName + ' : ' + delivery.address.formattedAddress,
+							icon: {
+								url: this.getMarkerIconUrl(delivery)
+							}
+						})
+					}
+				}
+
+				if(this.onPhaseMonitoring()) {
+					for (var i in this.conversations){
+						for(var y in this.conversations[i].deliveries) {
+							var delivery = this.conversations[i].deliveries[y]
+							markers.push({
+								position: {
+									lat: delivery.address.coordinates.latitude,
+									lng: delivery.address.coordinates.longitude
+								},
+								opened: false,
+								text: delivery.recipient.firstName + ' ' + delivery.recipient.lastName + ' : ' + delivery.address.formattedAddress,
+								icon: {
+									url: this.getMarkerIconUrl(delivery)
+								}
+							})
 						}
-					})
+					}
 				}
 
 				return markers
@@ -71,7 +95,7 @@
 		},
 		data() {
 			return {
-				center: {lat: 10.0, lng: 10.0},
+				center: {lat: 51.5287352, lng: 0.1785845},
 				options: {
 					zoomControl: true,
 					scaleControl: true,
@@ -82,6 +106,50 @@
 		},
 
 		methods: {
+			getMarkerIconUrl (delivery) {
+				const baseUrl = 'https://s3.eu-west-2.amazonaws.com/package.ai.eu.demo.static/images/maps/marker-'
+				switch (this.phase)
+				{
+					case 'route':
+						if(delivery.state == 'CREATED'){
+							return `${baseUrl}created-not-routed.png`
+						} else if (delivery.state == 'POSTPONED'){
+							return `${baseUrl}postponed-not-routed.png`
+						}
+						break;
+
+					case 'export':
+						if(delivery.state == 'CREATED' && this.routePlan.state == 'ROUTED'){
+							return `${baseUrl}created-${delivery.positionInRoute}.png`
+						}
+
+						if (delivery.state == 'POSTPONED' && this.routePlan.state == 'ROUTED'){
+							return `${baseUrl}postponed-${delivery.positionInRoute}.png`
+						}
+
+						break;
+
+					case 'monitoring':
+						return `${baseUrl}in-progress.png`
+						// @TODO decide icon by conversation state
+						if(delivery.conversationState == 'CONFIRMED'){
+							return `${baseUrl}confirmed.png`
+						}
+
+						if(delivery.conversationState == 'IN_PROGRESS'){
+							return `${baseUrl}in-progress.png`
+						}
+
+						if(delivery.conversationState == 'NO_RESPONSE'){
+							return `${baseUrl}no-response.png`
+						}
+
+						if(delivery.conversationState == 'POSTPONED'){
+							return `${baseUrl}postponed-conversation.png`
+						}
+						break;
+				}
+			},
 			mapRclicked (mouseArgs) {
 				const createdMarker = this.addMarker();
 				createdMarker.position.lat = mouseArgs.latLng.lat();
@@ -103,8 +171,12 @@
 				return this.markers[this.markers.length - 1];
 			},
 			onMarkerClick(marker, index) {
+				for(let i in this.markers){
+					this.markers[i].opened = false
+				}
 				marker.opened = true
 				this.mapCenter = marker.position
+				this.selectItem(this.deliveries[index])
 				setTimeout(() => this.mapCenter = marker.position, 1000)
 				//this.selectItem()
 			},

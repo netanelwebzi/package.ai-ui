@@ -1,21 +1,27 @@
 <template>
-	<div class="col-xs" v-if="setup.selectedItem !== undefined">
+	<div class="col-xs" v-if="selectedItem !== null">
 		<md-whiteframe md-tag="section" id="chat-panel">
 			<div class="item-details">
 				<div class="row">
 					<div class="col-xs-8 principal">
-						<div class="title">{{ setup.selectedItem.title }}</div>
-						<div id="places-input" class="item-detail">
-							<md-icon>location_on</md-icon>
-							<place-input placeholder="Search location"></place-input>
+						<div class="title">{{ selectedItem.recipientFirstName + ' ' + selectedItem.recipientLastName
+							}}
 						</div>
 						<md-input-container class="item-detail">
+							<md-icon>location_on</md-icon>
+							<md-input v-model="selectedItem.address" disabled></md-input>
+						</md-input-container>
+						<md-input-container class="item-detail">
 							<md-icon>call</md-icon>
-							<md-input v-model="setup.selectedItem.phoneNumber"></md-input>
+							<md-input v-model="selectedItem.recipientPhone" :disabled="!onPhaseRoute()"></md-input>
+						</md-input-container>
+						<md-input-container class="item-detail">
+							<md-icon>inbox</md-icon>
+							<md-input v-model="selectedItem.store" disabled></md-input>
 						</md-input-container>
 						<md-input-container class="item-detail">
 							<i class="fa fa-truck"></i>
-							<md-input v-model="setup.selectedItem.id" disabled></md-input>
+							<md-input disabled></md-input>
 						</md-input-container>
 					</div>
 					<div class="col-xs-4 secondary">
@@ -36,15 +42,15 @@
 				</div>
 			</div>
 			<div id="chatter">
-				<div v-for="(msg, msgIndex) in messages" class="chat"
-				     v-bind:class="{'reverse': msgIndex % 2 == 0, 'regular': msgIndex % 2 != 0}">
+				<div v-for="(msg, msgIndex) in selectedItem.chatMessages" class="chat regular"
+				     v-bind:class="">
 					<div class="chat-image">
-						<div class="no-image" v-if="msgIndex % 2 == 0">T</div>
+						<div class="no-image" v-if="msg.direction == 'INCOMING'">{{ selectedItem.recipientFirstName.charAt(0) }}</div>
 						<div v-else><img src="~assets/img/jenny_avatar.png"></div>
-						<div class="time text-center">{{ msg.time }}</div>
+						<div class="time text-center">{{ moment(msg.created).format('HH:mm') }}</div>
 					</div>
 					<div>
-						<div class="chat-content">{{ msg.message }}</div>
+						<div class="chat-content">{{ msg.text }}</div>
 					</div>
 				</div>
 			</div>
@@ -111,7 +117,7 @@
 
 		methods: {
 			unselectItem() {
-				this.selectedItem = void 0;
+				this.selectedItem = null
 			}
 		},
 
@@ -136,7 +142,7 @@
 			> .item-details {
 				background: #fff;
 				padding: 20px;
-				height: 150px;
+				height: 164px;
 				box-shadow: 0px 10px 10px 0px rgba(0, 0, 0, 0.1);
 				overflow: hidden;
 

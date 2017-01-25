@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Axios from 'axios'
 import moment from 'moment'
+import _ from 'underscore'
 import JWTDecode from 'jwt-decode'
 import store from './store'
 import config from './config'
@@ -20,9 +21,65 @@ Axios.interceptors.request.use((config) => {
 	return config
 });
 
+// normalize
+const getNormalizedItems = (type, data) => {
+	let items = []
+
+	switch (type)
+	{
+		case 'deliveries':
+			_.each(data, (delivery, key) => {
+				items.push({
+					title: `${delivery.recipient.firstName} ${delivery.recipient.lastName}`,
+					description: delivery.address.formattedAddress,
+					address: {
+						formattedAddress: delivery.address.formattedAddress
+					},
+					recipientPhone: delivery.recipient.phone,
+					storeName: delivery.retailer.name,
+					barcode: delivery.barcode || '',
+					state: delivery.state,
+					shippingDate: delivery.shippingDate
+				})
+			})
+
+			break;
+
+		case 'merge':
+			_.each(data.conversations, (conversation, key) => {
+				items.push({
+					title: `${conversation.recipientFirstName} ${conversation.recipientLastName}`,
+					description: conversation.lastMessageDirection == 'OUTGOING' ? `<strong>Jenny: </strong>${conversation.lastMessageText.substring(0,47)}` : conversation.lastMessageText.substring(0,47),
+					recipientPhone: conversation.recipientPhone,
+					storeName: conversation.store,
+					address: {
+						formattedAddress: conversation.address
+					}
+				})
+				let deliveries_ids = conversation.deliveries
+				conversation.deliveries = []
+				conversation.barcodes = []
+				_.each(deliveries_ids, (delivery_id, dkey) => {
+					let delivery = _.findWhere(data.deliveries, {id: delivery_id})
+					conversation.barcodes.push(delivery.barcode)
+					conversation.deliveries.push({
+						id: delivery_id,
+						state: delivery.state
+					})
+				})
+			})
+
+			break;
+	}
+
+	console.log('normalized', items)
+
+	return items
+}
+
 // load
 const init = (date) => {
-	date = date || moment(store.currentDate, 'dddd, DD/MM/YYYY').format('YYYY-MM-DD')
+	date = date || moment(store.currentDate).format('YYYY-MM-DD')
 	store.selectedItem = null
 	store.routePlan = {}
 	store.deliveries = []
@@ -32,6 +89,7 @@ const init = (date) => {
 		if(plan.length == 0){
 			Deliveries.get(date).then((deliveries) => {
 				if(deliveries.length > 0){
+					//store.items = getNormalizedItems('deliveries', deliveries)
 					store.deliveries = deliveries
 					store.phase = 'route'
 				} else {
@@ -40,13 +98,14 @@ const init = (date) => {
 				store.displayOverlay = false
 			})
 		} else {
+			plan = plan[0]
 			store.routePlan = plan
-
 			switch(plan.state)
 			{
 				case 'ROUTED':
 					Deliveries.get(date).then((deliveries) => {
 						store.deliveries = deliveries
+						//store.items = getNormalizedItems('deliveries', deliveries)
 						store.phase = 'export'
 						store.displayOverlay = false
 					})
@@ -59,6 +118,7 @@ const init = (date) => {
 					// get deliveries & phase = route
 					Deliveries.get(date).then((deliveries) => {
 						store.deliveries = deliveries
+						//store.items = getNormalizedItems('deliveries', deliveries)
 						store.phase = 'route'
 						store.displayOverlay = false
 					})
@@ -69,6 +129,7 @@ const init = (date) => {
 					// get deliveris & phase = jenny
 					Deliveries.get(date).then((deliveries) => {
 						store.deliveries = deliveries
+						//store.items = getNormalizedItems('deliveries', deliveries)
 						store.phase = 'jenny'
 						store.displayOverlay = false
 					})
@@ -76,9 +137,35 @@ const init = (date) => {
 
 				case 'CONTACTED':
 
-
-					// phase = monitoring
-					store.phase = 'monitoring'
+					Deliveries.get(date).then((deliveries) => {
+						Conversations.get(store.routePlan.id).then((conversations) => {
+							//store.items = getNormalizedItems('merge', {deliveries, conversations})
+							_.each(conversations, (conversation, key) => {
+								let deliveries_ids = conversation.deliveries
+								conversation.deliveries = []
+								conversation.barcodes = []
+								_.each(deliveries_ids, (delivery_id, dkey) => {
+									let delivery = _.findWhere(deliveries, {id: delivery_id})
+									conversation.barcodes.push(delivery.barcode)
+									conversation.deliveries.push({
+										id: delivery_id,
+										state: delivery.state,
+										address: delivery.address,
+										recipient: delivery.recipient,
+										conversationState: conversation.state,
+										positionInRoute: delivery.positionInRoute
+									})
+								})
+							})
+							store.conversations = conversations
+							console.log('done convs', conversations)
+							Plans.metrics(store.routePlan.id).then((metrics) => {
+								store.metrics = metrics
+								store.phase = 'monitoring'
+								store.displayOverlay = false
+							})
+						})
+					})
 
 					break;
 			}
@@ -124,10 +211,30 @@ class Plans
 		})
 	}
 
-	static new()
+	static schedule(date)
 	{
-		return Axios.post('plans/new').then((response) => {
+		return Axios.post('plans', {date}).then((response) => {
+			return response.data
+		})
+	}
 
+	static run(id)
+	{
+		return Axios.put(`plans/${id}`, {
+			id: id,
+			state: 'CONTACTED'
+		}).then((response) => {
+			return response.data
+		})
+	}
+
+	static export(id)
+	{
+		return Axios.put(`plans/${id}`, {
+			id: id,
+			state: 'EXPORTED'
+		}).then((response) => {
+			return response.data
 		})
 	}
 
@@ -197,7 +304,7 @@ class Conversations
 		})
 	}
 
-	getMessages(convId)
+	static getMessages(convId)
 	{
 		return Axios.get(`messages?convId=${convId}`).then((response) => {
 			return response.data

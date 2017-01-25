@@ -12,14 +12,14 @@ export default {
 	},
 
 	themes: {
-		indigo_pink: {
-			primary: 'indigo',
-			accent: 'pink',
+		default: {
+			primary: 'blue',
+			accent: 'grey',
 			warn: 'deep-orange',
-			background: 'grey'
+			background: 'white'
 		},
 		indigo_yellow: {
-			primary: 'indigo',
+			primary: 'blue',
 			accent: 'yellow',
 			warn: 'deep-orange',
 			background: 'grey'

@@ -2,11 +2,11 @@
 	<div class="col-xs-4">
 		<md-whiteframe md-tag="section" id="upload-panel">
 			<div class="file-drop">
-				<dropzone ref="dropzoneUploader" id="file-dropzone" @vdropzone-sending="onFileSending" @vdropzone-success="onFileUploaded" :url="endpointUrl" :useCustomDropzoneOptions="useCustomDropzoneOptions" :dropzoneOptions="dropzoneOptions"></dropzone>
+				<dropzone ref="dropzoneUploader" id="file-dropzone" @vdropzone-success="onFileUploaded" @vdropzone-error="onFileError" :url="endpointUrl" :useCustomDropzoneOptions="useCustomDropzoneOptions" :dropzoneOptions="dropzoneOptions"></dropzone>
 			</div>
 		</md-whiteframe>
 		<md-dialog-alert
-				md-content="Invalid deliveries found on this file. Please try to upload a valid deliveries file"
+				:md-content-html="failedDialogMessage"
 				md-ok-text="OK, I will try again"
 				ref="failedDialog">
 		</md-dialog-alert>
@@ -17,13 +17,15 @@
 	import FileUpload from 'vue-upload-component'
 	import Dropzone from 'vue2-dropzone'
 	import config from '../core/config'
+	import {Deliveries} from '../core/services'
 	export default {
 
-		store: ['setup', 'phase', 'currentDate', 'displayOverlay', 'overlayMessage', 'currentDate'],
+		store: ['setup', 'phase', 'currentDate', 'displayOverlay', 'overlayMessage', 'currentDate', 'deliveries'],
 
 		data() {
 			let that = this
 			return {
+				failedDialogMessage: 'test',
 				resourceId: null,
 				files: [],
 				extensions: ['xls', 'xlsx', 'csv'],
@@ -31,7 +33,7 @@
 				dropzoneOptions: {
 					init: function(){
 						this.on('sending', function(file, xhr, formData){
-							const date = that.moment(that.currentDate, 'dddd, DD/MM/YYYY').format('YYYY-MM-DD')
+							const date = that.moment(that.currentDate).format('YYYY-MM-DD')
 							formData.append('data', JSON.stringify({date: date}))
 						})
 					},
@@ -50,9 +52,12 @@
 				this.overlayMessage = 'Processing deliveries...'
 //				setTimeout(() => this.phase = 'route', 3000)
 			},
-			onFileSending: function(file, xhr, formData){
-				formData.append('date', 'test')
-				console.log('added', file, xhr, formData)
+			onFileError(file) {
+				const message = JSON.parse(file.xhr.response).message
+				this.failedDialogMessage = message
+				this.$refs.dropzoneUploader.removeAllFiles()
+				this.resourceId = null
+				this.$refs.failedDialog.open()
 			},
 			listen() {
 				let that = this
@@ -62,21 +67,29 @@
 					{
 						case 'FAILED':
 							// @TODO data.payload.error : need to decide what to display
+							this.displayOverlay = false
 							this.$refs.dropzoneUploader.removeAllFiles()
 							this.resourceId = null
+							this.failedDialogMessage = 'Invalid deliveries found on this file. Please try to upload a valid deliveries file'
 							this.$refs.failedDialog.open()
 							break;
 
 						case 'SUCCESS':
-							this.overlayMessage = 'Hold tight'
 							this.phase = 'route'
+							this.displayOverlay = true
+							const date = that.moment(that.currentDate).format('YYYY-MM-DD')
+							setTimeout(() => {
+								Deliveries.get(date).then((deliveries) => {
+									that.deliveries = deliveries
+									that.displayOverlay = false
+								})
+							}, 300)
 							break;
 
 						default:
 
 							break;
 					}
-					this.displayOverlay = false
 					console.log('the event ' + event + ' fired !', data)
 				})
 			}

@@ -17,7 +17,7 @@
 							<md-icon>location_on</md-icon>
 							<md-input v-model="selectedItem.address.formattedAddress" disabled></md-input>
 						</md-input-container>
-						<md-input-container class="item-detail">
+						<md-input-container class="item-detail" :class="{'md-input-invalid': !valid_phone}">
 							<md-icon>call</md-icon>
 							<md-input v-model="selectedItem.recipient.phone" :disabled="!onPhaseRoute()"></md-input>
 						</md-input-container>
@@ -57,6 +57,7 @@
 	import * as VueGoogleMaps from 'vue2-google-maps'
 	import Vue from 'vue'
 	import VueTimepicker from 'vue2-timepicker'
+	import {isValidNumber} from 'libphonenumber-js'
 
 	Vue.use(VueGoogleMaps, {
 		load: {
@@ -80,12 +81,16 @@
 
 		watch: {
 			'selectedItem.recipient.phone': function(){
-				this.onPhoneChange()
+				if(this.selectedItem !== null) {
+					this.onPhoneChange()
+				}
 			}
 		},
 
 		data() {
-			return {}
+			return {
+				valid_phone: false
+			}
 		},
 
 		methods: {
@@ -104,12 +109,16 @@
 				})
 			},
 			onPhoneChange() {
-				this.$services.Recipients.update(this.selectedItem.recipientId, {
-					id: this.selectedItem.recipientId,
-					phone: this.selectedItem.recipient.phone
-				}).then((response) => {
-					console.log('updated', response)
-				})
+				this.valid_phone = isValidNumber(this.selectedItem.recipient.phone)
+				console.log(this.valid_phone)
+				if(this.valid_phone) {
+					this.$services.Recipients.update(this.selectedItem.recipientId, {
+						id: this.selectedItem.recipientId,
+						phone: this.selectedItem.recipient.phone
+					}).then((response) => {
+						console.log('updated', response)
+					})
+				}
 			}
 		},
 
