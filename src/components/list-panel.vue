@@ -80,7 +80,7 @@
 	import _ from 'underscore'
 
 	export default {
-		store: ['setup', 'mapCenter', 'selectedItem', 'deliveries', 'conversations'],
+		store: ['setup', 'mapCenter', 'selectedItem', 'deliveries', 'conversations', 'selectedConversationStatus'],
 
 		data() {
 			return {
@@ -109,8 +109,13 @@
 			},
 			filteredConversations: function(){
 				let search = this.itemsSearch
+				let selectedConversationStatus = this.selectedConversationStatus
 				let results = this.conversations.filter(function(item){
-					return item.recipientFirstName.indexOf(search) !== -1 || item.recipientLastName.indexOf(search) !== -1
+					if(selectedConversationStatus == '') {
+						return (item.recipientFirstName.indexOf(search) !== -1 || item.recipientLastName.indexOf(search) !== -1)
+					} else {
+						return (item.recipientFirstName.indexOf(search) !== -1 || item.recipientLastName.indexOf(search) !== -1) && item.schedulingState == selectedConversationStatus
+					}
 				})
 
 				let list = _.sortBy(results, (item) => {

@@ -50,6 +50,7 @@ export default {
 	deliveries: [],
 	items: [],
 	metrics: {},
+	selectedConversationStatus: '',
 	conversations: [],
 	displayOverlay: true,
 	currentDate: currentDate,

@@ -123,28 +123,6 @@
 					<li>
 						<inline-date-picker format="D, dd/MM/yyyy" v-model="startTime.time"></inline-date-picker>
 					</li>
-					<!--<li>-->
-						<!--<div class="top-info" v-show="onPhaseMonitoring()">-->
-							<!--<img src="~assets/img/round.png">-->
-							<!--<div class="top-content">-->
-								<!--<div class="top">-->
-									<!--<span class="big">{{ Math.round((metrics.delivered / metrics.totalDeliveries) * 100) }}%</span><span class="small">({{ metrics.delivered }})</span>-->
-								<!--</div>-->
-								<!--<div class="bottom">Delivered</div>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</li>-->
-					<!--<li>-->
-						<!--<div class="top-info" v-show="onPhaseMonitoring()" style="margin-left:15px;">-->
-							<!--<img src="~assets/img/cancel.png">-->
-							<!--<div class="top-content">-->
-								<!--<div class="top">-->
-									<!--<span class="big">{{ Math.round((metrics.misdelivered / metrics.totalDeliveries) * 100) }}%</span><span class="small">({{ metrics.misdelivered }})</span>-->
-								<!--</div>-->
-								<!--<div class="bottom">Missdelivered</div>-->
-							<!--</div>-->
-						<!--</div>-->
-					<!--</li>-->
 					<li>
 						<md-button class="md-icon-button md-raised" @click="showDropdownBox=!showDropdownBox"
 						           style="margin-left:19px;">
@@ -186,7 +164,7 @@
 					<!--<div class="bottom">Deliveries</div>-->
 				<!--</div>-->
 			<!--</div>-->
-			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #88db5f">
+			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #88db5f" @click="selectConversationStatus('CONFIRMED')" :class="{selected: selectedConversationStatus == 'CONFIRMED'}">
 				<img src="~assets/img/toolbar_status_icon_2.png">
 				<div class="value">{{ metrics.confirmed }}</div>
 				<div class="top-content">
@@ -195,8 +173,9 @@
 					</div>
 					<div class="bottom">Deliveries</div>
 				</div>
+				<md-ink-ripple></md-ink-ripple>
 			</div>
-			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #ffb73a">
+			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #ffb73a" @click="selectConversationStatus('POSTPONED')" :class="{selected: selectedConversationStatus == 'POSTPONED'}">
 				<img src="~assets/img/toolbar_status_icon_3.png">
 				<div class="value">{{ metrics.postponed }}</div>
 				<div class="top-content">
@@ -205,8 +184,9 @@
 					</div>
 					<div class="bottom">Day</div>
 				</div>
+				<md-ink-ripple></md-ink-ripple>
 			</div>
-			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #9a67d9">
+			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #9a67d9" @click="selectConversationStatus('IN_PROGRESS')" :class="{selected: selectedConversationStatus == 'IN_PROGRESS'}">
 				<img src="~assets/img/toolbar_status_icon_4.png">
 				<div class="value">{{ metrics.conversing }}</div>
 				<div class="top-content">
@@ -215,8 +195,9 @@
 					</div>
 					<div class="bottom">Progress</div>
 				</div>
+				<md-ink-ripple></md-ink-ripple>
 			</div>
-			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #f75252">
+			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #f75252" @click="selectConversationStatus('NO_RESPONSE')" :class="{selected: selectedConversationStatus == 'NO_RESPONSE'}">
 				<img src="~assets/img/toolbar_status_icon_5.png">
 				<div class="value">{{ metrics.noResponse }}</div>
 				<div class="top-content">
@@ -225,6 +206,7 @@
 					</div>
 					<div class="bottom">Response</div>
 				</div>
+				<md-ink-ripple></md-ink-ripple>
 			</div>
 			<md-button class="md-raised" v-show="onPhaseRoute()" @click="createDeliverySchedule()">
 				<md-icon>date_range</md-icon>
@@ -260,7 +242,7 @@
 			InlineDatePicker,
 			PhaseProgressBar
 		},
-		store: ['phase', 'displayOverlay', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage', 'currentDate', 'metrics'],
+		store: ['phase', 'displayOverlay', 'selectedConversationStatus', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage', 'currentDate', 'metrics'],
 		data() {
 			const d = new Date();
 			return {
@@ -316,6 +298,13 @@
 			}
 		},
 		methods: {
+			selectConversationStatus(status) {
+				if(status != this.selectedConversationStatus) {
+					this.selectedConversationStatus = status
+				} else {
+					this.selectedConversationStatus = ''
+				}
+			},
 			listenForUpdates() {
 				console.log('start listening for updates')
 				let channel = this.$services.pusher.subscribe(`private-only_tenant.dev.plans.${this.routePlan.id}.demo`)
@@ -356,9 +345,9 @@
 				this.displayOverlay = true
 				this.overlayMessage = 'Running...'
 				this.$services.Plans.run(this.routePlan.id).then((response) => {
-					console.log('done', response)
 					this.phase = 'monitoring'
 					this.displayOverlay = false
+					// load conversations
 				})
 			},
 			listen(routePlanId) {
@@ -416,7 +405,6 @@
 		display: block !important;
 		position: relative;
 		z-index: 99999;
-
 		/*#right-bg {*/
 			/*background: url('~assets/img/toolbar_right_bg.png') no-repeat;*/
 			/*position: absolute;*/
@@ -629,8 +617,13 @@
 			}
 		}
 		.md-select-container, .top-info {
+			&.selected {
+				background: darken(#2196F3, 15%);
+			}
+
 			flex: 1;
 			height: 64px;
+			cursor: pointer;
 			padding-left: 20px;
 			padding-right: 20px;
 			position: relative;
