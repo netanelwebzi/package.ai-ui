@@ -27,7 +27,8 @@
 						<div class="container-action-icons">
 							<img src="~assets/img/AlertIcon.png" v-if="item.errors.length > 0">
 							<img src="~assets/img/Calendar_Orange_LeftPanel.png" v-if="item.errors.length == 0 && item.state == 'POSTPONED'">
-							<span v-if="item.errors.length == 0 && item.state == 'POSTPONED'">{{ item.startTime + '-' + item.finishTime }}</span>
+							<span v-if="item.errors.length == 0 && item.state == 'POSTPONED'" style="font-size:10px;">{{ item.startTime.substr(0, 5) + '-' + item.finishTime.substr(0, 5) }}</span>
+							<span v-if="(onPhaseExport() || onPhaseJenny()) && item.state != 'POSTPONED'" style="font-size:10px;">{{ item.startTime.substr(0, 5) + '-' + item.finishTime.substr(0, 5) }}</span>
 						</div>
 					</div>
 
@@ -45,8 +46,27 @@
 						</div>
 
 						<div class="container-action-icons">
-							<!--<img src="~assets/img/status_icon_1.png">-->
+							<img src="~assets/img/NoChat_Red_LeftPanel.png" v-if="item.schedulingState == 'NO_RESPONSE' && item != selectedItem">
+							<img src="~assets/img/NoChat_White_LeftPanel.png" v-if="item.schedulingState == 'NO_RESPONSE' && item == selectedItem">
+
+							<img src="~assets/img/Chat_Purple_LeftPanel.png" v-if="item.schedulingState == 'IN_PROGRESS' && item != selectedItem">
+							<img src="~assets/img/Chat_White_LeftPanel.png" v-if="item.schedulingState == 'IN_PROGRESS' && item == selectedItem">
+
+
+							<img src="~assets/img/Calendar_Orange_LeftPanel.png" v-if="item.schedulingState == 'POSTPONED' && item != selectedItem">
+							<img src="~assets/img/Calendar_White_LeftPanel.png" v-if="item.schedulingState == 'POSTPONED' && item == selectedItem">
+
+
+							<img src="~assets/img/Truck_Green_LeftPanel.png" v-if="item.schedulingState == 'CONFIRMED' && item != selectedItem">
+							<img src="~assets/img/Truck_White_LeftPanel.png" v-if="item.schedulingState == 'CONFIRMED' && item == selectedItem">
+
+							<img src="~assets/img/CheckIn_Green_LeftPanel.png" v-if="item.deliveries[0].state == 'DELIVERED' && item != selectedItem">
+							<img src="~assets/img/CheckIn_White_LeftPanel.png" v-if="item.deliveries[0].state == 'DELIVERED' && item == selectedItem">
+
+							<img src="~assets/img/CheckIn_Red_LeftPanel.png" v-if="item.deliveries[0].state == 'MISDELIVERED' && item != selectedItem">
+							<img src="~assets/img/CheckIn_Red_White_LeftPanel.png" v-if="item.deliveries[0].state == 'MISDELIVERED' && item == selectedItem">
 						</div>
+
 					</div>
 
 					<md-divider class="md-inset"></md-divider>
@@ -70,17 +90,19 @@
 
 		computed: {
 			filteredItems: function () {
+				let list = []
 				let search = this.itemsSearch
 				let results = this.deliveries.filter(function (item) {
 					return item.recipient.firstName.indexOf(search) !== -1 || item.recipient.lastName.indexOf(search) !== -1 || item.address.formattedAddress.indexOf(search) !== -1
 				})
 
 				if(this.onPhaseRoute()) {
-					let list = _.sortBy(results, (item) => {
+					list = _.sortBy(results, (item) => {
 						return item.errors.length
 					})
 				} else {
 					// @TODO sort by error & positionInRoute
+					list = results
 				}
 
 				return list
@@ -110,6 +132,7 @@
 				} else {
 					this.selectedItem = item
 				}
+				this.$events.emit('list:item:selected')
 			},
 			unselectItem() {
 				this.selectedItem = null

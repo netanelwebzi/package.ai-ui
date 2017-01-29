@@ -26,12 +26,19 @@
 					</div>
 					<div class="col-xs-4 secondary">
 						<div class="status">
-							<img src="~assets/img/status_icon_1.png">
-							<div style="color:#9a67d9;font-size:12px;padding-top:5px;">In Progress</div>
+							<img src="~assets/img/NoChat_Red_LeftPanel.png" v-if="selectedItem.schedulingState == 'NO_RESPONSE'">
+
+							<img src="~assets/img/Chat_Purple_LeftPanel.png" v-if="selectedItem.schedulingState == 'IN_PROGRESS'">
+
+							<img src="~assets/img/Calendar_Orange_LeftPanel.png" v-if="selectedItem.schedulingState == 'POSTPONED'">
+
+							<img src="~assets/img/Truck_Green_LeftPanel.png" v-if="selectedItem.schedulingState == 'CONFIRMED'">
+							<div style="font-size:12px;padding-top:5px;">{{ selectedItem.schedulingState.replace('_', ' ') }}</div>
 						</div>
 						<div class="item-detail">Mon, 08/11/2016</div>
 						<div id="timeslot-picker" class="item-detail">
-							<vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
+							{{ selectedItem.deliveries[0].startTime.substr(0, 5) + '-' + selectedItem.deliveries[0].finishTime.substr(0, 5) }}
+							<!--<vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>-->
 						</div>
 					</div>
 				</div>
@@ -42,8 +49,7 @@
 				</div>
 			</div>
 			<div id="chatter">
-				<div v-for="(msg, msgIndex) in selectedItem.chatMessages" class="chat regular"
-				     v-bind:class="">
+				<div v-for="(msg, msgIndex) in selectedItem.chatMessages" class="chat" :class="{reverse: msg.direction == 'OUTGOING', regular: msg.direction == 'INCOMING' }">
 					<div class="chat-image">
 						<div class="no-image" v-if="msg.direction == 'INCOMING'">{{ selectedItem.recipientFirstName.charAt(0) }}</div>
 						<div v-else><img src="~assets/img/jenny_avatar.png"></div>
@@ -85,36 +91,6 @@
 			VueTimepicker: VueTimepicker
 		},
 
-		data() {
-			return {
-				messages: [{
-					time: '12:00',
-					message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dolorem itaque maxime quidem vero.',
-					user_id: 2
-				}, {
-					time: '12:00',
-					message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dolorem itaque maxime quidem vero.' +
-					'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dolorem itaque maxime quidem vero.',
-					user_id: 1
-				}, {
-					time: '12:00',
-					message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dolorem itaque maxime quidem vero.' +
-					'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dolorem itaque maxime quidem vero.',
-					user_id: 1
-				}, {
-					time: '12:00',
-					message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dolorem itaque maxime quidem vero.' +
-					'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dolorem itaque maxime quidem vero.',
-					user_id: 1
-				}, {
-					time: '12:00',
-					message: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dolorem itaque maxime quidem vero.' +
-					'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Alias dolorem itaque maxime quidem vero.',
-					user_id: 1
-				}]
-			}
-		},
-
 		methods: {
 			unselectItem() {
 				this.selectedItem = null
@@ -122,11 +98,7 @@
 		},
 
 		mounted() {
-//			let that = this
-//			this.$nextTick(function () {
-//				var container = that.$el.querySelector("#chatter");
-//				container.scrollTop = container.scrollHeight;
-//			})
+
 		}
 
 	}

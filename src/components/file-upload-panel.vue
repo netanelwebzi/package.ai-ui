@@ -29,7 +29,7 @@
 				resourceId: null,
 				files: [],
 				extensions: ['xls', 'xlsx', 'csv'],
-				endpointUrl: `${config.api.baseUrl}deliveries/upload`,
+				endpointUrl: window.location.href.indexOf('switchapi') !== -1 ? config.api.second + 'deliveries/upload' : config.api.first + 'deliveries/upload',
 				dropzoneOptions: {
 					init: function(){
 						this.on('sending', function(file, xhr, formData){

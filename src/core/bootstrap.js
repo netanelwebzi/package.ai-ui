@@ -30,7 +30,7 @@ Pusher.logToConsole = true
 let pusher = new Pusher(config.pusher.key, {
 	encrypted: true,
 	cluster: config.pusher.cluster,
-	authEndpoint: config.api.baseUrl + 'hooks/pusher/auth'
+	authEndpoint: window.location.href.indexOf('switchapi') != -1 ? config.api.second + 'hooks/pusher/auth' : config.api.first + 'hooks/pusher/auth'
 })
 
 

@@ -1,13 +1,18 @@
 <template>
 	<div class="col-xs">
-		<map-time-slots v-show="phase == 'planning.schedule' || phase == 'monitoring'"></map-time-slots>
+		<md-button id="map-focus-button" class="md-raised" @click="focus()">
+			<md-tooltip md-direction="top">Click for auto zoom map to markers</md-tooltip>
+			<md-icon>center_focus_weak</md-icon>Focus
+		</md-button>
+		<map-time-slots v-show="!onPhaseUpload() && !onPhaseRoute()"></map-time-slots>
 		<gmap-map
 				:center="mapCenter"
-				:zoom="8"
+				:zoom="10"
 				:zoomControl="true"
 				:scaleControl="true"
 				:draggable="true"
 				id="map"
+				ref="googleMap"
 				@rightclick="mapRclicked"
 				:options="options" @resize="onMapResize">
 			<gmap-marker
@@ -83,7 +88,7 @@
 								opened: false,
 								text: delivery.recipient.firstName + ' ' + delivery.recipient.lastName + ' : ' + delivery.address.formattedAddress,
 								icon: {
-									url: this.getMarkerIconUrl(delivery)
+									url: this.getMarkerIconUrl(delivery, this.conversations[i].schedulingState)
 								}
 							})
 						}
@@ -92,6 +97,29 @@
 
 				return markers
 			}
+		},
+		created() {
+			this.$events.on('list:item:selected', () => {
+				setTimeout(() => {
+					this.focus()
+				}, 500)
+			})
+			setTimeout(() => {
+				this.$refs.googleMap.$mapCreated.then((gmapObject) => {
+					if(gmapObject !== undefined) {
+						var markers = this.markers
+						if(markers.length > 0) {
+							var bounds = new window.google.maps.LatLngBounds()
+
+							for (var i = 0; i < markers.length; i++) {
+								bounds.extend(markers[i].position)
+							}
+
+							gmapObject.fitBounds(bounds)
+						}
+					}
+				})
+			}, 5000)
 		},
 		data() {
 			return {
@@ -106,7 +134,19 @@
 		},
 
 		methods: {
-			getMarkerIconUrl (delivery) {
+			focus () {
+				this.$refs.googleMap.$mapCreated.then((gmapObject) => {
+					var markers = this.markers
+					var bounds = new window.google.maps.LatLngBounds()
+					for (var i = 0; i < markers.length; i++) {
+						bounds.extend(markers[i].position)
+					}
+
+					gmapObject.fitBounds(bounds)
+				})
+			},
+			getMarkerIconUrl (delivery, schedulingState) {
+				schedulingState = schedulingState || false
 				const baseUrl = 'https://s3.eu-west-2.amazonaws.com/package.ai.eu.demo.static/images/maps/marker-'
 				switch (this.phase)
 				{
@@ -130,27 +170,28 @@
 						break;
 
 					case 'monitoring':
-						return `${baseUrl}in-progress.png`
-						// @TODO decide icon by conversation state
-						if(delivery.conversationState == 'CONFIRMED'){
+						if(schedulingState == 'CONFIRMED'){
 							return `${baseUrl}confirmed.png`
 						}
 
-						if(delivery.conversationState == 'IN_PROGRESS'){
+						if(schedulingState == 'IN_PROGRESS'){
 							return `${baseUrl}in-progress.png`
 						}
 
-						if(delivery.conversationState == 'NO_RESPONSE'){
+						if(schedulingState == 'NO_RESPONSE'){
 							return `${baseUrl}no-response.png`
 						}
 
-						if(delivery.conversationState == 'POSTPONED'){
+						if(schedulingState == 'POSTPONED'){
 							return `${baseUrl}postponed-conversation.png`
 						}
+
+						return `${baseUrl}`
 						break;
 				}
 			},
 			mapRclicked (mouseArgs) {
+				debugger
 				const createdMarker = this.addMarker();
 				createdMarker.position.lat = mouseArgs.latLng.lat();
 				createdMarker.position.lng = mouseArgs.latLng.lng();
@@ -192,5 +233,12 @@
 </script>
 
 <style scoped lang="scss">
-
+	#map-focus-button {
+		position: absolute;
+		z-index: 999999;
+		bottom: 29px;
+		line-height: 32px !important;
+		min-height: 32px !important;
+		right: 80px;
+	}
 </style>

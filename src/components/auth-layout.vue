@@ -5,10 +5,10 @@
 				<div class="col-xs-12 col-md-8 col-lg-8">
 					<div class="card">
 						<div class="row">
-							<div class="col-xs-12 col-md-5 col-lg-5">
+							<div class="col-xs-5 col-md-5 col-lg-5">
 								<img src="~assets/img/login_jenny.png" id="jenny-picture" alt="">
 							</div>
-							<div class="col-xs-12 col-md-7 col-lg-7">
+							<div class="col-xs-7 col-md-7 col-lg-7">
 								<img src="~assets/img/PackageBlueLogo.png" id="logo-picture" alt="">
 								<div class="clear"></div>
 								<slot></slot>

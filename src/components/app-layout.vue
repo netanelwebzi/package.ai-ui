@@ -24,9 +24,9 @@
 		<md-dialog :md-click-outside-to-close="false" :md-esc-to-close="false" ref="jennyDialog" class="jenny-dialog">
 			<md-dialog-content>
 				<img src="~assets/img/jenny_dialog_icon.png" alt="">
-				<h3 style="margin-bottom:5px;">Hi, John Doe</h3>
+				<h3 style="margin-bottom:5px;">Hi, {{ user.name }}</h3>
 				<p>
-					I'm about to contact <strong>123</strong> recipients<br/>
+					I'm about to contact <strong>{{ deliveries.length }}</strong> recipients<br/>
 					and export the route to the driver.
 				</p>
 				<strong style="height:17px;">Are you sure you want me to go ahead ?</strong>
@@ -52,9 +52,26 @@
 				<!--</div>-->
 				<phase-progress-bar></phase-progress-bar>
 			</div>
-			<div v-else id="phases-progress">
+			<div v-else id="phases-progress" style="margin-top:10px;">
 				<div class="current">
-					Today's Conversations
+					Today's<br />
+					Conversations
+				</div>
+			</div>
+			<div id="app-toolbar-summery" v-if="onPhaseMonitoring()">
+				<div>
+					<img src="~assets/img/round.png">
+					<div>
+						{{ Math.round((metrics.delivered / metrics.totalDeliveries) * 100) }}% Delivered<br />
+						<span>({{ metrics.delivered }})</span>
+					</div>
+				</div>
+				<div>
+					<img src="~assets/img/cancel.png">
+					<div>
+						{{ Math.round((metrics.misdelivered / metrics.totalDeliveries) * 100) }}% Missdelivered<br />
+						<span>({{ metrics.misdelivered }})</span>
+					</div>
 				</div>
 			</div>
 			<transition name="fade">
@@ -106,28 +123,28 @@
 					<li>
 						<inline-date-picker format="D, dd/MM/yyyy" v-model="startTime.time"></inline-date-picker>
 					</li>
-					<li>
-						<div class="top-info" v-show="onPhaseMonitoring()">
-							<img src="~assets/img/round.png">
-							<div class="top-content">
-								<div class="top">
-									<span class="big">{{ Math.round((metrics.delivered / metrics.totalDeliveries) * 100) }}%</span><span class="small">({{ metrics.delivered }})</span>
-								</div>
-								<div class="bottom">Delivered</div>
-							</div>
-						</div>
-					</li>
-					<li>
-						<div class="top-info" v-show="onPhaseMonitoring()" style="margin-left:15px;">
-							<img src="~assets/img/cancel.png">
-							<div class="top-content">
-								<div class="top">
-									<span class="big">{{ Math.round((metrics.misdelivered / metrics.totalDeliveries) * 100) }}%</span><span class="small">({{ metrics.misdelivered }})</span>
-								</div>
-								<div class="bottom">Missdelivered</div>
-							</div>
-						</div>
-					</li>
+					<!--<li>-->
+						<!--<div class="top-info" v-show="onPhaseMonitoring()">-->
+							<!--<img src="~assets/img/round.png">-->
+							<!--<div class="top-content">-->
+								<!--<div class="top">-->
+									<!--<span class="big">{{ Math.round((metrics.delivered / metrics.totalDeliveries) * 100) }}%</span><span class="small">({{ metrics.delivered }})</span>-->
+								<!--</div>-->
+								<!--<div class="bottom">Delivered</div>-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<div class="top-info" v-show="onPhaseMonitoring()" style="margin-left:15px;">-->
+							<!--<img src="~assets/img/cancel.png">-->
+							<!--<div class="top-content">-->
+								<!--<div class="top">-->
+									<!--<span class="big">{{ Math.round((metrics.misdelivered / metrics.totalDeliveries) * 100) }}%</span><span class="small">({{ metrics.misdelivered }})</span>-->
+								<!--</div>-->
+								<!--<div class="bottom">Missdelivered</div>-->
+							<!--</div>-->
+						<!--</div>-->
+					<!--</li>-->
 					<li>
 						<md-button class="md-icon-button md-raised" @click="showDropdownBox=!showDropdownBox"
 						           style="margin-left:19px;">
@@ -153,29 +170,22 @@
 			</div>
 		</md-toolbar>
 		<md-toolbar id="app-sub-toolbar" class="md-accent">
-			<h2 class="md-title" v-show="!onPhaseUpload() && !onPhaseRoute()" style="flex: 1">
+			<h2 class="md-title" v-show="!onPhaseUpload() && !onPhaseRoute()" :class="{'flex-1': onPhaseJenny()}" style="padding-right: 70px;">
 				Route ID <strong>{{ routePlan.id }}</strong>
+				<span id="delimiter"></span>
+				<span id="deliveries-count">{{ onPhaseMonitoring() ? metrics.totalDeliveries : deliveries.length }} Deliveries</span>
 			</h2>
-			<div class="md-select-container" v-show="onPhaseMonitoring()">
-				<md-select name="delivery" v-model="delivery" placeholder="Select deliveries type">
-					<md-option value="option1">Today Deliveries</md-option>
-					<md-option value="option2">Confirmed Deliveries</md-option>
-					<md-option value="option3">Different Day</md-option>
-					<md-option value="option4">In Progress</md-option>
-					<md-option value="option5">No Response</md-option>
-				</md-select>
-			</div>
-			<div v-show="!onPhaseUpload()" class="top-info" style="justify-content: flex-start">
-				<img src="~assets/img/UploadDeliveryList_LeftPanel.png">
-				<div class="value" v-if="onPhaseMonitoring()">{{ metrics.totalDeliveries }}</div>
-				<div class="value" v-else>{{ deliveries.length }}</div>
-				<div class="top-content">
-					<div class="top">
-						Today
-					</div>
-					<div class="bottom">Deliveries</div>
-				</div>
-			</div>
+			<!--<div v-show="!onPhaseUpload()" class="top-info" style="justify-content: flex-start">-->
+				<!--<img src="~assets/img/UploadDeliveryList_LeftPanel.png">-->
+				<!--<div class="value" v-if="onPhaseMonitoring()">{{ metrics.totalDeliveries }}</div>-->
+				<!--<div class="value" v-else>{{ deliveries.length }}</div>-->
+				<!--<div class="top-content">-->
+					<!--<div class="top">-->
+						<!--Today-->
+					<!--</div>-->
+					<!--<div class="bottom">Deliveries</div>-->
+				<!--</div>-->
+			<!--</div>-->
 			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #88db5f">
 				<img src="~assets/img/toolbar_status_icon_2.png">
 				<div class="value">{{ metrics.confirmed }}</div>
@@ -224,7 +234,7 @@
 				<md-icon>send</md-icon>
 				Export schedule
 			</md-button>
-			<md-button class="md-raised md-accent jenny-button" md-theme="yellow" id="jenny-button"
+			<md-button class="md-raised jenny-button" md-theme="yellow" id="jenny-button"
 			           @click="$refs.jennyDialog.open()" v-show="onPhaseJenny()">
 				RUN Jenny, RUN !
 			</md-button>
@@ -289,7 +299,7 @@
 				this.$localStorage.set('phase', this.phase)
 
 				if(this.phase == 'monitoring'){
-					this.listenForUpdates()
+					this.listenForUpdates() // @TODO invoke this method on init also
 					this.$services.Plans.metrics(this.routePlan.id).then((metrics) => {
 						this.metrics = metrics
 					})
@@ -298,10 +308,20 @@
 				setTimeout(() => this.displayOverlay = false, 2000)
 			}
 		},
+		created() {
+			if(this.onPhaseMonitoring()){
+				setTimeout(() => {
+					this.listenForUpdates()
+				}, 3000)
+			}
+		},
 		methods: {
 			listenForUpdates() {
+				console.log('start listening for updates')
 				let channel = this.$services.pusher.subscribe(`private-only_tenant.dev.plans.${this.routePlan.id}.demo`)
-				// @TODO listen for deliveries/conversations updates
+				channel.bind_global((event, data) => {
+					console.log('listenForUpdates event ' + event, data)
+				})
 			},
 			onNewDeliversConfirmDialogClose(button) {
 				if(button == 'ok'){
@@ -411,10 +431,41 @@
 			float: left;
 		}
 
+		#app-toolbar-summery {
+			float: left;
+			margin-left: 50px;
+
+			> div {
+				float: left;
+				margin-top: 15px;
+
+				&:first-of-type {
+					margin-left: 40px;
+					margin-right: 50px;
+				}
+
+				img {
+					float: left;
+					height: 36px;
+					width: 36px;
+					margin-right: 10px;
+				}
+
+				div {
+					float: left;
+					font-weight: bold;
+					color: #fff;
+					span {
+						color: gray;
+					}
+				}
+			}
+		}
+
 		#phases-progress {
 			display: block;
 			float: left;
-			max-width: 600px;
+			max-width: 480px;
 			margin-top: 25px;
 			margin-left: 20px;
 		}
@@ -570,6 +621,7 @@
 	#app-sub-toolbar {
 		background: #2196F3 !important;
 		color: #fff;
+		padding: 0px;
 		width: 100%;
 		.md-select-container {
 			.md-select {
@@ -654,4 +706,22 @@
 		padding: 0px 30px;
 	}
 
+	#jenny-button {
+		background-color: #FFEB3B !important;
+		color: #000;
+	}
+
+	#delimiter {
+		height: 15px;
+		width: 1px;
+		margin:0px 10px;
+		background: #000;
+		display: inline-block;
+	}
+
+	#deliveries-count {}
+
+	.flex-1 {
+		flex: 1;
+	}
 </style>

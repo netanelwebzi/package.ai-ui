@@ -9,7 +9,7 @@ import LocalStorage from './local-storage'
 let $localStorage = new LocalStorage
 
 // Axios
-Axios.defaults.baseURL = config.api.baseUrl
+Axios.defaults.baseURL = window.location.href.indexOf('switchapi') !== -1 ? config.api.second : config.api.first
 Axios.defaults.headers.common['Content-Type'] = 'application/json'
 Axios.defaults.headers.common['Accept'] = 'application/json'
 
@@ -71,8 +71,6 @@ const getNormalizedItems = (type, data) => {
 
 			break;
 	}
-
-	console.log('normalized', items)
 
 	return items
 }
@@ -152,13 +150,14 @@ const init = (date) => {
 										state: delivery.state,
 										address: delivery.address,
 										recipient: delivery.recipient,
+										finishTime: delivery.finishTime,
+										startTime: delivery.startTime,
 										conversationState: conversation.state,
 										positionInRoute: delivery.positionInRoute
 									})
 								})
 							})
 							store.conversations = conversations
-							console.log('done convs', conversations)
 							Plans.metrics(store.routePlan.id).then((metrics) => {
 								store.metrics = metrics
 								store.phase = 'monitoring'

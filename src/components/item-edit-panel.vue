@@ -32,14 +32,16 @@
 					</div>
 					<div class="col-xs-4 secondary">
 						<div class="status" style="margin-top:13px;">
-							<img src="~assets/img/status_icon_1.png">
-							<div style="color:#9a67d9;font-size:12px;padding-top:5px;">{{selectedItem.state}}</div>
+							<img src="~assets/img/NewDelivery_1.png" v-if="selectedItem.state == 'CREATED'">
+							<img src="~assets/img/FutureDeliveries.png" v-if="selectedItem.state == 'POSTPONED'">
+							<div style="font-size:12px;padding-top:5px;">{{selectedItem.state}}</div>
 						</div>
 						<div class="item-detail">{{selectedItem.shippingDate}}</div>
 						<div id="timeslot-picker" class="item-detail" v-if="!onPhaseRoute()">
-							<vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>
-							<span style="display:inline-block;margin-top:3px;">{{ timeSlotEnd }}<md-tooltip
-									md-direction="bottom">Time slot end</md-tooltip></span>
+							{{ selectedItem.startTime.substr(0, 5) + '-' + selectedItem.finishTime.substr(0, 5) }}
+							<!--<vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>-->
+							<!--<span style="display:inline-block;margin-top:3px;">{{ timeSlotEnd }}<md-tooltip-->
+									<!--md-direction="bottom">Time slot end</md-tooltip></span>-->
 						</div>
 					</div>
 				</div>
