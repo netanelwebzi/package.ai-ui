@@ -525,7 +525,7 @@
 			z-index: 9999999999;
 			display: block;
 			padding: 20px 10px 0px 25px;
-			right: 82px;
+			right: 32px;
 			margin-top: 64px;
 			transition-property: all;
 			transition-duration: .5s;
