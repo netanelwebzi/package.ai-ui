@@ -99,6 +99,7 @@
 		},
 
 		created() {
+			this.listen()
 		}
 
 	}

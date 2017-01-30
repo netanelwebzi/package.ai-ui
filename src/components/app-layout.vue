@@ -148,7 +148,7 @@
 			</div>
 		</md-toolbar>
 		<md-toolbar id="app-sub-toolbar" class="md-accent">
-			<h2 class="md-title" v-show="!onPhaseUpload() && !onPhaseRoute()" :class="{'flex-1': onPhaseJenny()}" style="padding-right: 70px;">
+			<h2 class="md-title" v-show="!onPhaseUpload() && !onPhaseRoute()" :class="{'flex-1': onPhaseJenny() || onPhaseExport()}" style="padding-right: 70px;">
 				Route ID <strong>{{ routePlan.id }}</strong>
 				<span id="delimiter"></span>
 				<span id="deliveries-count">{{ onPhaseMonitoring() ? metrics.totalDeliveries : deliveries.length }} Deliveries</span>
@@ -365,6 +365,22 @@
 							break;
 					}
 				})
+//				let channel = this.$services.pusher.subscribe('private-only_tenant.dev.plans.demo')
+//				channel.bind_global((event, data) => {
+//					console.log('public channel event fire ' + event, data)
+//					switch (event)
+//					{
+//						case 'UPDATED':
+////							if(data.payload.id == routePlanId) {
+//								this.$services.Plans.get(this.moment(this.currentDate).format('YYYY-MM-DD')).then((plan) => {
+//									this.routePlan = plan
+//									this.phase = 'export'
+//									this.displayOverlay = false
+//								})
+////							}
+//							break;
+//					}
+//				})
 			},
 			exportSchedule() {
 				this.displayOverlay = true

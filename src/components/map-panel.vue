@@ -1,6 +1,6 @@
 <template>
 	<div class="col-xs">
-		<md-button id="map-focus-button" class="md-raised" @click="focus()">
+		<md-button id="map-focus-button" class="md-raised" @click="focus()" v-show="!onPhaseUpload()">
 			<md-tooltip md-direction="top">Click for auto zoom map to markers</md-tooltip>
 			<md-icon>center_focus_weak</md-icon>Focus
 		</md-button>
