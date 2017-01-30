@@ -208,7 +208,7 @@
 				</div>
 				<md-ink-ripple></md-ink-ripple>
 			</div>
-			<md-button class="md-raised" v-show="onPhaseRoute()" @click="createDeliverySchedule()">
+			<md-button class="md-raised" v-show="onPhaseRoute()" @click="createDeliverySchedule()" style="position: absolute;top: 7px; right: 0px;">
 				<md-icon>date_range</md-icon>
 				Create delivery schedule
 			</md-button>
