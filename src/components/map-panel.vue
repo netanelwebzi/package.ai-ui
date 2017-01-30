@@ -13,7 +13,6 @@
 				:draggable="true"
 				id="map"
 				ref="googleMap"
-				@rightclick="mapRclicked"
 				:options="options" @resize="onMapResize">
 			<gmap-marker
 					v-for="(m, index) in markers"
