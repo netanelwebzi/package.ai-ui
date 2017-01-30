@@ -27,8 +27,9 @@
 						<div class="container-action-icons">
 							<img src="~assets/img/AlertIcon.png" v-if="item.errors.length > 0">
 							<img src="~assets/img/Calendar_Orange_LeftPanel.png" v-if="item.errors.length == 0 && item.state == 'POSTPONED'">
-							<span v-if="item.errors.length == 0 && item.state == 'POSTPONED'" style="font-size:10px;">{{ item.startTime.substr(0, 5) + '-' + item.finishTime.substr(0, 5) }}</span>
-							<span v-if="(onPhaseExport() || onPhaseJenny()) && item.state != 'POSTPONED'" style="font-size:10px;">{{ item.startTime.substr(0, 5) + '-' + item.finishTime.substr(0, 5) }}</span>
+							<span style="font-size:10px;"></span>
+							<!--<span v-if="item.errors.length == 0 && item.state == 'POSTPONED'" style="font-size:10px;">{{ item.startTime.substr(0, 5) + '-' + item.finishTime.substr(0, 5) }}</span>-->
+							<!--<span v-if="(onPhaseExport() || onPhaseJenny()) && item.state != 'POSTPONED'" style="font-size:10px;">{{ item.startTime.substr(0, 5) + '-' + item.finishTime.substr(0, 5) }}</span>-->
 						</div>
 					</div>
 
@@ -135,6 +136,7 @@
 						this.selectedItem = item
 					})
 				} else {
+					console.log('selecting item', item)
 					this.selectedItem = item
 				}
 				this.$events.emit('list:item:selected')

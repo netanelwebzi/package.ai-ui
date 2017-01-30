@@ -76,6 +76,38 @@ const getNormalizedItems = (type, data) => {
 }
 
 // load
+const loadMergedData = (date) => {
+	Deliveries.get(date).then((deliveries) => {
+		Conversations.get(store.routePlan.id).then((conversations) => {
+			_.each(conversations, (conversation, key) => {
+				let deliveries_ids = conversation.deliveries
+				conversation.deliveries = []
+				conversation.barcodes = []
+				_.each(deliveries_ids, (delivery_id, dkey) => {
+					let delivery = _.findWhere(deliveries, {id: delivery_id})
+					conversation.barcodes.push(delivery.barcode)
+					conversation.deliveries.push({
+						id: delivery_id,
+						state: delivery.state,
+						address: delivery.address,
+						recipient: delivery.recipient,
+						finishTime: delivery.finishTime,
+						accurateStartTime: delivery.accurateStartTime,
+						startTime: delivery.startTime,
+						conversationState: conversation.state,
+						positionInRoute: delivery.positionInRoute
+					})
+				})
+			})
+			store.conversations = conversations
+			Plans.metrics(store.routePlan.id).then((metrics) => {
+				store.metrics = metrics
+				store.phase = 'monitoring'
+				store.displayOverlay = false
+			})
+		})
+	})
+}
 const init = (date) => {
 	date = date || moment(store.currentDate).format('YYYY-MM-DD')
 	store.selectedItem = null
@@ -127,7 +159,6 @@ const init = (date) => {
 					// get deliveris & phase = jenny
 					Deliveries.get(date).then((deliveries) => {
 						store.deliveries = deliveries
-						//store.items = getNormalizedItems('deliveries', deliveries)
 						store.phase = 'jenny'
 						store.displayOverlay = false
 					})
@@ -135,37 +166,7 @@ const init = (date) => {
 
 				case 'CONTACTED':
 
-					Deliveries.get(date).then((deliveries) => {
-						Conversations.get(store.routePlan.id).then((conversations) => {
-							//store.items = getNormalizedItems('merge', {deliveries, conversations})
-							_.each(conversations, (conversation, key) => {
-								let deliveries_ids = conversation.deliveries
-								conversation.deliveries = []
-								conversation.barcodes = []
-								_.each(deliveries_ids, (delivery_id, dkey) => {
-									let delivery = _.findWhere(deliveries, {id: delivery_id})
-									conversation.barcodes.push(delivery.barcode)
-									conversation.deliveries.push({
-										id: delivery_id,
-										state: delivery.state,
-										address: delivery.address,
-										recipient: delivery.recipient,
-										finishTime: delivery.finishTime,
-										accurateStartTime: delivery.accurateStartTime,
-										startTime: delivery.startTime,
-										conversationState: conversation.state,
-										positionInRoute: delivery.positionInRoute
-									})
-								})
-							})
-							store.conversations = conversations
-							Plans.metrics(store.routePlan.id).then((metrics) => {
-								store.metrics = metrics
-								store.phase = 'monitoring'
-								store.displayOverlay = false
-							})
-						})
-					})
+					loadMergedData(date)
 
 					break;
 			}
@@ -318,5 +319,6 @@ export {
 	Deliveries,
 	Conversations,
 	Recipients,
-	init
+	init,
+	loadMergedData
 }

@@ -230,6 +230,7 @@
 	import PhaseProgressBar from './phase-progress'
 	import InlineDatePicker from 'vuejs-datepicker'
 	import LocalStorage from '../core/local-storage'
+	import _ from 'underscore'
 	let $localStorage = new LocalStorage
 
 	function capitalize(s) {
@@ -242,13 +243,14 @@
 			InlineDatePicker,
 			PhaseProgressBar
 		},
-		store: ['phase', 'displayOverlay', 'selectedConversationStatus', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage', 'currentDate', 'metrics'],
+		store: ['phase', 'displayOverlay', 'selectedConversationStatus', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage', 'currentDate', 'metrics', 'conversations'],
 		data() {
 			const d = new Date();
 			return {
 				delivery: '',
 				showDropdownBox: false,
 				todayDate: this.moment().format('dddd, DD/MM/YYYY'),
+				routePlanId: null,
 				startTime: {
 					time: $localStorage.get('currentDate')
 				},
@@ -281,10 +283,10 @@
 				this.$localStorage.set('phase', this.phase)
 
 				if(this.phase == 'monitoring'){
-					this.listenForUpdates() // @TODO invoke this method on init also
-					this.$services.Plans.metrics(this.routePlan.id).then((metrics) => {
-						this.metrics = metrics
-					})
+					this.listenForUpdates()
+//					this.$services.Plans.metrics(this.routePlan.id).then((metrics) => {
+//						this.metrics = metrics
+//					})
 				}
 
 				setTimeout(() => this.displayOverlay = false, 2000)
@@ -296,6 +298,26 @@
 					this.listenForUpdates()
 				}, 3000)
 			}
+
+			let channel = this.$services.pusher.subscribe('private-only_tenant.dev.plans.demo')
+			channel.bind_global((event, data) => {
+				switch (event)
+				{
+					case 'UPDATED':
+						if(data.subResourceName == undefined && data.payload.state !== undefined && data.payload.state == 'ROUTED'){
+							this.$services.Plans.get(this.moment(this.currentDate).format('YYYY-MM-DD')).then((plan) => {
+								this.routePlan = plan[0]
+								this.$services.Deliveries.get(this.moment(this.currentDate).format('YYYY-MM-DD')).then((deliveries) => {
+									console.log('before moving to export', deliveries)
+									this.deliveries = deliveries
+									this.phase = 'export'
+									this.displayOverlay = false
+								})
+							})
+						}
+						break;
+				}
+			})
 		},
 		methods: {
 			selectConversationStatus(status) {
@@ -306,10 +328,19 @@
 				}
 			},
 			listenForUpdates() {
-				console.log('start listening for updates')
 				let channel = this.$services.pusher.subscribe(`private-only_tenant.dev.plans.${this.routePlan.id}.demo`)
 				channel.bind_global((event, data) => {
-					console.log('listenForUpdates event ' + event, data)
+					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations' && data.payload.lastMessageText !== undefined){
+						const foundConversation = _.findWhere(this.conversations, {id: data.subResourceId})
+						foundConversation.lastMessageDirection = data.payload.lastMessageDirection
+						foundConversation.lastMessageText = data.payload.lastMessageText
+						//foundConversation.schedulingState = data.payload.schedulingState
+					}
+
+					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations' && data.payload.schedulingState !== undefined){
+						const foundConversation = _.findWhere(this.conversations, {id: data.subResourceId})
+						foundConversation.schedulingState = data.payload.schedulingState
+					}
 				})
 			},
 			onNewDeliversConfirmDialogClose(button) {
@@ -345,42 +376,8 @@
 				this.displayOverlay = true
 				this.overlayMessage = 'Running...'
 				this.$services.Plans.run(this.routePlan.id).then((response) => {
-					this.phase = 'monitoring'
-					this.displayOverlay = false
-					// load conversations
+					this.$services.loadMergedData(this.moment(this.currentDate).format('YYYY-MM-DD'))
 				})
-			},
-			listen(routePlanId) {
-				let that = this
-				let channel = this.$services.pusher.subscribe(`private-only_tenant.dev.plans.${routePlanId}.demo`)
-				channel.bind_global((event, data) => {
-					switch (event)
-					{
-						case 'UPDATED':
-							this.$services.Plans.get(this.moment(this.currentDate).format('YYYY-MM-DD')).then((plan) => {
-								this.routePlan = plan
-								this.phase = 'export'
-								this.displayOverlay = false
-							})
-							break;
-					}
-				})
-//				let channel = this.$services.pusher.subscribe('private-only_tenant.dev.plans.demo')
-//				channel.bind_global((event, data) => {
-//					console.log('public channel event fire ' + event, data)
-//					switch (event)
-//					{
-//						case 'UPDATED':
-////							if(data.payload.id == routePlanId) {
-//								this.$services.Plans.get(this.moment(this.currentDate).format('YYYY-MM-DD')).then((plan) => {
-//									this.routePlan = plan
-//									this.phase = 'export'
-//									this.displayOverlay = false
-//								})
-////							}
-//							break;
-//					}
-//				})
 			},
 			exportSchedule() {
 				this.displayOverlay = true
@@ -394,7 +391,7 @@
 				this.displayOverlay = true
 				this.overlayMessage = 'Preparing route plan...'
 				this.$services.Plans.schedule(this.moment(this.currentDate).format('YYYY-MM-DD')).then((response) => {
-					this.listen(response.routePlanId)
+					this.routePlanId = response.routePlanId
 				}).catch((error) => {
 					this.displayOverlay = false
 					alert(error.response.data.message)
