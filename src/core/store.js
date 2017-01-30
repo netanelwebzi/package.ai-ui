@@ -51,6 +51,7 @@ export default {
 	items: [],
 	metrics: {},
 	selectedConversationStatus: '',
+	selectedTimeSlot: null,
 	conversations: [],
 	displayOverlay: true,
 	currentDate: currentDate,

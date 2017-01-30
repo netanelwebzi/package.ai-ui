@@ -2,7 +2,7 @@
 	<div class="map-time-slots">
 		<transition name="fade">
 			<div v-show="toggled" id="first-col">
-				<div class="time-slot-circle" v-for="(timeSlot, index) in slots.first" :class="{active: active == index}" @click="toggleSlot(index)">
+				<div class="time-slot-circle" v-for="(timeSlot, index) in slots.first" :class="{active: active == index && type == 'first'}" @click="toggleSlot('first', index)">
 					<div>
 						<md-ink-ripple></md-ink-ripple>
 						<span>{{ timeSlot.end }}</span>
@@ -14,7 +14,7 @@
 		</transition>
 		<transition name="fade">
 			<div v-show="toggled" id="second-col">
-				<div class="time-slot-circle" v-for="(timeSlot, index) in slots.second" :class="{active: active == index}" @click="toggleSlot(index)">
+				<div class="time-slot-circle" v-for="(timeSlot, index) in slots.second" :class="{active: active == index && type == 'second'}" @click="toggleSlot('second', index)">
 					<div>
 						<md-ink-ripple></md-ink-ripple>
 						<span>{{ timeSlot.start }}</span>
@@ -33,7 +33,7 @@
 
 <script lang="babel">
 export default {
-	store: ['phase', 'routePlan'],
+	store: ['phase', 'routePlan', 'selectedTimeSlot'],
 	watch: {
 		phase: function() {
 			if(this.onPhaseExport()){
@@ -45,17 +45,18 @@ export default {
 		}
 	},
 	methods: {
-		toggleSlot(index) {
-			if(this.active == index)
+		toggleSlot(type, index) {
+			this.type = type
+			if(this.active == index && this.type == type)
 				this.active = null
 			else
 				this.active = index
 
 			if(this.active == null){
-
+				this.selectedTimeSlot = null
 			} else {
-				let slot = this.slots[index]
-				console.log()
+				let slot = this.slots[type][index]
+				this.selectedTimeSlot = slot
 			}
 		}
 	},
@@ -99,6 +100,7 @@ export default {
 	data() {
 		return {
 			active: null,
+			type: '',
 			toggled: false,
 			timeSlots : [
 				{

@@ -151,6 +151,7 @@ const init = (date) => {
 										address: delivery.address,
 										recipient: delivery.recipient,
 										finishTime: delivery.finishTime,
+										accurateStartTime: delivery.accurateStartTime,
 										startTime: delivery.startTime,
 										conversationState: conversation.state,
 										positionInRoute: delivery.positionInRoute

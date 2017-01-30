@@ -20,6 +20,7 @@
 					:position="m.position"
 					:clickable="true"
 					:draggable="false"
+					v-if="isMarkerInTimeSlot(m)"
 					:icon="m.icon"
 					@click="onMarkerClick(m, index)">
 				<gmap-info-window
@@ -49,7 +50,7 @@
 	})
 
 	export default {
-		store: ['setup', 'phase', 'mapCenter', 'selectedItem', 'deliveries', 'routePlan', 'conversations'],
+		store: ['setup', 'phase', 'mapCenter', 'selectedItem', 'deliveries', 'routePlan', 'conversations' , 'selectedTimeSlot'],
 		components: {
 			gmapMap: VueGoogleMaps.Map,
 			gmapMarker: VueGoogleMaps.Marker,
@@ -58,7 +59,6 @@
 		computed: {
 			markers() {
 				let markers = []
-
 				if(!this.onPhaseUpload() && !this.onPhaseMonitoring()) {
 					for (var i in this.deliveries) {
 						var delivery = this.deliveries[i]
@@ -68,6 +68,7 @@
 								lng: delivery.address.coordinates.longitude
 							},
 							opened: false,
+							accurateStartTime: delivery.accurateStartTime,
 							text: delivery.recipient.firstName + ' ' + delivery.recipient.lastName + ' : ' + delivery.address.formattedAddress,
 							icon: {
 								url: this.getMarkerIconUrl(delivery)
@@ -85,6 +86,7 @@
 									lat: delivery.address.coordinates.latitude,
 									lng: delivery.address.coordinates.longitude
 								},
+								accurateStartTime: delivery.accurateStartTime,
 								opened: false,
 								text: delivery.recipient.firstName + ' ' + delivery.recipient.lastName + ' : ' + delivery.address.formattedAddress,
 								icon: {
@@ -134,6 +136,21 @@
 		},
 
 		methods: {
+			isMarkerInTimeSlot(marker) {
+				if(this.selectedTimeSlot == null){
+					return true
+				}
+
+				const x11 = parseInt(marker.accurateStartTime)
+				const y11 = parseInt(this.selectedTimeSlot.start)
+				const y22 = parseInt(this.selectedTimeSlot.end)
+
+				if(x11 == y11 || (x11 > y11 && x11 < y22)) {
+					return true
+				} else {
+					return false;
+				}
+			},
 			focus () {
 				this.$refs.googleMap.$mapCreated.then((gmapObject) => {
 					var markers = this.markers
