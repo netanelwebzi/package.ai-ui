@@ -68,6 +68,7 @@
 								lng: delivery.address.coordinates.longitude
 							},
 							opened: false,
+							deliveryIndex: i,
 							accurateStartTime: delivery.accurateStartTime,
 							text: delivery.recipient.firstName + ' ' + delivery.recipient.lastName + ' : ' + delivery.address.formattedAddress,
 							icon: {
@@ -86,6 +87,8 @@
 									lat: delivery.address.coordinates.latitude,
 									lng: delivery.address.coordinates.longitude
 								},
+								deliveryIndex: y,
+								conversationIndex: i,
 								accurateStartTime: delivery.accurateStartTime,
 								opened: false,
 								text: delivery.recipient.firstName + ' ' + delivery.recipient.lastName + ' : ' + delivery.address.formattedAddress,
@@ -234,7 +237,11 @@
 				}
 				marker.opened = true
 				this.mapCenter = marker.position
-				this.selectItem(this.deliveries[index])
+				if(this.onPhaseMonitoring()) {
+					this.selectItem(this.conversations[marker.conversationIndex])
+				} else {
+					this.selectItem(this.deliveries[marker.deliveryIndex])
+				}
 				setTimeout(() => this.mapCenter = marker.position, 1000)
 				//this.selectItem()
 			},
