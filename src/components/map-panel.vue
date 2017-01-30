@@ -245,7 +245,15 @@
 				//this.selectItem()
 			},
 			selectItem(item) {
-				this.selectedItem = item
+				if(this.onPhaseMonitoring()){
+					this.$services.Conversations.getMessages(item.id).then((messages) => {
+						item.chatMessages = messages
+						this.selectedItem = item
+					})
+				} else {
+					this.selectedItem = item
+				}
+				this.$events.emit('list:item:selected')
 			},
 			onMapResize() {
 
