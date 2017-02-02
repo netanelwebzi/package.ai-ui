@@ -1,20 +1,25 @@
+const PHASE_UPLOAD = 'upload'
+const PHASE_ROUTE = 'route'
+const PHASE_EXPORT = 'export'
+const PHASE_JENNY = 'jenny'
+const PHASE_MONITORING = 'monitoring'
 export default {
 	store: ['phase'],
 	methods: {
 		onPhaseUpload() {
-			return this.phase == 'upload'
+			return this.phase == PHASE_UPLOAD
 		},
 		onPhaseRoute() {
-			return this.phase == 'route'
+			return this.phase == PHASE_ROUTE
 		},
 		onPhaseExport() {
-			return this.phase == 'export'
+			return this.phase == PHASE_EXPORT
 		},
 		onPhaseJenny() {
-			return this.phase == 'jenny'
+			return this.phase == PHASE_JENNY
 		},
 		onPhaseMonitoring() {
-			return this.phase == 'monitoring'
+			return this.phase == PHASE_MONITORING
 		}
 	}
 }

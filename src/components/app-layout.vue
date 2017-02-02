@@ -208,7 +208,7 @@
 				</div>
 				<md-ink-ripple></md-ink-ripple>
 			</div>
-			<md-button class="md-raised" v-show="onPhaseRoute()" @click="createDeliverySchedule()" style="position: absolute;top: 7px; right: 0px;">
+			<md-button class="md-raised" v-show="onPhaseRoute()" :disabled="hasErrorsInDeliveries" @click="createDeliverySchedule()" style="position: absolute;top: 7px; right: 0px;">
 				<md-icon>date_range</md-icon>
 				Create delivery schedule
 			</md-button>
@@ -226,7 +226,6 @@
 </template>
 
 <script lang="babel">
-	import DatePicker from './datepicker'
 	import PhaseProgressBar from './phase-progress'
 	import InlineDatePicker from 'vuejs-datepicker'
 	import LocalStorage from '../core/local-storage'
@@ -238,8 +237,7 @@
 	}
 
 	export default {
-		components: {
-			DatePicker,
+		vponents: {
 			InlineDatePicker,
 			PhaseProgressBar
 		},
@@ -334,7 +332,14 @@
 						const foundConversation = _.findWhere(this.conversations, {id: data.subResourceId})
 						foundConversation.lastMessageDirection = data.payload.lastMessageDirection
 						foundConversation.lastMessageText = data.payload.lastMessageText
+						foundConversation.updated = data.payload.updated
 						//foundConversation.schedulingState = data.payload.schedulingState
+					}
+
+					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'deliveries'){
+						this.$services.Plans.metrics(this.routePlan.id).then((metrics) => {
+							this.metrics = metrics
+						})
 					}
 
 					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations' && data.payload.schedulingState !== undefined){
@@ -400,6 +405,21 @@
 			logout() {
 
 			},
+		},
+		computed: {
+			hasErrorsInDeliveries: function(){
+				let count = 0
+
+				if(this.onPhaseRoute()){
+					_.each(this.deliveries, (delivery, key) => {
+						if(delivery.errors !== undefined){
+							count = parseInt(count + delivery.errors.length)
+						}
+					});
+				}
+
+				return count > 0
+			}
 		}
 	}
 </script>

@@ -179,9 +179,9 @@ class Auth
 	static login(username, password)
 	{
 		return Axios.post('auth/login', {username, password}).then((response) => {
-			let data = JWTDecode(response.data.value)
-			data.token = response.data.value
-			store.user = data
+			let tokenData = JWTDecode(response.data.value)
+			tokenData.token = response.data.value
+			store.user = tokenData
 			store.authenticated = true
 			$localStorage.set('user', data)
 		})

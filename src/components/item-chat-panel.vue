@@ -55,7 +55,7 @@
 						<div v-else><img src="~assets/img/jenny_avatar.png"></div>
 						<div class="time text-center">{{ moment(msg.created).format('HH:mm') }}</div>
 					</div>
-					<div>
+					<div class="chat-content-container">
 						<div class="chat-content">{{ msg.text }}</div>
 					</div>
 				</div>
@@ -282,16 +282,20 @@
 				.chat-image {
 					order: 1;
 				}
-				.chat-content {
-					margin-left: 10px;
-					margin-right: 20px;
-					background-color: #00baff;
-					color: #fff;
-					font-weight: 300;
-					&:before {
-						right: -10px;
-						border-right: 0;
-						border-left: 10px solid #00baff;
+				.chat-content-container {
+					width: 100%;
+
+					.chat-content {
+						margin-left: 10px;
+						margin-right: 20px;
+						background-color: #00baff;
+						color: #fff;
+						font-weight: 300;
+						&:before {
+							right: -10px;
+							border-right: 0;
+							border-left: 10px solid #00baff;
+						}
 					}
 				}
 			}

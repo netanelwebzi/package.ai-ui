@@ -61,19 +61,21 @@
 				if(!this.onPhaseUpload() && !this.onPhaseMonitoring()) {
 					for (var i in this.deliveries) {
 						var delivery = this.deliveries[i]
-						markers.push({
-							position: {
-								lat: delivery.address.coordinates.latitude,
-								lng: delivery.address.coordinates.longitude
-							},
-							opened: false,
-							deliveryIndex: i,
-							accurateStartTime: delivery.accurateStartTime,
-							text: delivery.recipient.firstName + ' ' + delivery.recipient.lastName + ' : ' + delivery.address.formattedAddress,
-							icon: {
-								url: this.getMarkerIconUrl(delivery)
-							}
-						})
+						if(delivery.address != undefined && delivery.address.coordinates !== undefined && Object.keys( delivery.address.coordinates).length > 0) {
+							markers.push({
+								position: {
+									lat: delivery.address.coordinates.latitude,
+									lng: delivery.address.coordinates.longitude
+								},
+								opened: false,
+								deliveryIndex: i,
+								accurateStartTime: delivery.accurateStartTime,
+								text: delivery.recipient.firstName + ' ' + delivery.recipient.lastName + ' : ' + delivery.address.formattedAddress,
+								icon: {
+									url: this.getMarkerIconUrl(delivery)
+								}
+							})
+						}
 					}
 				}
 
