@@ -35,7 +35,7 @@
 							<img src="~assets/img/Truck_Green_LeftPanel.png" v-if="selectedItem.schedulingState == 'CONFIRMED'">
 							<div style="font-size:12px;padding-top:5px;">{{ selectedItem.schedulingState.replace('_', ' ') }}</div>
 						</div>
-						<div class="item-detail">Mon, 08/11/2016</div>
+						<div class="item-detail">{{selectedItem.deliveries[0].shippingDate}}</div>
 						<div id="timeslot-picker" class="item-detail">
 							{{ selectedItem.deliveries[0].startTime.substr(0, 5) + '-' + selectedItem.deliveries[0].finishTime.substr(0, 5) }}
 							<!--<vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>-->

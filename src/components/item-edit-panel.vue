@@ -19,7 +19,7 @@
 						</md-input-container>
 						<md-input-container class="item-detail" :class="{'md-input-invalid': !valid_phone}">
 							<md-icon>call</md-icon>
-							<md-input v-model="selectedItem.recipient.phone" :disabled="!onPhaseRoute()"></md-input>
+							<md-input v-model="selectedItem.recipient.phone" :disabled="!onPhaseRoute()" @change="onPhoneChange"></md-input>
 						</md-input-container>
 						<md-input-container class="item-detail">
 							<md-icon>inbox</md-icon>
@@ -82,11 +82,12 @@
 		},
 
 		watch: {
-			'selectedItem.recipient.phone': function(){
-				if(this.selectedItem !== null) {
-					this.onPhoneChange()
-				}
-			}
+//			'selectedItem.recipient.phone': function(val, oldVal){
+//				if(this.selectedItem !== null && oldVal !== undefined && val !== oldVal) {
+//					debugger
+//					this.onPhoneChange()
+//				}
+//			}
 		},
 
 		data() {

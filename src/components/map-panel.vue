@@ -24,7 +24,7 @@
 					@click="onMarkerClick(m, index)">
 				<gmap-info-window
 						:content="m.text"
-						:opened="m.opened"
+						:opened="tempMarkers[index].opened"
 						@closeclick="m.opened=false"
 				></gmap-info-window>
 			</gmap-marker>
@@ -37,6 +37,7 @@
 	import * as VueGoogleMaps from 'vue2-google-maps'
 	import MapTimeSlots from './map-time-slots'
 	import Vue from 'vue'
+	import _ from 'underscore'
 
 	Vue.use(VueGoogleMaps, {
 		load: {
@@ -49,7 +50,7 @@
 	})
 
 	export default {
-		store: ['setup', 'phase', 'mapCenter', 'selectedItem', 'deliveries', 'routePlan', 'conversations' , 'selectedTimeSlot'],
+		store: ['setup', 'phase', 'mapCenter', 'selectedItem', 'deliveries', 'routePlan', 'conversations' , 'selectedTimeSlot', 'tempMarkers'],
 		components: {
 			gmapMap: VueGoogleMaps.Map,
 			gmapMarker: VueGoogleMaps.Marker,
@@ -81,6 +82,7 @@
 
 				if(this.onPhaseMonitoring()) {
 					for (var i in this.conversations){
+						let conversationId = this.conversations[i].id
 						for(var y in this.conversations[i].deliveries) {
 							var delivery = this.conversations[i].deliveries[y]
 							markers.push({
@@ -88,6 +90,7 @@
 									lat: delivery.address.coordinates.latitude,
 									lng: delivery.address.coordinates.longitude
 								},
+								conversationId: conversationId,
 								deliveryIndex: y,
 								conversationIndex: i,
 								accurateStartTime: delivery.accurateStartTime,
@@ -101,13 +104,24 @@
 					}
 				}
 
+				this.tempMarkers = markers
+
 				return markers
 			}
 		},
 		created() {
-			this.$events.on('list:item:selected', () => {
+			this.$events.on('list:item:selected', (item) => {
 				setTimeout(() => {
 					this.focus()
+					if(item !== null && item.id !== null) {
+						_.each(this.markers, (marker, key) => {
+							if (marker.conversationId == item.id) {
+								this.tempMarkers[key].opened = true
+							} else {
+								this.tempMarkers[key].opened = false
+							}
+						})
+					}
 				}, 500)
 			})
 			setTimeout(() => {

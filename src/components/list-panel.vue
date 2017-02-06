@@ -139,7 +139,7 @@
 					console.log('selecting item', item)
 					this.selectedItem = item
 				}
-				this.$events.emit('list:item:selected')
+				this.$events.emit('list:item:selected', item)
 			},
 			unselectItem() {
 				this.selectedItem = null

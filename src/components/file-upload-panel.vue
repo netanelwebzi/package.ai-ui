@@ -2,7 +2,7 @@
 	<div class="col-xs-4">
 		<md-whiteframe md-tag="section" id="upload-panel">
 			<div class="file-drop">
-				<dropzone ref="dropzoneUploader" id="file-dropzone" @vdropzone-success="onFileUploaded" @vdropzone-error="onFileError" :url="endpointUrl" :useCustomDropzoneOptions="useCustomDropzoneOptions" :dropzoneOptions="dropzoneOptions"></dropzone>
+				<dropzone ref="dropzoneUploader" id="file-dropzone" @vdropzone-success="onFileUploaded" @vdropzone-error="onFileError" :url="endpointUrl" :useCustomDropzoneOptions="useCustomDropzoneOptions" :dropzoneOptions="dropzoneOptions" :headers="dropzoneHeaders"></dropzone>
 			</div>
 		</md-whiteframe>
 		<md-dialog-alert
@@ -20,7 +20,7 @@
 	import {Deliveries} from '../core/services'
 	export default {
 
-		store: ['setup', 'phase', 'currentDate', 'displayOverlay', 'overlayMessage', 'currentDate', 'deliveries'],
+		store: ['setup', 'phase', 'currentDate', 'displayOverlay', 'overlayMessage', 'currentDate', 'deliveries', 'user'],
 
 		data() {
 			let that = this
@@ -30,6 +30,7 @@
 				files: [],
 				extensions: ['xls', 'xlsx', 'csv'],
 				endpointUrl: window.location.href.indexOf('switchapi') !== -1 ? config.api.second + 'deliveries/upload' : config.api.first + 'deliveries/upload',
+				dropzoneHeaders: {},
 				dropzoneOptions: {
 					init: function(){
 						this.on('sending', function(file, xhr, formData){
@@ -50,7 +51,6 @@
 				this.listen()
 				this.displayOverlay = true
 				this.overlayMessage = 'Processing deliveries...'
-//				setTimeout(() => this.phase = 'route', 3000)
 			},
 			onFileError(file) {
 				const message = JSON.parse(file.xhr.response).message
@@ -99,6 +99,7 @@
 		},
 
 		created() {
+			this.dropzoneHeaders['Authorization'] = 'Bearer ' + this.user.token
 			this.listen()
 		}
 

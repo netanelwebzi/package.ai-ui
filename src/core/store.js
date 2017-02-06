@@ -53,6 +53,7 @@ export default {
 	selectedConversationStatus: '',
 	selectedTimeSlot: null,
 	conversations: [],
+	tempMarkers: [],
 	displayOverlay: true,
 	currentDate: currentDate,
 	overlayMessage: 'Hold tight',

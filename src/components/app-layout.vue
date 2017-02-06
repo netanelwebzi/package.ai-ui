@@ -75,7 +75,7 @@
 				</div>
 			</div>
 			<transition name="fade">
-				<md-whiteframe md-elevation="2" id="dropdown-box" v-if="showDropdownBox">
+				<md-whiteframe md-elevation="2" id="dropdown-box" v-if="showDropdownBox" v-click-outside="onDropdownBoxClickOutSide">
 					<div class="row">
 						<div class="col-xs-4 left-none top-none">
 							<a href="">
@@ -124,10 +124,14 @@
 						<inline-date-picker format="D, dd/MM/yyyy" v-model="startTime.time"></inline-date-picker>
 					</li>
 					<li>
-						<md-button class="md-icon-button md-raised" @click="showDropdownBox=!showDropdownBox"
-						           style="margin-left:19px;">
-							<md-icon>dashboard</md-icon>
+						<md-button @click.prevent="uploadNewDeliveries">
+							<md-icon>add</md-icon>
+							<md-tooltip placement="bottom">Upload new deliveries</md-tooltip>
 						</md-button>
+						<!--<md-button class="md-icon-button md-raised" @click="showDropdownBox=!showDropdownBox"-->
+						           <!--style="margin-left:19px;">-->
+							<!--<md-icon>dashboard</md-icon>-->
+						<!--</md-button>-->
 					</li>
 					<li>
 						<md-menu :md-offset-x="10" md-offset-y="60">
@@ -229,6 +233,7 @@
 	import PhaseProgressBar from './phase-progress'
 	import InlineDatePicker from 'vuejs-datepicker'
 	import LocalStorage from '../core/local-storage'
+	import ClickOutSide from '../core/click-outside'
 	import _ from 'underscore'
 	let $localStorage = new LocalStorage
 
@@ -236,10 +241,46 @@
 		return s && s[0].toUpperCase() + s.slice(1);
 	}
 
+	let clickOutsideCounter = 0
+
 	export default {
 		components: {
 			InlineDatePicker,
 			PhaseProgressBar
+		},
+		directives: {
+			'click-outside': {
+				bind: function(el, binding, vNode) {
+					// Provided expression must evaluate to a function.
+					if (typeof binding.value !== 'function') {
+						const compName = vNode.context.name
+						let warn = `[Vue-click-outside:] provided expression '${binding.expression}' is not a function, but has to be`
+						if (compName) { warn += `Found in component '${compName}'` }
+
+						console.warn(warn)
+					}
+					// Define Handler and cache it on the element
+					const bubble = binding.modifiers.bubble
+					const handler = (e) => {
+						if(e.target.className != "md-icon material-icons md-theme-default") {
+							if (bubble || (!el.contains(e.target) && el !== e.target)) {
+								binding.value(e)
+							}
+						}
+					}
+					el.__vueClickOutside__ = handler
+
+					// add Event Listeners
+					document.addEventListener('click', handler)
+				},
+
+				unbind: function(el, binding) {
+					// Remove Event Listeners
+					document.removeEventListener('click', el.__vueClickOutside__)
+					el.__vueClickOutside__ = null
+
+				}
+			}
 		},
 		store: ['phase', 'displayOverlay', 'selectedConversationStatus', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage', 'currentDate', 'metrics', 'conversations'],
 		data() {
@@ -318,6 +359,11 @@
 			})
 		},
 		methods: {
+			onDropdownBoxClickOutSide() {
+				clickOutsideCounter++
+				if(this.showDropdownBox === true && clickOutsideCounter > 1)
+					this.showDropdownBox = false
+			},
 			selectConversationStatus(status) {
 				if(status != this.selectedConversationStatus) {
 					this.selectedConversationStatus = status
