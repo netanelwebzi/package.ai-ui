@@ -237,7 +237,7 @@
 	}
 
 	export default {
-		vponents: {
+		components: {
 			InlineDatePicker,
 			PhaseProgressBar
 		},
