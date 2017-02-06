@@ -183,7 +183,7 @@ class Auth
 			tokenData.token = response.data.value
 			store.user = tokenData
 			store.authenticated = true
-			$localStorage.set('user', data)
+			$localStorage.set('user', tokenData)
 		})
 	}
 

@@ -79,10 +79,14 @@
 
 				if (!this.errors.username && !this.errors.password) {
 					this.displayOverlay = true
-					this.$services.Auth.login(this.user.username, this.user.password).then(() => {
+					let r = this.$services.Auth.login(this.user.username, this.user.password)
+
+					r.then((result) => {
 						this.displayOverlay = false
 						this.$router.push({name: 'app.dashboard'})
-					}, () => {
+					})
+
+					r.catch(() => {
 						this.displayOverlay = false
 						this.$refs.errorDialog.open()
 					})
