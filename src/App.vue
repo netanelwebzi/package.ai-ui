@@ -16,7 +16,18 @@
 	export default {
 		store: ['displayOverlay', 'overlayMessage'],
 		mounted() {
+			const offlineMessage = 'Network is offline, waiting for connection...'
 			setTimeout(() => this.displayOverlay = false, 2000)
+			window.addEventListener('online',  () => {
+				if(this.overlayMessage == offlineMessage && this.displayOverlay == true){
+					this.displayOverlay = false
+					this.overlayMessage = 'Hold tight'
+				}
+			});
+			window.addEventListener('offline', () => {
+				this.overlayMessage = offlineMessage
+				this.displayOverlay = true
+			});
 		}
 	}
 </script>
