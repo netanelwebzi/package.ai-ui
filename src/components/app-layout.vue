@@ -382,11 +382,12 @@
 						//foundConversation.schedulingState = data.payload.schedulingState
 					}
 
-					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'deliveries'){
+					if(event == 'UPDATED' && data.subResourceName !== undefined && (data.subResourceName == 'deliveries' || data.subResourceName == 'conversations')){
 						this.$services.Plans.metrics(this.routePlan.id).then((metrics) => {
 							this.metrics = metrics
 						})
 					}
+
 
 					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations' && data.payload.schedulingState !== undefined){
 						const foundConversation = _.findWhere(this.conversations, {id: data.subResourceId})

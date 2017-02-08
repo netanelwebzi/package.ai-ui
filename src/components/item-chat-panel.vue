@@ -21,7 +21,7 @@
 						</md-input-container>
 						<md-input-container class="item-detail">
 							<i class="fa fa-truck"></i>
-							<md-input disabled></md-input>
+							<md-input disabled v-model="selectedItem.deliveries[0].externalId"></md-input>
 						</md-input-container>
 					</div>
 					<div class="col-xs-4 secondary">
@@ -35,7 +35,7 @@
 							<img src="~assets/img/Truck_Green_LeftPanel.png" v-if="selectedItem.schedulingState == 'CONFIRMED'">
 							<div style="font-size:12px;padding-top:5px;">{{ selectedItem.schedulingState.replace('_', ' ') }}</div>
 						</div>
-						<div class="item-detail">{{selectedItem.deliveries[0].shippingDate}}</div>
+						<div class="item-detail">{{moment(selectedItem.deliveries[0].shippingDate).format('ddd, DD/MM/YYYY')}}</div>
 						<div id="timeslot-picker" class="item-detail">
 							{{ selectedItem.deliveries[0].startTime.substr(0, 5) + '-' + selectedItem.deliveries[0].finishTime.substr(0, 5) }}
 							<!--<vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>-->
@@ -53,7 +53,15 @@
 					<div class="chat-image">
 						<div class="no-image" v-if="msg.direction == 'INCOMING'">{{ selectedItem.recipientFirstName.charAt(0) }}</div>
 						<div v-else><img src="~assets/img/jenny_avatar.png"></div>
-						<div class="time text-center">{{ moment(msg.created).format('HH:mm') }}</div>
+						<div class="time text-center">
+							<span>
+								{{ moment(msg.created).format('HH:mm') }}
+								<md-tooltip>
+									{{ moment(msg.created).format('dddd, DD/MM/YYYY HH:mm') }}
+								</md-tooltip>
+							</span>
+							<span v-if="moment(msg.created).date() != moment().date()">{{ moment(msg.created).format('DD/MM') }}</span>
+						</div>
 					</div>
 					<div class="chat-content-container">
 						<div class="chat-content">{{ msg.text }}</div>

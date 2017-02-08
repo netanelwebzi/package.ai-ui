@@ -89,7 +89,9 @@ const loadMergedData = (date) => {
 					conversation.deliveries.push({
 						id: delivery_id,
 						state: delivery.state,
+						externalId: delivery.externalId,
 						address: delivery.address,
+						shippingDate: delivery.shippingDate,
 						recipient: delivery.recipient,
 						finishTime: delivery.finishTime,
 						accurateStartTime: delivery.accurateStartTime,

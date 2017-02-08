@@ -25,7 +25,10 @@
 						</div>
 
 						<div class="container-action-icons">
-							<img src="~assets/img/AlertIcon.png" v-if="item.errors.length > 0">
+							<div v-if="item.errors.length > 0">
+								<img src="~assets/img/AlertIcon.png">
+								<md-tooltip>{{ item.errors[0] }}</md-tooltip>
+							</div>
 							<img src="~assets/img/Calendar_Orange_LeftPanel.png" v-if="item.errors.length == 0 && item.state == 'POSTPONED'">
 							<span style="font-size:10px;"></span>
 							<span v-if="item.errors.length == 0 && item.state == 'POSTPONED'" style="font-size:10px;">{{ item.startTime.substr(0, 5) + '-' + item.finishTime.substr(0, 5) }}</span>
@@ -67,7 +70,6 @@
 							<img src="~assets/img/CheckIn_Red_LeftPanel.png" v-if="item.deliveries[0].state == 'MISDELIVERED' && item != selectedItem">
 							<img src="~assets/img/CheckIn_Red_White_LeftPanel.png" v-if="item.deliveries[0].state == 'MISDELIVERED' && item == selectedItem">
 						</div>
-
 					</div>
 
 					<md-divider class="md-inset"></md-divider>
@@ -100,7 +102,7 @@
 				if(this.onPhaseRoute()) {
 					list = _.sortBy(results, (item) => {
 						return item.errors.length
-					})
+					}).reverse()
 				} else {
 					// @TODO sort by error & positionInRoute
 					list = results
@@ -132,11 +134,9 @@
 				if(this.onPhaseMonitoring()){
 					this.$services.Conversations.getMessages(item.id).then((messages) => {
 						item.chatMessages = messages
-						console.log(messages)
 						this.selectedItem = item
 					})
 				} else {
-					console.log('selecting item', item)
 					this.selectedItem = item
 				}
 				this.$events.emit('list:item:selected', item)
@@ -147,12 +147,6 @@
 		},
 
 		created() {
-//			this.$services.Conversations.get().then((response) => {
-//				console.log('convs', response)
-//			})
-//			this.$services.Deliveries.get().then((response) => {
-//				this.deliveries = response
-//			})
 		}
 
 	}

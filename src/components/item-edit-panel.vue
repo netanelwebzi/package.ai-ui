@@ -33,14 +33,19 @@
 					<div class="col-xs-4 secondary">
 						<div class="status" style="margin-top:13px;">
 							<img src="~assets/img/NewDelivery_1.png" v-if="selectedItem.state == 'CREATED'">
-							<img src="~assets/img/FutureDeliveries.png" v-if="selectedItem.state == 'POSTPONED'">
-							<div style="font-size:12px;padding-top:5px;">{{selectedItem.state}}</div>
+							<img src="~assets/img/Calendar_Orange_LeftPanel.png" v-if="selectedItem.state == 'POSTPONED'">
+							<div style="font-size:12px;padding-top:5px;">{{selectedItem.state == 'POSTPONED' ? 'Rescheduled'.toUpperCase() : selectedItem.state}}</div>
 						</div>
-						<div class="item-detail">{{selectedItem.shippingDate}}</div>
-						<div id="timeslot-picker" class="item-detail" v-if="!onPhaseRoute()">
-							{{ selectedItem.startTime.substr(0, 5) + '-' + selectedItem.finishTime.substr(0, 5) }}
-							<!--<vue-timepicker format="hh:mm A" :minute-interval="30"></vue-timepicker>-->
-							<!--<span style="display:inline-block;margin-top:3px;">{{ timeSlotEnd }}<md-tooltip-->
+						<div class="item-detail">{{moment(selectedItem.shippingDate).format('ddd, DD/MM/YYYY')}}</div>
+						<div id="timeslot-picker" class="item-detail">
+							<span v-if="selectedItem.state == 'POSTPONED' || onPhaseJenny() || onPhaseMonitoring()">{{ selectedItem.startTime.substr(0, 5) + '-' + selectedItem.finishTime.substr(0, 5) }}</span>
+							<div v-if="selectedItem.state !== 'POSTPONED' && onPhaseExport()">
+								<label>From</label>
+								<vue-timepicker hide-clear-button :format="timePicker.format" v-model="timePicker.value" :minute-interval="routePlan.alignToMinutes" @change="onTimeSlotChange($event, 'user')"></vue-timepicker>
+								<br />
+								<label>To: <strong>{{ selectedItem.finishTime.substr(0, 5) }}</strong></label><br />
+							</div>
+								<!--<span style="display:inline-block;margin-top:3px;">{{ timeSlotEnd }}<md-tooltip-->
 									<!--md-direction="bottom">Time slot end</md-tooltip></span>-->
 						</div>
 					</div>
@@ -74,7 +79,7 @@
 
 	export default {
 
-		store: ['selectedItem'],
+		store: ['selectedItem', 'routePlan'],
 
 		components: {
 			PlaceInput: VueGoogleMaps.PlaceInput,
@@ -82,23 +87,57 @@
 		},
 
 		watch: {
-//			'selectedItem.recipient.phone': function(val, oldVal){
-//				if(this.selectedItem !== null && oldVal !== undefined && val !== oldVal) {
-//					debugger
-//					this.onPhoneChange()
-//				}
-//			}
+		},
+
+		created() {
+			this.$events.on('list:item:selected', (item) => {
+				let ex = item.startTime.split(':')
+				this.timePicker.value = {
+					HH: ex[0],
+					mm: ex[1]
+				}
+			})
 		},
 
 		data() {
 			return {
-				valid_phone: false
+				valid_phone: false,
+				timePicker: {
+					value: {
+						HH: '',
+						mm: ''
+					},
+					format: 'HH:mm'
+				}
 			}
 		},
+
 
 		methods: {
 			unselectItem() {
 				this.selectedItem = null;
+			},
+			onTimeSlotChange(event, type) {
+				// startTime, finishTime
+				if(type !== undefined && type == 'user'){
+					let startTime = event.data.HH + ':' + event.data.mm + ':00'
+
+					let temp = this.moment()
+					temp.hours(parseInt(event.data.H))
+					temp.minutes(parseInt(event.data.mm))
+					temp.add(this.routePlan.slotSizeMinutes, 'minutes')
+
+					let finishTime = temp.format('HH:mm') + ':00'
+
+					this.$services.Deliveries.update(this.selectedItem.id, {
+						id: this.selectedItem.id,
+						startTime: startTime,
+						finishTime: finishTime
+					}).then((response) => {
+						this.selectedItem.startTime = startTime
+						this.selectedItem.finishTime = temp.format('HH:mm') + ':00'
+					})
+				}
 			},
 			onPlaceChange(value) {
 				const newFormattedAddress = value.formatted_address
@@ -130,14 +169,6 @@
 				return {
 					name: this.selectedItem.address.formattedAddress
 				}
-			},
-			timeSlotEnd: function () {
-				/**var h = parseInt(this.selectedItem.timeSlotStart.hh);
-				 h = parseInt(h + 2)
-				 if (h < 10) {
-					h = '0' + h
-				}
-				 return h + ':' + this.selectedItem.timeSlotStart.mm;**/
 			}
 		}
 

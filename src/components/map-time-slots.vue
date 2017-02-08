@@ -64,9 +64,10 @@ export default {
 		slots: function(){
 			let slots = []
 			let result = {first: [], second: []}
+			const hours_gap = parseInt(this.routePlan.slotSizeMinutes / 60)
 			if(this.routePlan.allowedRange !== undefined) {
 				let fromHour = parseInt(this.routePlan.allowedRange.from), toHour = parseInt(this.routePlan.allowedRange.to)
-				for (let i = fromHour; i < toHour; i++) {
+				for (let i = fromHour; i < toHour; i = i + hours_gap) {
 					let y = i + 1
 					slots.push({
 						start: i < 10 ? '0' + i + ':00' : i + ':00',
