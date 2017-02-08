@@ -178,22 +178,23 @@
 			<!--</div>-->
 		</md-toolbar>
 		<md-toolbar id="app-sub-toolbar" class="md-accent">
-			<h2 class="md-title" v-show="!onPhaseUpload() && !onPhaseRoute()" :class="{'flex-1': onPhaseJenny() || onPhaseExport()}" style="padding-right: 70px;">
-				Route ID <strong>{{ routePlan.id }}</strong>
-				<span id="delimiter"></span>
-				<span id="deliveries-count">{{ onPhaseMonitoring() ? metrics.totalDeliveries : deliveries.length }} Deliveries</span>
-			</h2>
-			<!--<div v-show="!onPhaseUpload()" class="top-info" style="justify-content: flex-start">-->
-				<!--<img src="~assets/img/UploadDeliveryList_LeftPanel.png">-->
-				<!--<div class="value" v-if="onPhaseMonitoring()">{{ metrics.totalDeliveries }}</div>-->
-				<!--<div class="value" v-else>{{ deliveries.length }}</div>-->
-				<!--<div class="top-content">-->
-					<!--<div class="top">-->
-						<!--Today-->
-					<!--</div>-->
-					<!--<div class="bottom">Deliveries</div>-->
-				<!--</div>-->
-			<!--</div>-->
+			<!--<h2 class="md-title" v-show="!onPhaseUpload() && !onPhaseRoute()" :class="{'flex-1': onPhaseJenny() || onPhaseExport()}" style="padding-right: 70px;">-->
+				<!--Route ID <strong>{{ routePlan.id }}</strong>-->
+				<!--<span id="delimiter"></span>-->
+				<!--<span id="deliveries-count">{{ onPhaseMonitoring() ? metrics.totalDeliveries : deliveries.length }} Deliveries</span>-->
+			<!--</h2>-->
+			<div>
+				<md-menu md-align-trigger v-if="availableRoutePlans.length > 0">
+					<md-button md-menu-trigger>
+						{{ routePlanSelectorButtonText }}
+						<md-icon>arrow_drop_down</md-icon>
+					</md-button>
+					<md-menu-content>
+						<md-menu-item v-for="routePlanObject in availableRoutePlans" @click="chooseCurrentRoutePlan(routePlanObject.id)" v-if="availableRoutePlans.length > 1 || (availableRoutePlans.length == 1 && onPhaseUpload())">{{ routePlanObject.id }}</md-menu-item>
+						<md-menu-item v-if="availableRoutePlans.length == 1 && !onPhaseUpload()"><span style="font-size:13px;">No additional routes</span></md-menu-item>
+					</md-menu-content>
+				</md-menu>
+			</div>
 			<div v-show="onPhaseMonitoring()" class="top-info" style="border-top:3px solid #88db5f" @click="selectConversationStatus('CONFIRMED')" :class="{selected: selectedConversationStatus == 'CONFIRMED'}">
 				<img src="~assets/img/toolbar_status_icon_2.png">
 				<div class="value">{{ metrics.confirmed }}</div>
@@ -308,7 +309,7 @@
 				}
 			}
 		},
-		store: ['phase', 'displayOverlay', 'selectedConversationStatus', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage', 'currentDate', 'metrics', 'conversations'],
+		store: ['availableRoutePlans', 'currentRoutePlanId', 'phase', 'displayOverlay', 'selectedConversationStatus', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage', 'currentDate', 'metrics', 'conversations'],
 		data() {
 			const d = new Date();
 			return {
@@ -342,6 +343,9 @@
 				$localStorage.set('currentDate', this.startTime.time)
 				this.$store.currentDate = this.startTime.time
 				this.$services.init(this.moment(this.startTime.time, 'dddd, DD/MM/YYYY').format('YYYY-MM-DD'))
+			},
+			currentRoutePlanId() {
+				this.$localStorage.set('currentRoutePlanId', this.currentRoutePlanId)
 			},
 			phase: function () {
 				this.displayOverlay = true
@@ -385,6 +389,12 @@
 			})
 		},
 		methods: {
+			chooseCurrentRoutePlan (route_plan_id) {
+				this.currentRoutePlanId = route_plan_id
+				setTimeout(() => {
+					window.location.reload()
+				}, 200)
+			},
 			onDropdownBoxClickOutSide() {
 				clickOutsideCounter++
 				if(this.showDropdownBox === true && clickOutsideCounter > 1)
@@ -427,15 +437,17 @@
 				}
 			},
 			uploadNewDeliveries() {
-				if(this.routePlan == null || this.routePlan == undefined || this.routePlan.state == undefined){
-					this.$refs.newDeliveriesConfirmDialog.open();
-				} else {
-					if(this.routePlan.state == 'CONTACTED' || this.routePlan.state == 'EXPORTED'){
-						this.$refs.uploadNewDeliversErrorDialog.open()
-					} else {
-						this.$refs.newDeliveriesConfirmDialog.open();
-					}
-				}
+//				if(this.routePlan == null || this.routePlan == undefined || this.routePlan.state == undefined){
+//					this.$refs.newDeliveriesConfirmDialog.open();
+//				} else {
+//					if(this.routePlan.state == 'CONTACTED' || this.routePlan.state == 'EXPORTED'){
+//						this.$refs.uploadNewDeliversErrorDialog.open()
+//					} else {
+//						this.$refs.newDeliveriesConfirmDialog.open()
+//					}
+//				}
+
+				this.$refs.newDeliveriesConfirmDialog.open()
 
 				this.showDropdownBox = false
 			},
@@ -480,6 +492,14 @@
 			},
 		},
 		computed: {
+			routePlanSelectorButtonText() {
+				if(this.currentRoutePlanId == null) {
+					return 'Select Route Plan'
+				} else {
+					let x = this.onPhaseMonitoring() ? this.metrics.totalDeliveries : this.deliveries.length
+					return `Route ID ${this.currentRoutePlanId} (${x} deliveries)`
+				}
+			},
 			hasErrorsInDeliveries: function(){
 				let count = 0
 

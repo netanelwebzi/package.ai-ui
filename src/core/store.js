@@ -10,6 +10,7 @@ let user = false
 let authenticated = false
 let token = null
 let currentDate = null
+let currentRoutePlanId = null
 
 if($localStorage.has('phase')){
 	phase = $localStorage.get('phase')
@@ -37,6 +38,10 @@ if(!$localStorage.has('currentDate')){
 	currentDate = $localStorage.get('currentDate')
 }
 
+if($localStorage.has('currentRoutePlanId')){
+	currentRoutePlanId = $localStorage.get('currentRoutePlanId')
+}
+
 export default {
 	user: user,
 	selectedItem: null,
@@ -47,6 +52,8 @@ export default {
 	},
 	metrics: {},
 	routePlan: {},
+	availableRoutePlans: [],
+	currentRoutePlanId: currentRoutePlanId,
 	deliveries: [],
 	items: [],
 	metrics: {},
