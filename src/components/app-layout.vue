@@ -69,7 +69,7 @@
 				<div>
 					<img src="~assets/img/cancel.png">
 					<div>
-						{{ Math.round((metrics.misdelivered / metrics.totalDeliveries) * 100) }}% Missdelivered<br />
+						{{ Math.round((metrics.misdelivered / metrics.totalDeliveries) * 100) }}% Missed<br />
 						<span>({{ metrics.misdelivered }})</span>
 					</div>
 				</div>
@@ -118,38 +118,64 @@
 					</div>
 				</md-whiteframe>
 			</transition>
-			<div class="pull-right" id="right-actions">
-				<ul>
-					<li>
-						<inline-date-picker format="D, dd/MM/yyyy" v-model="startTime.time"></inline-date-picker>
-					</li>
-					<li>
-						<md-button @click.prevent="uploadNewDeliveries">
-							<md-icon>add</md-icon>
-							<md-tooltip placement="bottom">Upload new deliveries</md-tooltip>
+			<div class="pull-right" id="right-toolbar-actions">
+				<div>
+					<inline-date-picker format="D, dd/MM/yyyy" v-model="startTime.time"></inline-date-picker>
+				</div>
+				<div>
+					<md-button @click.prevent="uploadNewDeliveries">
+						<md-icon>add</md-icon>
+						Upload
+						<md-tooltip placement="bottom">Upload new deliveries</md-tooltip>
+					</md-button>
+				</div>
+				<div>
+					<md-menu :md-offset-x="10" md-offset-y="60">
+						<md-button md-menu-trigger>
+							<md-avatar class="md-avatar-icon md-raised">
+								<md-icon>face</md-icon>
+							</md-avatar>
 						</md-button>
-						<!--<md-button class="md-icon-button md-raised" @click="showDropdownBox=!showDropdownBox"-->
-						           <!--style="margin-left:19px;">-->
-							<!--<md-icon>dashboard</md-icon>-->
-						<!--</md-button>-->
-					</li>
-					<li>
-						<md-menu :md-offset-x="10" md-offset-y="60">
-							<md-button md-menu-trigger>
-								<md-avatar class="md-avatar-icon md-raised">
-									<md-icon>face</md-icon>
-								</md-avatar>
 
-							</md-button>
-
-							<md-menu-content>
-								<md-menu-item>Profile</md-menu-item>
-								<md-menu-item @click="$refs.logoutConfirmDialog.open()">Sign out</md-menu-item>
-							</md-menu-content>
-						</md-menu>
-					</li>
-				</ul>
+						<md-menu-content>
+							<md-menu-item>Profile</md-menu-item>
+							<md-menu-item @click="$refs.logoutConfirmDialog.open()">Sign out</md-menu-item>
+						</md-menu-content>
+					</md-menu>
+				</div>
 			</div>
+			<!--<div class="pull-right" id="right-actions">-->
+				<!--<ul>-->
+					<!--<li>-->
+						<!--<inline-date-picker format="D, dd/MM/yyyy" v-model="startTime.time"></inline-date-picker>-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<md-button @click.prevent="uploadNewDeliveries">-->
+							<!--<md-icon>add</md-icon>-->
+							<!--<md-tooltip placement="bottom">Upload new deliveries</md-tooltip>-->
+						<!--</md-button>-->
+						<!--&lt;!&ndash;<md-button class="md-icon-button md-raised" @click="showDropdownBox=!showDropdownBox"&ndash;&gt;-->
+						           <!--&lt;!&ndash;style="margin-left:19px;">&ndash;&gt;-->
+							<!--&lt;!&ndash;<md-icon>dashboard</md-icon>&ndash;&gt;-->
+						<!--&lt;!&ndash;</md-button>&ndash;&gt;-->
+					<!--</li>-->
+					<!--<li>-->
+						<!--<md-menu :md-offset-x="10" md-offset-y="60">-->
+							<!--<md-button md-menu-trigger>-->
+								<!--<md-avatar class="md-avatar-icon md-raised">-->
+									<!--<md-icon>face</md-icon>-->
+								<!--</md-avatar>-->
+
+							<!--</md-button>-->
+
+							<!--<md-menu-content>-->
+								<!--<md-menu-item>Profile</md-menu-item>-->
+								<!--<md-menu-item @click="$refs.logoutConfirmDialog.open()">Sign out</md-menu-item>-->
+							<!--</md-menu-content>-->
+						<!--</md-menu>-->
+					<!--</li>-->
+				<!--</ul>-->
+			<!--</div>-->
 		</md-toolbar>
 		<md-toolbar id="app-sub-toolbar" class="md-accent">
 			<h2 class="md-title" v-show="!onPhaseUpload() && !onPhaseRoute()" :class="{'flex-1': onPhaseJenny() || onPhaseExport()}" style="padding-right: 70px;">
@@ -500,6 +526,17 @@
 		}
 
 		#app-toolbar-summery {
+			@media screen and (max-width: 1025px) {
+				margin-left: 0px;
+				> div {
+					&:first-of-type {
+						margin-right: 20px !important;
+					}
+					img {
+						display: none;
+					}
+				}
+			}
 			float: left;
 			margin-left: 50px;
 
@@ -650,6 +687,52 @@
 			content: ' ';
 		}
 
+		#right-toolbar-actions {
+			.datepicker {
+				color: #000;
+				margin-top: 3px;
+			}
+
+			> div {
+				float: left;
+				border-right: 1px dashed #fff;
+				height: 30px;
+				margin-top: 17px;
+
+				&:first-of-type {
+					padding-right: 15px;
+				}
+
+				&:nth-child(2) {
+					padding: 0px 5px;
+				}
+
+				&:last-of-type {
+					border-right: 0px;
+				}
+
+				button {
+					min-height: auto;
+					min-width: auto;
+					padding: 0px;
+					line-height: 0px;
+					text-transform: none;
+				}
+
+				.md-avatar {
+					min-height: auto;
+					height: 30px;
+					.md-icon {
+						top: 39%;
+					}
+				}
+
+				.md-avatar .md-icon {
+					top: 39%;
+				}
+			}
+		}
+
 		#right-actions {
 			.md-menu button {
 				margin-top: 1px;
@@ -687,6 +770,11 @@
 	}
 
 	#app-sub-toolbar {
+		@media screen and (max-width: 1025px) {
+			h2 {
+				padding-right: 10px !important;
+			}
+		}
 		background: #2196F3 !important;
 		color: #fff;
 		padding: 0px;

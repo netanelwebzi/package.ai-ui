@@ -105,7 +105,9 @@
 					}).reverse()
 				} else {
 					// @TODO sort by error & positionInRoute
-					list = results
+					list = _.sortBy(results, (item) => {
+						return item.positionInRoute
+					})
 				}
 
 				return list

@@ -13,11 +13,12 @@
 						<span class="md-error" v-if="errors.password">Required</span>
 					</md-input-container>
 					<div class="spacer-20"></div>
-					<md-checkbox id="my-test1" name="my-test1" v-model="user.remember" class="pull-left md-primary">Remember me
-					</md-checkbox>
+					<!--<md-checkbox id="my-test1" name="my-test1" v-model="user.remember" class="pull-left md-primary">Remember me-->
+					<!--</md-checkbox>-->
 					<md-button class="md-raised md-primary pull-right" @click="login()">Login</md-button>
 					<div class="spacer-40"></div>
-					<a href="/#/auth/forgot-password">Forgot password ?</a>
+
+					<!--<a href="/#/auth/forgot-password">Forgot password ?</a>-->
 				</form>
 		<md-dialog-alert
 				md-content="Invalid username or password"

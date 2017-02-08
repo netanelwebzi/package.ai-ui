@@ -67,6 +67,24 @@
 						<div class="chat-content">{{ msg.text }}</div>
 					</div>
 				</div>
+				<div v-for="(msg, msgIndex) in selectedItem.chatMessages" class="chat" :class="{reverse: msg.direction == 'OUTGOING', regular: msg.direction == 'INCOMING' }">
+					<div class="chat-image">
+						<div class="no-image" v-if="msg.direction == 'INCOMING'">{{ selectedItem.recipientFirstName.charAt(0) }}</div>
+						<div v-else><img src="~assets/img/jenny_avatar.png"></div>
+						<div class="time text-center">
+							<span>
+								{{ moment(msg.created).format('HH:mm') }}
+								<md-tooltip>
+									{{ moment(msg.created).format('dddd, DD/MM/YYYY HH:mm') }}
+								</md-tooltip>
+							</span>
+							<span v-if="moment(msg.created).date() != moment().date()">{{ moment(msg.created).format('DD/MM') }}</span>
+						</div>
+					</div>
+					<div class="chat-content-container">
+						<div class="chat-content">{{ msg.text }}</div>
+					</div>
+				</div>
 			</div>
 		</md-whiteframe>
 	</div>
@@ -105,8 +123,13 @@
 			}
 		},
 
-		mounted() {
-
+		created() {
+			this.$events.on('list:item:selected', (item) => {
+				setTimeout(() => {
+					let el = document.getElementById('chatter')
+					el.scrollTop = el.scrollHeight
+				}, 500)
+			})
 		}
 
 	}
