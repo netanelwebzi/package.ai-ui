@@ -21,60 +21,6 @@ Axios.interceptors.request.use((config) => {
 	return config
 });
 
-// normalize
-const getNormalizedItems = (type, data) => {
-	let items = []
-
-	switch (type)
-	{
-		case 'deliveries':
-			_.each(data, (delivery, key) => {
-				items.push({
-					title: `${delivery.recipient.firstName} ${delivery.recipient.lastName}`,
-					description: delivery.address.formattedAddress,
-					address: {
-						formattedAddress: delivery.address.formattedAddress
-					},
-					recipientPhone: delivery.recipient.phone,
-					storeName: delivery.retailer.name,
-					barcode: delivery.barcode || '',
-					state: delivery.state,
-					shippingDate: delivery.shippingDate
-				})
-			})
-
-			break;
-
-		case 'merge':
-			_.each(data.conversations, (conversation, key) => {
-				items.push({
-					title: `${conversation.recipientFirstName} ${conversation.recipientLastName}`,
-					description: conversation.lastMessageDirection == 'OUTGOING' ? `<strong>Jenny: </strong>${conversation.lastMessageText.substring(0,47)}` : conversation.lastMessageText.substring(0,47),
-					recipientPhone: conversation.recipientPhone,
-					storeName: conversation.store,
-					address: {
-						formattedAddress: conversation.address
-					}
-				})
-				let deliveries_ids = conversation.deliveries
-				conversation.deliveries = []
-				conversation.barcodes = []
-				_.each(deliveries_ids, (delivery_id, dkey) => {
-					let delivery = _.findWhere(data.deliveries, {id: delivery_id})
-					conversation.barcodes.push(delivery.barcode)
-					conversation.deliveries.push({
-						id: delivery_id,
-						state: delivery.state
-					})
-				})
-			})
-
-			break;
-	}
-
-	return items
-}
-
 // load
 const loadMergedData = (date) => {
 	Deliveries.get(date).then((deliveries) => {
@@ -118,6 +64,7 @@ const init = (date) => {
 	store.displayOverlay = true
 
 	Plans.get(date).then((plan) => {
+		debugger
 		if(plan.length == 0){
 			Deliveries.get(date).then((deliveries) => {
 				if(deliveries.length > 0){
@@ -133,8 +80,10 @@ const init = (date) => {
 			store.availableRoutePlans = plan
 			if(store.currentRoutePlanId == null) {
 				plan = plan[0]
+				console.log('no current', plan)
 				store.currentRoutePlanId = plan.id
 			} else {
+				console.log('current', store.currentRoutePlanId)
 				plan = _.findWhere(plan, {id: store.currentRoutePlanId})
 			}
 			store.routePlan = plan

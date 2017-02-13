@@ -24,13 +24,16 @@
 
 		data() {
 			let that = this
+			let authorizationHeader = 'Bearer ' + this.$store.user.token
 			return {
 				failedDialogMessage: 'test',
 				resourceId: null,
 				files: [],
 				extensions: ['xls', 'xlsx', 'csv'],
 				endpointUrl: window.location.href.indexOf('switchapi') !== -1 ? config.api.second + 'deliveries/upload' : config.api.first + 'deliveries/upload',
-				dropzoneHeaders: {},
+				dropzoneHeaders: {
+					Authorization: authorizationHeader
+				},
 				dropzoneOptions: {
 					init: function(){
 						this.on('sending', function(file, xhr, formData){
@@ -38,6 +41,10 @@
 							formData.append('data', JSON.stringify({date: date}))
 						})
 					},
+					headers: {
+						'Authorization': authorizationHeader
+					},
+
 					paramName: 'uploaded_file',
 					dictDefaultMessage: '<i class="md-icon material-icons md-theme-default">backup</i>Drag & Drop your delivery list here'
 				},
@@ -99,7 +106,6 @@
 		},
 
 		created() {
-			this.dropzoneHeaders['Authorization'] = 'Bearer ' + this.user.token
 			this.listen()
 		}
 

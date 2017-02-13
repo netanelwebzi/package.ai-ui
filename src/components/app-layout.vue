@@ -341,6 +341,7 @@
 		watch: {
 			'startTime.time': function(){
 				$localStorage.set('currentDate', this.startTime.time)
+				this.currentRoutePlanId = null
 				this.$store.currentDate = this.startTime.time
 				this.$services.init(this.moment(this.startTime.time, 'dddd, DD/MM/YYYY').format('YYYY-MM-DD'))
 			},
@@ -365,7 +366,7 @@
 			if(this.onPhaseMonitoring()){
 				setTimeout(() => {
 					this.listenForUpdates()
-				}, 3000)
+				}, 5000)
 			}
 
 			let channel = this.$services.pusher.subscribe('private-only_tenant.dev.plans.demo')
