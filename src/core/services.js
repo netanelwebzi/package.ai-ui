@@ -64,7 +64,6 @@ const init = (date) => {
 	store.displayOverlay = true
 
 	Plans.get(date).then((plan) => {
-		debugger
 		if(plan.length == 0){
 			Deliveries.get(date).then((deliveries) => {
 				if(deliveries.length > 0){

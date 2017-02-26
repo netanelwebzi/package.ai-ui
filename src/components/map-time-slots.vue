@@ -32,8 +32,9 @@
 </template>
 
 <script lang="babel">
+	import _ from 'underscore'
 export default {
-	store: ['phase', 'routePlan', 'selectedTimeSlot'],
+	store: ['phase', 'routePlan', 'selectedTimeSlot', 'deliveries'],
 	watch: {
 		phase: function() {
 			if(this.onPhaseExport()){
@@ -61,11 +62,11 @@ export default {
 		}
 	},
 	computed: {
-		slots: function(){
+		slots() {
+			console.log('slots deliveries', this.deliveries)
 			let slots = []
 			let result = {first: [], second: []}
 			if(this.routePlan !== undefined && this.routePlan.slotSizeMinutes !== undefined) {
-				debugger
 				const hours_gap = parseInt(this.routePlan.slotSizeMinutes / 60)
 				if (this.routePlan.allowedRange !== undefined) {
 					let fromHour = parseInt(this.routePlan.allowedRange.from), toHour = parseInt(this.routePlan.allowedRange.to)

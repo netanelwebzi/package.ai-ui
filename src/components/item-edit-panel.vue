@@ -39,14 +39,12 @@
 						<div class="item-detail">{{moment(selectedItem.shippingDate).format('ddd, DD/MM/YYYY')}}</div>
 						<div id="timeslot-picker" class="item-detail">
 							<span v-if="selectedItem.state == 'POSTPONED' || onPhaseJenny() || onPhaseMonitoring()">{{ selectedItem.startTime.substr(0, 5) + '-' + selectedItem.finishTime.substr(0, 5) }}</span>
-							<div v-if="selectedItem.state !== 'POSTPONED' && onPhaseExport()">
-								<label>From</label>
-								<vue-timepicker hide-clear-button :format="timePicker.format" v-model="timePicker.value" :minute-interval="routePlan.alignToMinutes" @change="onTimeSlotChange($event, 'user')"></vue-timepicker>
-								<br />
-								<label>To: <strong>{{ selectedItem.finishTime.substr(0, 5) }}</strong></label><br />
-							</div>
-								<!--<span style="display:inline-block;margin-top:3px;">{{ timeSlotEnd }}<md-tooltip-->
-									<!--md-direction="bottom">Time slot end</md-tooltip></span>-->
+							<!--<div v-if="selectedItem.state !== 'POSTPONED' && onPhaseExport()">-->
+								<!--<label>From</label>-->
+								<!--<vue-timepicker hide-clear-button :format="timePicker.format" v-model="timePicker.value" :minute-interval="routePlan.alignToMinutes" @change="onTimeSlotChange($event, 'user')"></vue-timepicker>-->
+								<!--<br />-->
+								<!--<label>To: <strong>{{ selectedItem.finishTime.substr(0, 5) }}</strong></label><br />-->
+							<!--</div>-->
 						</div>
 					</div>
 				</div>
@@ -65,6 +63,7 @@
 	import Vue from 'vue'
 	import VueTimepicker from 'vue2-timepicker'
 	import {isValidNumber} from 'libphonenumber-js'
+	import _ from 'underscore'
 
 	Vue.use(VueGoogleMaps, {
 		load: {
@@ -79,7 +78,7 @@
 
 	export default {
 
-		store: ['selectedItem', 'routePlan'],
+		store: ['selectedItem', 'routePlan', 'deliveries'],
 
 		components: {
 			PlaceInput: VueGoogleMaps.PlaceInput,
@@ -90,13 +89,13 @@
 		},
 
 		created() {
-			this.$events.on('list:item:selected', (item) => {
-				let ex = item.startTime.split(':')
-				this.timePicker.value = {
-					HH: ex[0],
-					mm: ex[1]
-				}
-			})
+//			this.$events.on('list:item:selected', (item) => {
+//				let ex = item.startTime.split(':')
+//				this.timePicker.value = {
+//					HH: ex[0],
+//					mm: ex[1]
+//				}
+//			})
 		},
 
 		data() {
@@ -140,6 +139,7 @@
 				}
 			},
 			onPlaceChange(value) {
+				let delivery = _.findWhere(this.deliveries, {id: this.selectedItem.id})
 				const newFormattedAddress = value.formatted_address
 				this.$services.Deliveries.update(this.selectedItem.id, {
 					id: this.selectedItem.id,
@@ -147,12 +147,12 @@
 						formattedAddress: newFormattedAddress
 					}
 				}).then((response) => {
-					console.log('updated', response)
+					delivery.errors = response.errors
+					delivery.address = response.address
 				})
 			},
 			onPhoneChange() {
 				this.valid_phone = isValidNumber(this.selectedItem.recipient.phone)
-				console.log(this.valid_phone)
 				if(this.valid_phone) {
 					this.$services.Recipients.update(this.selectedItem.recipientId, {
 						id: this.selectedItem.recipientId,

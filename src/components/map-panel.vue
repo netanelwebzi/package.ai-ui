@@ -226,7 +226,6 @@
 				}
 			},
 			mapRclicked (mouseArgs) {
-				debugger
 				const createdMarker = this.addMarker();
 				createdMarker.position.lat = mouseArgs.latLng.lat();
 				createdMarker.position.lng = mouseArgs.latLng.lng();

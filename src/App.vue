@@ -13,21 +13,40 @@
 </template>
 
 <script>
+	import config from './core/config'
 	export default {
-		store: ['displayOverlay', 'overlayMessage'],
+		store: ['displayOverlay', 'overlayMessage', 'displayOverlayStartTime'],
+		watch: {
+			displayOverlay() {
+				if(this.displayOverlay == false){
+					this.displayOverlayStartTime = new Date()
+				}
+			}
+		},
 		mounted() {
 			const offlineMessage = 'Network is offline, waiting for connection...'
+
 			setTimeout(() => this.displayOverlay = false, 2000)
+
 			window.addEventListener('online',  () => {
 				if(this.overlayMessage == offlineMessage && this.displayOverlay == true){
 					this.displayOverlay = false
 					this.overlayMessage = 'Hold tight'
 				}
 			});
+
 			window.addEventListener('offline', () => {
 				this.overlayMessage = offlineMessage
 				this.displayOverlay = true
 			});
+
+			setInterval(() => {
+				const calc = (new Date().getTime() - this.displayOverlayStartTime.getTime()) / 1000;
+				if(calc >= config.autoRefreshInterval && this.displayOverlay == true){
+					window.location.reload()
+				}
+
+			}, 1000)
 		}
 	}
 </script>

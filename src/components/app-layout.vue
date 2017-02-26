@@ -183,7 +183,7 @@
 				<!--<span id="delimiter"></span>-->
 				<!--<span id="deliveries-count">{{ onPhaseMonitoring() ? metrics.totalDeliveries : deliveries.length }} Deliveries</span>-->
 			<!--</h2>-->
-			<div>
+			<div :class="{'flex-1': onPhaseJenny() || onPhaseExport()}">
 				<md-menu md-align-trigger v-if="availableRoutePlans.length > 0">
 					<md-button md-menu-trigger>
 						{{ routePlanSelectorButtonText }}
@@ -438,16 +438,6 @@
 				}
 			},
 			uploadNewDeliveries() {
-//				if(this.routePlan == null || this.routePlan == undefined || this.routePlan.state == undefined){
-//					this.$refs.newDeliveriesConfirmDialog.open();
-//				} else {
-//					if(this.routePlan.state == 'CONTACTED' || this.routePlan.state == 'EXPORTED'){
-//						this.$refs.uploadNewDeliversErrorDialog.open()
-//					} else {
-//						this.$refs.newDeliveriesConfirmDialog.open()
-//					}
-//				}
-
 				this.$refs.newDeliveriesConfirmDialog.open()
 
 				this.showDropdownBox = false

@@ -62,6 +62,7 @@ export default {
 	conversations: [],
 	tempMarkers: [],
 	displayOverlay: true,
+	displayOverlayStartTime: new Date(),
 	currentDate: currentDate,
 	overlayMessage: 'Hold tight',
 	phases: [

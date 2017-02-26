@@ -8,8 +8,9 @@ export default {
 	},
 
 	api: {
-		first: 'http://demo.package.ai:9005/v1/',
+		//first: 'http://demo.package.ai:9005/v1/',
 		//first: 'http://demo2.package.ai:9005/v1/',
+		first: 'http://demo2.package.ai:9007/v1/',
 		second: 'http://demo2.package.ai:9003/v1/'
 	},
 
@@ -28,5 +29,7 @@ export default {
 		}
 	},
 
-	defaultPhase: 'upload'
+	defaultPhase: 'upload',
+
+	autoRefreshInterval: 20, // seconds
 }
