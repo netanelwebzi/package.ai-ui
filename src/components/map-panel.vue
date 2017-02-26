@@ -70,6 +70,7 @@
 								},
 								opened: false,
 								deliveryIndex: i,
+								deliveryId: delivery.id,
 								accurateStartTime: delivery.accurateStartTime,
 								text: delivery.recipient.firstName + ' ' + delivery.recipient.lastName + ' : ' + delivery.address.formattedAddress,
 								icon: {
@@ -115,7 +116,7 @@
 					this.focus()
 					if(item !== null && item.id !== null) {
 						_.each(this.markers, (marker, key) => {
-							if (marker.conversationId == item.id) {
+							if (marker.conversationId == item.id || marker.deliveryId == item.id) {
 								this.tempMarkers[key].opened = true
 							} else {
 								this.tempMarkers[key].opened = false
@@ -224,26 +225,6 @@
 						return `${baseUrl}`
 						break;
 				}
-			},
-			mapRclicked (mouseArgs) {
-				const createdMarker = this.addMarker();
-				createdMarker.position.lat = mouseArgs.latLng.lat();
-				createdMarker.position.lng = mouseArgs.latLng.lng();
-			},
-			addMarker: function addMarker() {
-				this.markers.push({
-					position: { lat: 48.8538302, lng: 2.2982161 },
-					opacity: 1,
-					draggable: false,
-					enabled: false,
-					clicked: 0,
-					rightClicked: 0,
-					icon: {
-						url: 'https://s27.postimg.org/nw2j43dbn/marker_in_progress_icon.png',
-					},
-					dragended: 0
-				});
-				return this.markers[this.markers.length - 1];
 			},
 			onMarkerClick(marker, index) {
 				for(let i in this.markers){

@@ -16,7 +16,7 @@
 			</div>
 
 			<md-list class="custom-list md-triple-line" v-if="!onPhaseMonitoring()">
-				<md-list-item v-for="item in filteredItems" @click="selectItem(item)"
+				<md-list-item v-for="(item, index) in filteredItems" @click="selectItem(item, index)"
 				              :class="{ selected: selectedItem === item }">
 					<div class="item-container">
 						<div class="md-list-text-container">
@@ -40,7 +40,7 @@
 				</md-list-item>
 			</md-list>
 			<md-list class="custom-list md-triple-line" v-else>
-				<md-list-item v-for="item in filteredConversations" @click="selectItem(item)"
+				<md-list-item v-for="(item, index) in filteredConversations" @click="selectItem(item, index)"
 				              :class="{ selected: selectedItem === item }">
 					<div class="item-container">
 						<div class="md-list-text-container">
@@ -83,7 +83,7 @@
 	import _ from 'underscore'
 
 	export default {
-		store: ['setup', 'mapCenter', 'selectedItem', 'deliveries', 'conversations', 'selectedConversationStatus'],
+		store: ['setup', 'mapCenter', 'selectedItem', 'deliveries', 'conversations', 'selectedConversationStatus', 'tempMarkers'],
 
 		data() {
 			return {
@@ -132,7 +132,7 @@
 		},
 
 		methods: {
-			selectItem(item) {
+			selectItem(item, index) {
 				if(this.onPhaseMonitoring()){
 					this.$services.Conversations.getMessages(item.id).then((messages) => {
 						item.chatMessages = messages

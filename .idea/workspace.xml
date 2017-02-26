@@ -3,15 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="ac872419-97f0-44e2-af38-c7a9fe3615ce" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/app-layout.vue" afterPath="$PROJECT_DIR$/src/components/app-layout.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/item-edit-panel.vue" afterPath="$PROJECT_DIR$/src/components/item-edit-panel.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/list-panel.vue" afterPath="$PROJECT_DIR$/src/components/list-panel.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/map-panel.vue" afterPath="$PROJECT_DIR$/src/components/map-panel.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/map-time-slots.vue" afterPath="$PROJECT_DIR$/src/components/map-time-slots.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/config.js" afterPath="$PROJECT_DIR$/src/core/config.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/services.js" afterPath="$PROJECT_DIR$/src/core/services.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/store.js" afterPath="$PROJECT_DIR$/src/core/store.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -30,7 +23,7 @@
         <entry file="file://$PROJECT_DIR$/src/App.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="341">
-              <caret line="55" column="27" lean-forward="true" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+              <caret line="55" column="27" lean-forward="false" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -48,11 +41,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="map-panel.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="map-panel.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/map-panel.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="163" column="41" lean-forward="false" selection-start-line="163" selection-start-column="39" selection-end-line="163" selection-end-column="41" />
+            <state relative-caret-position="246">
+              <caret line="117" column="27" lean-forward="false" selection-start-line="117" selection-start-column="27" selection-end-line="117" selection-end-column="27" />
               <folding />
             </state>
           </provider>
@@ -62,17 +55,17 @@
         <entry file="file://$PROJECT_DIR$/src/components/map-time-slots.vue">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="95">
-              <caret line="66" column="26" lean-forward="true" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
+              <caret line="66" column="26" lean-forward="false" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="list-panel.vue" pinned="false" current-in-tab="false">
+      <file leaf-file-name="list-panel.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/list-panel.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="29">
-              <caret line="94" column="25" lean-forward="false" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="25" />
+            <state relative-caret-position="219">
+              <caret line="134" column="37" lean-forward="false" selection-start-line="134" selection-start-column="37" selection-end-line="134" selection-end-column="37" />
               <folding />
             </state>
           </provider>
@@ -102,7 +95,7 @@
         <entry file="file://$PROJECT_DIR$/src/core/store.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="194">
-              <caret line="64" column="40" lean-forward="true" selection-start-line="64" selection-start-column="40" selection-end-line="64" selection-end-column="40" />
+              <caret line="64" column="40" lean-forward="false" selection-start-line="64" selection-start-column="40" selection-end-line="64" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -132,11 +125,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>currentR</find>
-      <find>uploadNewDe</find>
-      <find>available</find>
-      <find>.card</find>
-      <find>Plans.get</find>
       <find>Authori</find>
       <find>slotSizeMinutes</find>
       <find>listenForUpdates</find>
@@ -158,10 +146,15 @@
       <find>onPlaceChange</find>
       <find>findWhere</find>
       <find>filteredItems</find>
-      <find>tempMarkers</find>
-      <find>markers</find>
       <find>selectedTimeSlot</find>
       <find>is</find>
+      <find>tempMarkers</find>
+      <find>addMarker</find>
+      <find>mapR</find>
+      <find>onMarkerClick</find>
+      <find>markers</find>
+      <find>selectItem</find>
+      <find>selected</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -191,18 +184,18 @@
         <option value="$PROJECT_DIR$/src/components/auth-layout.vue" />
         <option value="$PROJECT_DIR$/src/core/component-mixin.js" />
         <option value="$PROJECT_DIR$/src/core/click-outside.js" />
-        <option value="$PROJECT_DIR$/src/components/map-panel.vue" />
         <option value="$PROJECT_DIR$/src/components/item-chat-panel.vue" />
         <option value="$PROJECT_DIR$/src/views/auth/login.vue" />
         <option value="$PROJECT_DIR$/src/core/services.js" />
         <option value="$PROJECT_DIR$/src/components/file-upload-panel.vue" />
-        <option value="$PROJECT_DIR$/src/components/list-panel.vue" />
         <option value="$PROJECT_DIR$/src/core/config.js" />
         <option value="$PROJECT_DIR$/src/core/store.js" />
         <option value="$PROJECT_DIR$/src/components/app-layout.vue" />
         <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/components/item-edit-panel.vue" />
         <option value="$PROJECT_DIR$/src/components/map-time-slots.vue" />
+        <option value="$PROJECT_DIR$/src/components/map-panel.vue" />
+        <option value="$PROJECT_DIR$/src/components/list-panel.vue" />
       </list>
     </option>
   </component>
@@ -447,12 +440,12 @@
       <workItem from="1487597885963" duration="504000" />
       <workItem from="1487669408697" duration="446000" />
       <workItem from="1487716206153" duration="603000" />
-      <workItem from="1488142420557" duration="3559000" />
+      <workItem from="1488142420557" duration="4452000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="210051000" />
+    <option name="totallyTimeSpent" value="210944000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -760,7 +753,7 @@
         <state relative-caret-position="209">
           <caret line="11" column="0" lean-forward="false" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="29" />
           <folding>
-            <element signature="e#1278#1337#0" expanded="true" />
+            <element signature="e#1278#1337#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -768,7 +761,7 @@
     <entry file="file://$PROJECT_DIR$/src/core/store.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="194">
-          <caret line="64" column="40" lean-forward="true" selection-start-line="64" selection-start-column="40" selection-end-line="64" selection-end-column="40" />
+          <caret line="64" column="40" lean-forward="false" selection-start-line="64" selection-start-column="40" selection-end-line="64" selection-end-column="40" />
           <folding />
         </state>
       </provider>
@@ -800,7 +793,7 @@
     <entry file="file://$PROJECT_DIR$/src/App.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="341">
-          <caret line="55" column="27" lean-forward="true" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
+          <caret line="55" column="27" lean-forward="false" selection-start-line="55" selection-start-column="27" selection-end-line="55" selection-end-column="27" />
           <folding />
         </state>
       </provider>
@@ -813,10 +806,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/list-panel.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/map-panel.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="29">
-          <caret line="94" column="25" lean-forward="false" selection-start-line="94" selection-start-column="12" selection-end-line="94" selection-end-column="25" />
+        <state relative-caret-position="246">
+          <caret line="117" column="27" lean-forward="false" selection-start-line="117" selection-start-column="27" selection-end-line="117" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/map-time-slots.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="66" column="26" lean-forward="false" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
           <folding />
         </state>
       </provider>
@@ -831,18 +832,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/map-time-slots.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/list-panel.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="66" column="26" lean-forward="true" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/map-panel.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="163" column="41" lean-forward="false" selection-start-line="163" selection-start-column="39" selection-end-line="163" selection-end-column="41" />
+        <state relative-caret-position="219">
+          <caret line="134" column="37" lean-forward="false" selection-start-line="134" selection-start-column="37" selection-end-line="134" selection-end-column="37" />
           <folding />
         </state>
       </provider>
