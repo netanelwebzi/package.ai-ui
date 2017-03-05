@@ -195,6 +195,7 @@
 						break;
 
 					case 'export':
+					case 'jenny':
 						if(delivery.state == 'CREATED' && this.routePlan.state == 'ROUTED'){
 							return `${baseUrl}created-${delivery.positionInRoute}.png`
 						}

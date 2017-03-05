@@ -7,7 +7,7 @@
 			<span>ROUTE</span>
 		</li>
 		<li data-step="3" :class="{'is-complete': !onPhaseUpload() && !onPhaseRoute() && !onPhaseExport(), 'is-active': onPhaseExport()}">
-			<span>EXPORT</span>
+			<span>DISPATCH</span>
 		</li>
 		<li data-step="4" :class="{'is-complete': !onPhaseUpload() && !onPhaseRoute() && !onPhaseExport() && !onPhaseJenny(), 'is-active': onPhaseJenny()}">
 			<span>RUN JENNY</span>

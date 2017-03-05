@@ -20,6 +20,23 @@ export default {
 		},
 		onPhaseMonitoring() {
 			return this.phase == PHASE_MONITORING
+		},
+		buildName(item) {
+			let firstName = ''
+			let lastName = ''
+			if(this.phase == PHASE_MONITORING){
+				firstName = item.recipientFirstName
+				if (item.recipientLastName != null || item.recipientLastName != undefined && item.recipientLastName.length > 0) {
+					lastName = item.recipientLastName
+				}
+			} else {
+				firstName = item.recipient.firstName
+				if (item.recipient.lastName != null || item.recipient.lastName != undefined && item.recipient.lastName.length > 0) {
+					lastName = item.recipient.lastName
+				}
+			}
+
+			return `${firstName} ${lastName}`
 		}
 	}
 }

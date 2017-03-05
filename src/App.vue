@@ -18,7 +18,7 @@
 		store: ['displayOverlay', 'overlayMessage', 'displayOverlayStartTime'],
 		watch: {
 			displayOverlay() {
-				if(this.displayOverlay == false){
+				if(this.displayOverlay == true){
 					this.displayOverlayStartTime = new Date()
 				}
 			}

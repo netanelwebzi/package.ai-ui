@@ -245,7 +245,7 @@
 			</md-button>
 			<md-button class="md-raised" v-show="onPhaseExport()" @click="exportSchedule()">
 				<md-icon>send</md-icon>
-				Export schedule
+				Dispatch
 			</md-button>
 			<md-button class="md-raised jenny-button" md-theme="yellow" id="jenny-button"
 			           @click="$refs.jennyDialog.open()" v-show="onPhaseJenny()">

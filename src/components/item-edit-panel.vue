@@ -4,7 +4,7 @@
 			<div class="item-details">
 				<div class="row">
 					<div class="col-xs-8 principal">
-						<div class="title">{{ selectedItem.recipient.firstName + ' ' + selectedItem.recipient.lastName
+						<div class="title">{{ buildName(selectedItem)
 							}}
 						</div>
 						<div id="places-input" class="item-detail" v-if="onPhaseRoute()">
@@ -21,7 +21,7 @@
 							<md-icon>call</md-icon>
 							<md-input v-model="selectedItem.recipient.phone" :disabled="!onPhaseRoute()" @change="onPhoneChange"></md-input>
 						</md-input-container>
-						<md-input-container class="item-detail">
+						<md-input-container class="item-detail" v-if="selectedItem.retailer !== undefined && selectedItem.retailer.name !== undefined">
 							<md-icon>inbox</md-icon>
 							<md-input v-model="selectedItem.retailer.name" disabled></md-input>
 						</md-input-container>
@@ -39,6 +39,7 @@
 						<div class="item-detail">{{moment(selectedItem.shippingDate).format('ddd, DD/MM/YYYY')}}</div>
 						<div id="timeslot-picker" class="item-detail">
 							<span v-if="selectedItem.state == 'POSTPONED' || onPhaseJenny() || onPhaseMonitoring()">{{ selectedItem.startTime.substr(0, 5) + '-' + selectedItem.finishTime.substr(0, 5) }}</span>
+							<span v-if="selectedItem.state !== 'POSTPONED' && onPhaseExport()">{{ selectedItem.startTime.substr(0, 5) + '-' + selectedItem.finishTime.substr(0, 5) }}</span>
 							<!--<div v-if="selectedItem.state !== 'POSTPONED' && onPhaseExport()">-->
 								<!--<label>From</label>-->
 								<!--<vue-timepicker hide-clear-button :format="timePicker.format" v-model="timePicker.value" :minute-interval="routePlan.alignToMinutes" @change="onTimeSlotChange($event, 'user')"></vue-timepicker>-->
