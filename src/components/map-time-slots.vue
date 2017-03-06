@@ -67,7 +67,6 @@ export default {
 			let slots = []
 			let result = {first: [], second: []}
 			if(this.routePlan !== undefined && this.routePlan.slotSizeMinutes !== undefined) {
-				debugger
 				const hours_gap = parseInt(this.routePlan.slotSizeMinutes / 60)
 				if (this.routePlan.allowedRange !== undefined) {
 					let fromHour = parseInt(this.routePlan.allowedRange.from), toHour = parseInt(this.routePlan.allowedRange.to)

@@ -94,17 +94,22 @@
 		computed: {
 			filteredItems: function () {
 				let list = []
-				let search = this.itemsSearch
-				let results = this.deliveries.filter(function (item) {
-					return item.recipient.firstName.indexOf(search) !== -1 || item.recipient.lastName.indexOf(search) !== -1 || item.address.formattedAddress.indexOf(search) !== -1
-				})
+				let search = this.itemsSearch.toLowerCase()
+				let results
+
+				if(search == '' || search.length == 0){
+					results = this.deliveries
+				} else {
+					results = this.deliveries.filter(function (item) {
+						return item.recipient.firstName.toLowerCase().indexOf(search) !== -1 || item.recipient.lastName.toLowerCase().indexOf(search) !== -1 || item.address.formattedAddress.toLowerCase().indexOf(search) !== -1
+					})
+				}
 
 				if(this.onPhaseRoute()) {
 					list = _.sortBy(results, (item) => {
 						return item.errors.length
 					}).reverse()
 				} else {
-					// @TODO sort by error & positionInRoute
 					list = _.sortBy(results, (item) => {
 						return item.positionInRoute
 					})
@@ -113,15 +118,20 @@
 				return list
 			},
 			filteredConversations: function(){
-				let search = this.itemsSearch
+				let search = this.itemsSearch.toLowerCase()
 				let selectedConversationStatus = this.selectedConversationStatus
-				let results = this.conversations.filter(function(item){
-					if(selectedConversationStatus == '') {
-						return (item.recipientFirstName.indexOf(search) !== -1 || item.recipientLastName.indexOf(search) !== -1)
-					} else {
-						return (item.recipientFirstName.indexOf(search) !== -1 || item.recipientLastName.indexOf(search) !== -1) && item.schedulingState == selectedConversationStatus
-					}
-				})
+				let results
+				if(search == '' || search.length == 0) {
+					results = this.conversations
+				} else {
+					results = this.conversations.filter(function (item) {
+						if (selectedConversationStatus == '') {
+							return (item.recipientFirstName.toLowerCase().indexOf(search) !== -1 || item.recipientLastName.toLowerCase().indexOf(search) !== -1)
+						} else {
+							return (item.recipientFirstName.toLowerCase().indexOf(search) !== -1 || item.recipientLastName.toLowerCase().indexOf(search) !== -1) && item.schedulingState == selectedConversationStatus
+						}
+					})
+				}
 
 				let list = _.sortBy(results, (item) => {
 					return this.moment(item.updated)
