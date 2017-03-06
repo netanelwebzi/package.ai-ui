@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ac872419-97f0-44e2-af38-c7a9fe3615ce" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/app-layout.vue" afterPath="$PROJECT_DIR$/src/components/app-layout.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/item-edit-panel.vue" afterPath="$PROJECT_DIR$/src/components/item-edit-panel.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/map-panel.vue" afterPath="$PROJECT_DIR$/src/components/map-panel.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/phase-progress.vue" afterPath="$PROJECT_DIR$/src/components/phase-progress.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/component-mixin.js" afterPath="$PROJECT_DIR$/src/core/component-mixin.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/map-time-slots.vue" afterPath="$PROJECT_DIR$/src/components/map-time-slots.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -23,83 +18,11 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="item-edit-panel.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/item-edit-panel.vue">
+      <file leaf-file-name="map-time-slots.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/map-time-slots.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="371">
-              <caret line="51" column="36" lean-forward="true" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="app-layout.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4637">
-              <caret line="244" column="24" lean-forward="true" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="App.vue" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/App.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="phase-progress.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/phase-progress.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="171">
-              <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="map-panel.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/map-panel.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="190" column="33" lean-forward="true" selection-start-line="190" selection-start-column="33" selection-end-line="190" selection-end-column="33" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="646">
-              <caret line="34" column="1" lean-forward="true" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="item-chat-panel.vue" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/item-chat-panel.vue">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="77" lean-forward="false" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="77" />
-              <folding>
-                <element signature="n#div#0;n#div#1;n#md-whiteframe#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="component-mixin.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/component-mixin.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="134">
-              <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+            <state relative-caret-position="228">
+              <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -169,7 +92,6 @@
         <option value="$PROJECT_DIR$/src/core/services.js" />
         <option value="$PROJECT_DIR$/src/components/file-upload-panel.vue" />
         <option value="$PROJECT_DIR$/src/core/config.js" />
-        <option value="$PROJECT_DIR$/src/components/map-time-slots.vue" />
         <option value="$PROJECT_DIR$/src/components/list-panel.vue" />
         <option value="$PROJECT_DIR$/src/core/bootstrap.js" />
         <option value="$PROJECT_DIR$/src/core/store.js" />
@@ -180,6 +102,7 @@
         <option value="$PROJECT_DIR$/src/components/phase-progress.vue" />
         <option value="$PROJECT_DIR$/src/components/map-panel.vue" />
         <option value="$PROJECT_DIR$/src/App.vue" />
+        <option value="$PROJECT_DIR$/src/components/map-time-slots.vue" />
       </list>
     </option>
   </component>
@@ -194,6 +117,166 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/dist/now-static/node_modules" />
     <handled-path value="$PROJECT_DIR$/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/autoprefixer/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/babel-core/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/babel-generator/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/babel-loader/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/babel-plugin-transform-es2015-unicode-regex/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/babel-register/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/babel-template/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/babel-traverse/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/camelcase-keys/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/chokidar/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/clean-css/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/cliui/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/cross-spawn/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/crypto-browserify/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/css-select/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/css-selector-tokenizer/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/dashdash/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/debug/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/dom-converter/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/dom-serializer/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/editorconfig/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/enhanced-resolve/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/express/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/extract-text-webpack-plugin/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/finalhandler/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/find-cache-dir/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/fsevents/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/fstream/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/gauge/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/getpass/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/glob-base/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/glob-parent/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/globule/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/html-minifier/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/html-webpack-plugin/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/htmlparser2/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/http-signature/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/invariant/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/is-glob/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/js-beautify/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/js-yaml/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/less-loader/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/less/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/loader-utils/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/memory-fs/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/micromatch/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/mkdirp/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/node-gyp/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/node-pre-gyp/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/node-sass/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/normalize-package-data/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/optimist/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/parse-glob/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/postcss-svgo/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/postcss/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/pusher-js/spec/javascripts/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/rc/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/redent/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/regexpu-core/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/regjsparser/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/renderkid/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/request/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/sass-loader/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/send/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/shelljs/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/sshpk/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/svgo/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/tar-pack/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/uglify-js/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/url/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/util/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/vue-loader/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/vue-template-compiler/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/watchpack/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/webpack-core/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/webpack-dev-middleware/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/webpack-hot-middleware/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/webpack/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/yargs-parser/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules/yargs/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/autoprefixer/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/babel-core/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/babel-generator/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/babel-loader/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/babel-plugin-transform-es2015-unicode-regex/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/babel-register/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/babel-template/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/babel-traverse/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/camelcase-keys/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/chokidar/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/clean-css/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/cliui/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/cross-spawn/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/crypto-browserify/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/css-select/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/css-selector-tokenizer/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/dashdash/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/debug/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/dom-converter/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/dom-serializer/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/editorconfig/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/enhanced-resolve/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/express/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/extract-text-webpack-plugin/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/finalhandler/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/find-cache-dir/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/fsevents/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/fstream/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/gauge/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/getpass/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/glob-base/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/glob-parent/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/globule/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/html-minifier/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/html-webpack-plugin/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/htmlparser2/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/http-signature/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/invariant/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/is-glob/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/js-beautify/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/js-yaml/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/less-loader/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/less/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/loader-utils/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/memory-fs/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/micromatch/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/mkdirp/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/node-gyp/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/node-pre-gyp/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/node-sass/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/normalize-package-data/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/optimist/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/parse-glob/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/postcss-svgo/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/postcss/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/pusher-js/spec/javascripts/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/rc/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/redent/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/regexpu-core/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/regjsparser/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/renderkid/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/request/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/sass-loader/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/send/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/shelljs/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/sshpk/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/svgo/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/tar-pack/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/uglify-js/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/url/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/util/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/vue-loader/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/vue-template-compiler/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/watchpack/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/webpack-core/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/webpack-dev-middleware/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/webpack-hot-middleware/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/webpack/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/yargs-parser/node_modules" />
+    <handled-path value="$PROJECT_DIR$/old_node_modules2/yargs/node_modules" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration" backward_compatibility_performed="true" />
   <component name="ProjectFrameBounds">
@@ -216,7 +299,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -257,12 +339,13 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="core" />
+              <option name="myItemId" value="components" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="Scratches" />
     </panes>
   </component>
@@ -407,12 +490,13 @@
       <workItem from="1487669408697" duration="446000" />
       <workItem from="1487716206153" duration="603000" />
       <workItem from="1488142420557" duration="4825000" />
-      <workItem from="1488357186413" duration="4148000" />
+      <workItem from="1488357186413" duration="4450000" />
+      <workItem from="1488791505491" duration="290000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="215465000" />
+    <option name="totallyTimeSpent" value="216057000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -645,7 +729,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="21" lean-forward="false" selection-start-line="0" selection-start-column="21" selection-end-line="0" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -653,14 +736,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="14" column="15" lean-forward="false" selection-start-line="14" selection-start-column="15" selection-end-line="14" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/map-time-slots.vue">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="66" column="26" lean-forward="false" selection-start-line="66" selection-start-column="26" selection-end-line="66" selection-end-column="26" />
         </state>
       </provider>
     </entry>
@@ -668,7 +743,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-127">
           <caret line="11" column="9" lean-forward="false" selection-start-line="11" selection-start-column="9" selection-end-line="11" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -676,9 +750,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="52" column="7" lean-forward="true" selection-start-line="52" selection-start-column="7" selection-end-line="52" selection-end-column="7" />
-          <folding>
-            <element signature="e#0#42#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -686,9 +757,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
           <caret line="44" column="12" lean-forward="true" selection-start-line="44" selection-start-column="12" selection-end-line="44" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#21#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -696,10 +764,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="760">
           <caret line="61" column="23" lean-forward="false" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="23" />
-          <folding>
-            <element signature="e#20#41#0" expanded="false" />
-            <element signature="e#1278#1337#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -707,7 +771,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="1" column="9" lean-forward="false" selection-start-line="1" selection-start-column="5" selection-end-line="1" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -715,7 +778,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1862">
           <caret line="34" column="72" lean-forward="false" selection-start-line="34" selection-start-column="60" selection-end-line="34" selection-end-column="72" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -723,9 +785,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="627">
           <caret line="33" column="12" lean-forward="false" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
-          <folding>
-            <element signature="e#272#336#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -733,7 +792,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="63" column="31" lean-forward="true" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -741,7 +799,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="627">
           <caret line="33" column="21" lean-forward="false" selection-start-line="33" selection-start-column="21" selection-end-line="33" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -749,7 +806,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="228">
           <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -757,25 +813,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="77" lean-forward="false" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="77" />
-          <folding>
-            <element signature="n#div#0;n#div#1;n#md-whiteframe#0;n#div#0;n#template#0;n#!!top" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/component-mixin.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="134">
-          <caret line="25" column="29" lean-forward="true" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
-          <folding />
+          <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/item-edit-panel.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="371">
-          <caret line="51" column="36" lean-forward="true" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
-          <folding />
+          <caret line="51" column="36" lean-forward="false" selection-start-line="51" selection-start-column="36" selection-end-line="51" selection-end-column="36" />
         </state>
       </provider>
     </entry>
@@ -783,38 +834,41 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="9" column="26" lean-forward="false" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="646">
-          <caret line="34" column="1" lean-forward="true" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
-          <folding />
+          <caret line="34" column="1" lean-forward="false" selection-start-line="34" selection-start-column="1" selection-end-line="34" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/map-panel.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="38">
-          <caret line="190" column="33" lean-forward="true" selection-start-line="190" selection-start-column="33" selection-end-line="190" selection-end-column="33" />
-          <folding />
+          <caret line="190" column="33" lean-forward="false" selection-start-line="190" selection-start-column="33" selection-end-line="190" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-4637">
-          <caret line="244" column="24" lean-forward="true" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
-          <folding />
+          <caret line="244" column="24" lean-forward="false" selection-start-line="244" selection-start-column="24" selection-end-line="244" selection-end-column="24" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.vue">
+    <entry file="file://$PROJECT_DIR$/src/components/map-time-slots.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="24" column="10" lean-forward="true" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
+        <state relative-caret-position="228">
+          <caret line="42" column="0" lean-forward="false" selection-start-line="42" selection-start-column="0" selection-end-line="42" selection-end-column="0" />
           <folding />
         </state>
       </provider>
