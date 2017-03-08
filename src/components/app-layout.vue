@@ -411,25 +411,41 @@
 			},
 			listenForUpdates() {
 				let channel = this.$services.pusher.subscribe(`private-only_tenant.qa.plans.${this.routePlan.id}.upload`)
+				let that = this
 				channel.bind_global((event, data) => {
 					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations' && data.payload.lastMessageText !== undefined){
-						const foundConversation = _.findWhere(this.conversations, {id: data.subResourceId})
-						foundConversation.lastMessageDirection = data.payload.lastMessageDirection
-						foundConversation.lastMessageText = data.payload.lastMessageText
-						foundConversation.updated = data.payload.updated
-						//foundConversation.schedulingState = data.payload.schedulingState
+						const foundConversation = _.findWhere(that.conversations, {id: data.subResourceId})
+						if(data.payload !== undefined && Object.keys(data.payload).length > 0) {
+							if(data.payload.lastMessageDirection !== undefined && data.payload.lastMessageDirection !== null) {
+								foundConversation.lastMessageDirection = data.payload.lastMessageDirection
+							}
+
+							if(data.payload.lastMessageText !== undefined && data.payload.lastMessageText !== null) {
+								foundConversation.lastMessageText = data.payload.lastMessageText
+							}
+
+							if(data.payload.updated !== undefined && data.payload.updated !== null) {
+								foundConversation.updated = data.payload.updated
+							}
+
+							if(data.payload.schedulingState !== undefined && data.payload.schedulingState !== null){
+								foundConversation.schedulingState = data.payload.schedulingState
+							}
+						}
 					}
 
 					if(event == 'UPDATED' && data.subResourceName !== undefined && (data.subResourceName == 'deliveries' || data.subResourceName == 'conversations')){
-						this.$services.Plans.metrics(this.routePlan.id).then((metrics) => {
-							this.metrics = metrics
+						this.$services.Plans.metrics(that.routePlan.id).then((metrics) => {
+							that.metrics = metrics
 						})
 					}
 
 
 					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations' && data.payload.schedulingState !== undefined){
-						const foundConversation = _.findWhere(this.conversations, {id: data.subResourceId})
-						foundConversation.schedulingState = data.payload.schedulingState
+						const foundConversation = _.findWhere(that.conversations, {id: data.subResourceId})
+						if(foundConversation !== undefined) {
+							foundConversation.schedulingState = data.payload.schedulingState
+						}
 					}
 				})
 			},

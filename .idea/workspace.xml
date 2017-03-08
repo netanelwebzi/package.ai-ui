@@ -3,10 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="ac872419-97f0-44e2-af38-c7a9fe3615ce" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.vue" afterPath="$PROJECT_DIR$/src/App.vue" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/app-layout.vue" afterPath="$PROJECT_DIR$/src/components/app-layout.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/file-upload-panel.vue" afterPath="$PROJECT_DIR$/src/components/file-upload-panel.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/list-panel.vue" afterPath="$PROJECT_DIR$/src/components/list-panel.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -21,11 +18,31 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="list-panel.vue" pinned="false" current-in-tab="true">
+      <file leaf-file-name="list-panel.vue" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/list-panel.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="208">
-              <caret line="51" column="135" lean-forward="false" selection-start-line="51" selection-start-column="135" selection-end-line="51" selection-end-column="135" />
+            <state relative-caret-position="417">
+              <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app-layout.vue" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="276">
+              <caret line="447" column="25" lean-forward="false" selection-start-line="447" selection-start-column="25" selection-end-line="447" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="services.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/services.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-28">
+              <caret line="24" column="6" lean-forward="false" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
               <folding />
             </state>
           </provider>
@@ -35,8 +52,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>errors</find>
-      <find>address:</find>
       <find>onPlaceChange</find>
       <find>findWhere</find>
       <find>filteredItems</find>
@@ -58,13 +73,15 @@
       <find>listen</find>
       <find>listen()</find>
       <find>createDevlier</find>
-      <find>listenForUpda</find>
       <find>selectedItem</find>
       <find>store:</find>
       <find>createDeku</find>
       <find>substr</find>
       <find>lastMessageDirection</find>
       <find>item.item</find>
+      <find>listenForUpda</find>
+      <find>loadmerged</find>
+      <find>onJenn</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -104,8 +121,8 @@
         <option value="$PROJECT_DIR$/src/components/map-time-slots.vue" />
         <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/components/file-upload-panel.vue" />
-        <option value="$PROJECT_DIR$/src/components/app-layout.vue" />
         <option value="$PROJECT_DIR$/src/components/list-panel.vue" />
+        <option value="$PROJECT_DIR$/src/components/app-layout.vue" />
       </list>
     </option>
   </component>
@@ -344,6 +361,24 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vue-webpack-project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vue-webpack-project" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="components" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -497,12 +532,12 @@
       <workItem from="1488791505491" duration="798000" />
       <workItem from="1488807999447" duration="795000" />
       <workItem from="1488812533490" duration="779000" />
-      <workItem from="1488960674166" duration="1933000" />
+      <workItem from="1488960674166" duration="3711000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="220072000" />
+    <option name="totallyTimeSpent" value="221850000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -515,7 +550,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1440" height="820" extended-state="6" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22430556" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32833788" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -525,7 +560,7 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3355526" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3355526" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -551,13 +586,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/core/store.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="475">
-          <caret line="25" column="24" lean-forward="false" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/map-time-slots.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1634">
@@ -780,13 +808,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/services.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="63" column="31" lean-forward="true" selection-start-line="63" selection-start-column="31" selection-end-line="63" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="627">
@@ -872,18 +893,34 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
+    <entry file="file://$PROJECT_DIR$/dist/static/js/app.8196d5e4ad4cab85d949.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="472" column="20" lean-forward="true" selection-start-line="472" selection-start-column="20" selection-end-line="472" selection-end-column="20" />
+        <state relative-caret-position="157">
+          <caret line="0" column="6057" lean-forward="false" selection-start-line="0" selection-start-column="6057" selection-end-line="0" selection-end-column="6057" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-28">
+          <caret line="24" column="6" lean-forward="false" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/list-panel.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="51" column="135" lean-forward="false" selection-start-line="51" selection-start-column="135" selection-end-line="51" selection-end-column="135" />
+        <state relative-caret-position="417">
+          <caret line="63" column="0" lean-forward="true" selection-start-line="63" selection-start-column="0" selection-end-line="63" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="447" column="25" lean-forward="false" selection-start-line="447" selection-start-column="25" selection-end-line="447" selection-end-column="25" />
           <folding />
         </state>
       </provider>
