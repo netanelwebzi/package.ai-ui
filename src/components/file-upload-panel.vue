@@ -68,7 +68,7 @@
 			},
 			listen() {
 				let that = this
-				let channel = this.$services.pusher.subscribe(`private-only_tenant.dev.deliveries_uploads.${this.resourceId}.demo`)
+				let channel = this.$services.pusher.subscribe(`private-only_tenant.qa.deliveries_uploads.${this.resourceId}.upload`)
 				channel.bind_global((event, data) => {
 					switch(event)
 					{
@@ -106,7 +106,7 @@
 		},
 
 		created() {
-			this.listen()
+			//this.listen()
 		}
 
 	}

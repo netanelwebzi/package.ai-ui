@@ -45,13 +45,11 @@
 					<div class="item-container">
 						<div class="md-list-text-container">
 							<h1>{{ item.recipientFirstName + ' ' + item.recipientLastName }}</h1>
-							<p v-if="item.lastMessageText !== undefined && item.lastMessageText !== null && item.lastMessageText.length > 0"><strong v-if="item.lastMessageDirection == 'OUTGOING'">Jenny: </strong>{{ item.lastMessageText.substring(0,47) }}...</p>
+							<p v-if="item.lastMessageDirection !== undefined && item.lastMessageText !== undefined && item.lastMessageText !== null && item.lastMessageText.length > 0"><strong v-if="item.lastMessageDirection == 'OUTGOING'">Jenny: </strong>{{ item.lastMessageText.substring(0,47) }}...</p>
 							<p v-else>-- Not started --</p>
 						</div>
 
-						<div class="container-action-icons">
-							<img src="~assets/img/NoChat_Red_LeftPanel.png" v-if="item.schedulingState == 'NO_RESPONSE' && item != selectedItem">
-							<img src="~assets/img/NoChat_White_LeftPanel.png" v-if="item.schedulingState == 'NO_RESPONSE' && item == selectedItem">
+						<div class="container-action-icons" v-if="item.schedulingState !== undefined && item.schedulingState !== null">
 
 							<img src="~assets/img/Chat_Purple_LeftPanel.png" v-if="item.schedulingState == 'IN_PROGRESS' && item != selectedItem">
 							<img src="~assets/img/Chat_White_LeftPanel.png" v-if="item.schedulingState == 'IN_PROGRESS' && item == selectedItem">

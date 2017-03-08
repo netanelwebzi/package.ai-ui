@@ -309,7 +309,7 @@
 				}
 			}
 		},
-		store: ['availableRoutePlans', 'currentRoutePlanId', 'phase', 'displayOverlay', 'selectedConversationStatus', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage', 'currentDate', 'metrics', 'conversations'],
+		store: ['availableRoutePlans', 'currentRoutePlanId', 'phase', 'displayOverlay', 'selectedConversationStatus', 'user', 'phases', 'metrics', 'routePlan', 'deliveries', 'overlayMessage', 'currentDate', 'metrics', 'conversations', 'selectedItem'],
 		data() {
 			const d = new Date();
 			return {
@@ -369,7 +369,7 @@
 				}, 5000)
 			}
 
-			let channel = this.$services.pusher.subscribe('private-only_tenant.dev.plans.demo')
+			let channel = this.$services.pusher.subscribe('private-only_tenant.qa.plans.upload')
 			channel.bind_global((event, data) => {
 				switch (event)
 				{
@@ -378,6 +378,7 @@
 							this.$services.Plans.get(this.moment(this.currentDate).format('YYYY-MM-DD')).then((plan) => {
 								this.routePlan = plan[0]
 								this.$services.Deliveries.get(this.moment(this.currentDate).format('YYYY-MM-DD')).then((deliveries) => {
+									debugger
 									console.log('before moving to export', deliveries)
 									this.deliveries = deliveries
 									this.phase = 'export'
@@ -409,7 +410,7 @@
 				}
 			},
 			listenForUpdates() {
-				let channel = this.$services.pusher.subscribe(`private-only_tenant.dev.plans.${this.routePlan.id}.demo`)
+				let channel = this.$services.pusher.subscribe(`private-only_tenant.qa.plans.${this.routePlan.id}.upload`)
 				channel.bind_global((event, data) => {
 					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations' && data.payload.lastMessageText !== undefined){
 						const foundConversation = _.findWhere(this.conversations, {id: data.subResourceId})
@@ -471,6 +472,7 @@
 			createDeliverySchedule() {
 				this.displayOverlay = true
 				this.overlayMessage = 'Preparing route plan...'
+				this.selectedItem = null
 				this.$services.Plans.schedule(this.moment(this.currentDate).format('YYYY-MM-DD')).then((response) => {
 					this.routePlanId = response.routePlanId
 				}).catch((error) => {

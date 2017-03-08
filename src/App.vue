@@ -40,13 +40,13 @@
 				this.displayOverlay = true
 			});
 
-			setInterval(() => {
+			/**setInterval(() => {
 				const calc = (new Date().getTime() - this.displayOverlayStartTime.getTime()) / 1000;
 				if(calc >= config.autoRefreshInterval && this.displayOverlay == true){
 					window.location.reload()
 				}
 
-			}, 1000)
+			}, 1000)**/
 		}
 	}
 </script>
