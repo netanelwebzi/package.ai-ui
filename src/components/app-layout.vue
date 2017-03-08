@@ -378,7 +378,6 @@
 							this.$services.Plans.get(this.moment(this.currentDate).format('YYYY-MM-DD')).then((plan) => {
 								this.routePlan = plan[0]
 								this.$services.Deliveries.get(this.moment(this.currentDate).format('YYYY-MM-DD')).then((deliveries) => {
-									debugger
 									console.log('before moving to export', deliveries)
 									this.deliveries = deliveries
 									this.phase = 'export'
@@ -440,6 +439,9 @@
 						})
 					}
 
+					if(event == 'CREATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations'){
+						this.$services.loadMergedData(this.moment(this.currentDate).format('YYYY-MM-DD'))
+					}
 
 					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations' && data.payload.schedulingState !== undefined){
 						const foundConversation = _.findWhere(that.conversations, {id: data.subResourceId})
