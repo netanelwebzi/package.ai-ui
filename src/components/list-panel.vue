@@ -20,7 +20,7 @@
 				              :class="{ selected: selectedItem === item }">
 					<div class="item-container">
 						<div class="md-list-text-container">
-							<h1>{{ item.recipient.firstName + ' ' + item.recipient.lastName }}</h1>
+							<h1>{{ item.recipient.lastName == undefined ? item.recipient.firstName : item.recipient.firstName + ' ' + item.recipient.lastName }}</h1>
 							<p>{{ item.address.formattedAddress }}</p>
 						</div>
 
@@ -44,8 +44,8 @@
 				              :class="{ selected: selectedItem === item }">
 					<div class="item-container">
 						<div class="md-list-text-container">
-							<h1>{{ item.recipientFirstName + ' ' + item.recipientLastName }}</h1>
-							<p v-if="item.lastMessageDirection !== undefined && item.lastMessageText !== undefined && item.lastMessageText !== null && item.lastMessageText.length > 0"><strong v-if="item.lastMessageDirection == 'OUTGOING'">Jenny: </strong>{{ item.lastMessageText.substring(0,47) }}...</p>
+							<h1>{{ item.recipientLastName == undefined ? item.recipientFirstName : item.recipientFirstName + ' ' + item.recipientLastName }}</h1>
+							<p v-if="item.lastMessageDirection !== undefined && item.lastMessageText !== undefined && item.lastMessageText !== null && item.lastMessageText.length > 0"><strong v-if="item.lastMessageDirection !== undefined && item.lastMessageDirection == 'OUTGOING'">Jenny: </strong>{{ item.lastMessageText.substring(0,47) }}...</p>
 							<p v-else>-- Not started --</p>
 						</div>
 
@@ -99,7 +99,11 @@
 					results = this.deliveries
 				} else {
 					results = this.deliveries.filter(function (item) {
-						return item.recipient.firstName.toLowerCase().indexOf(search) !== -1 || item.recipient.lastName.toLowerCase().indexOf(search) !== -1 || item.address.formattedAddress.toLowerCase().indexOf(search) !== -1
+						if(item.recipient.lastName !== null && item.recipient.lastName !== undefined){
+							return item.recipient.firstName.toLowerCase().indexOf(search) !== -1 || item.recipient.lastName.toLowerCase().indexOf(search) != -1 || item.address.formattedAddress.toLowerCase().indexOf(search) !== -1
+						} else {
+							return item.recipient.firstName.toLowerCase().indexOf(search) !== -1 || item.address.formattedAddress.toLowerCase().indexOf(search) !== -1
+						}
 					})
 				}
 

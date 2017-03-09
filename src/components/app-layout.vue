@@ -434,6 +434,7 @@
 					}
 
 					if(event == 'UPDATED' && data.subResourceName !== undefined && (data.subResourceName == 'deliveries' || data.subResourceName == 'conversations')){
+						debugger
 						this.$services.Plans.metrics(that.routePlan.id).then((metrics) => {
 							that.metrics = metrics
 						})
