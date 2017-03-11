@@ -450,6 +450,13 @@
 							foundConversation.schedulingState = data.payload.schedulingState
 						}
 					}
+
+					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'deliveries'){
+						const foundConversation = _.findWhere(that.conversations, {id: data.subResourceId})
+						if(foundConversation !== undefined) {
+							foundConversation.deliveries[0].state = data.payload.state
+						}
+					}
 				})
 			},
 			onNewDeliversConfirmDialogClose(button) {

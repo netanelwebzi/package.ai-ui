@@ -4,7 +4,6 @@
     <list default="true" id="ac872419-97f0-44e2-af38-c7a9fe3615ce" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/app-layout.vue" afterPath="$PROJECT_DIR$/src/components/app-layout.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/list-panel.vue" afterPath="$PROJECT_DIR$/src/components/list-panel.vue" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -32,8 +31,8 @@
       <file leaf-file-name="app-layout.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="186" column="67" lean-forward="false" selection-start-line="186" selection-start-column="48" selection-end-line="186" selection-end-column="67" />
+            <state relative-caret-position="390">
+              <caret line="461" column="53" lean-forward="true" selection-start-line="461" selection-start-column="53" selection-end-line="461" selection-end-column="53" />
               <folding />
             </state>
           </provider>
@@ -42,13 +41,9 @@
       <file leaf-file-name="services.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/services.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="979">
-              <caret line="132" column="4" lean-forward="false" selection-start-line="132" selection-start-column="4" selection-end-line="132" selection-end-column="4" />
-              <folding>
-                <element signature="e#767#1847#0" expanded="false" />
-                <element signature="e#833#1843#0" expanded="false" />
-                <element signature="e#883#1644#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="720">
+              <caret line="54" column="14" lean-forward="true" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -73,7 +68,6 @@
       <find>listenForUpda</find>
       <find>loadmerged</find>
       <find>onJenn</find>
-      <find>loadMerged</find>
       <find>CREATED</find>
       <find>this.$services.loadMergedData(this.moment(this.currentDate).format('YYYY-MM-DD'))</find>
       <find>debugger</find>
@@ -83,10 +77,11 @@
       <find>FirstName</find>
       <find>.recipientFi</find>
       <find>onJennyOK</find>
-      <find>listenForUpdates</find>
       <find>metrics</find>
       <find>deliveries[0]</find>
       <find>rOUTE id</find>
+      <find>loadMerged</find>
+      <find>listenForUpdates</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -126,8 +121,8 @@
         <option value="$PROJECT_DIR$/src/components/map-time-slots.vue" />
         <option value="$PROJECT_DIR$/src/App.vue" />
         <option value="$PROJECT_DIR$/src/components/file-upload-panel.vue" />
-        <option value="$PROJECT_DIR$/src/components/app-layout.vue" />
         <option value="$PROJECT_DIR$/src/components/list-panel.vue" />
+        <option value="$PROJECT_DIR$/src/components/app-layout.vue" />
       </list>
     </option>
   </component>
@@ -521,12 +516,12 @@
       <workItem from="1488812533490" duration="779000" />
       <workItem from="1488960674166" duration="3756000" />
       <workItem from="1488976228235" duration="619000" />
-      <workItem from="1489090470102" duration="2464000" />
+      <workItem from="1489090470102" duration="2983000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="224978000" />
+    <option name="totallyTimeSpent" value="225497000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -882,18 +877,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/services.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="979">
-          <caret line="132" column="4" lean-forward="false" selection-start-line="132" selection-start-column="4" selection-end-line="132" selection-end-column="4" />
-          <folding>
-            <element signature="e#767#1847#0" expanded="false" />
-            <element signature="e#833#1843#0" expanded="false" />
-            <element signature="e#883#1644#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/list-panel.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -902,10 +885,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="720">
+          <caret line="54" column="14" lean-forward="true" selection-start-line="54" selection-start-column="14" selection-end-line="54" selection-end-column="14" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="186" column="67" lean-forward="false" selection-start-line="186" selection-start-column="48" selection-end-line="186" selection-end-column="67" />
+        <state relative-caret-position="390">
+          <caret line="461" column="53" lean-forward="true" selection-start-line="461" selection-start-column="53" selection-end-line="461" selection-end-column="53" />
           <folding />
         </state>
       </provider>
