@@ -453,8 +453,8 @@
 					}
 
 					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'deliveries'){
-						const foundConversation = _.findWhere(that.conversations, {id: data.subResourceId})
-						if(foundConversation !== undefined) {
+						const foundConversation = _.findWhere(that.conversations, {id: data.payload.conversation})
+						if(foundConversation !== undefined && foundConversation !== null) {
 							foundConversation.deliveries[0].state = data.payload.state
 						}
 					}

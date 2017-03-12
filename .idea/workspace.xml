@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ac872419-97f0-44e2-af38-c7a9fe3615ce" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/app-layout.vue" afterPath="$PROJECT_DIR$/src/components/app-layout.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/bootstrap.js" afterPath="$PROJECT_DIR$/src/core/bootstrap.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,13 +20,12 @@
       <file leaf-file-name="app-layout.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="143">
-              <caret line="410" column="28" lean-forward="false" selection-start-line="410" selection-start-column="12" selection-end-line="410" selection-end-column="28" />
+            <state relative-caret-position="316">
+              <caret line="462" column="53" lean-forward="true" selection-start-line="462" selection-start-column="53" selection-end-line="462" selection-end-column="53" />
               <folding>
                 <element signature="e#14923#15879#0" expanded="false" />
                 <element signature="e#16031#16152#0" expanded="false" />
                 <element signature="e#16557#16779#0" expanded="false" />
-                <element signature="e#16886#17102#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -37,7 +34,7 @@
       <file leaf-file-name="component-mixin.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/component-mixin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="550">
+            <state relative-caret-position="506">
               <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
               <folding />
             </state>
@@ -77,8 +74,8 @@
       <file leaf-file-name="services.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/services.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="198">
-              <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+            <state relative-caret-position="236">
+              <caret line="52" column="20" lean-forward="true" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
               <folding />
             </state>
           </provider>
@@ -98,8 +95,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>store:</find>
-      <find>createDeku</find>
       <find>substr</find>
       <find>lastMessageDirection</find>
       <find>item.item</find>
@@ -128,6 +123,8 @@
       <find>loadMerged</find>
       <find>listenForupdate</find>
       <find>listenForUpdates</find>
+      <find>conversation</find>
+      <find>CO</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -595,12 +592,12 @@
       <workItem from="1488960674166" duration="3756000" />
       <workItem from="1488976228235" duration="619000" />
       <workItem from="1489090470102" duration="3006000" />
-      <workItem from="1489333024154" duration="3598000" />
+      <workItem from="1489333024154" duration="3985000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="229118000" />
+    <option name="totallyTimeSpent" value="229505000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -961,31 +958,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/services.js">
+    <entry file="file://$PROJECT_DIR$/src/core/component-mixin.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="198">
-          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+        <state relative-caret-position="506">
+          <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/component-mixin.js">
+    <entry file="file://$PROJECT_DIR$/src/core/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="550">
-          <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        <state relative-caret-position="236">
+          <caret line="52" column="20" lean-forward="true" selection-start-line="52" selection-start-column="20" selection-end-line="52" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="143">
-          <caret line="410" column="28" lean-forward="false" selection-start-line="410" selection-start-column="12" selection-end-line="410" selection-end-column="28" />
+        <state relative-caret-position="316">
+          <caret line="462" column="53" lean-forward="true" selection-start-line="462" selection-start-column="53" selection-end-line="462" selection-end-column="53" />
           <folding>
             <element signature="e#14923#15879#0" expanded="false" />
             <element signature="e#16031#16152#0" expanded="false" />
             <element signature="e#16557#16779#0" expanded="false" />
-            <element signature="e#16886#17102#0" expanded="false" />
           </folding>
         </state>
       </provider>
