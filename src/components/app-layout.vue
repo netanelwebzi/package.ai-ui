@@ -414,7 +414,7 @@
 				channel.bind_global((event, data) => {
 					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations' && data.payload.lastMessageText !== undefined){
 						const foundConversation = _.findWhere(that.conversations, {id: data.subResourceId})
-						if(data.payload !== undefined && Object.keys(data.payload).length > 0) {
+						if(data.payload !== undefined && Object.keys(data.payload).length > 0 && foundConversation !== undefined && foundConversation !== null) {
 							if(data.payload.lastMessageDirection !== undefined && data.payload.lastMessageDirection !== null) {
 								foundConversation.lastMessageDirection = data.payload.lastMessageDirection
 							}
