@@ -4,7 +4,7 @@
     <list default="true" id="ac872419-97f0-44e2-af38-c7a9fe3615ce" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/app-layout.vue" afterPath="$PROJECT_DIR$/src/components/app-layout.vue" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/services.js" afterPath="$PROJECT_DIR$/src/core/services.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/core/bootstrap.js" afterPath="$PROJECT_DIR$/src/core/bootstrap.js" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -22,8 +22,43 @@
       <file leaf-file-name="app-layout.vue" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="486" column="44" lean-forward="false" selection-start-line="486" selection-start-column="44" selection-end-line="486" selection-end-column="44" />
+            <state relative-caret-position="143">
+              <caret line="410" column="28" lean-forward="false" selection-start-line="410" selection-start-column="12" selection-end-line="410" selection-end-column="28" />
+              <folding>
+                <element signature="e#14923#15879#0" expanded="false" />
+                <element signature="e#16031#16152#0" expanded="false" />
+                <element signature="e#16557#16779#0" expanded="false" />
+                <element signature="e#16886#17102#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="component-mixin.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/component-mixin.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="550">
+              <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="264">
+              <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="bootstrap.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/bootstrap.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="198">
+              <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -42,8 +77,8 @@
       <file leaf-file-name="services.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/services.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-341">
-              <caret line="24" column="6" lean-forward="false" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+            <state relative-caret-position="198">
+              <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
               <folding />
             </state>
           </provider>
@@ -63,8 +98,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>createDevlier</find>
-      <find>selectedItem</find>
       <find>store:</find>
       <find>createDeku</find>
       <find>substr</find>
@@ -90,9 +123,11 @@
       <find>availableRoutePlans</find>
       <find>createDeliverySchedule</find>
       <find>loadRo</find>
-      <find>listenForUpdates</find>
       <find>onJenny</find>
+      <find>listenFor</find>
       <find>loadMerged</find>
+      <find>listenForupdate</find>
+      <find>listenForUpdates</find>
     </findStrings>
     <dirStrings>
       <dir>$PROJECT_DIR$/src</dir>
@@ -121,7 +156,6 @@
         <option value="$PROJECT_DIR$/src/core/click-outside.js" />
         <option value="$PROJECT_DIR$/src/views/auth/login.vue" />
         <option value="$PROJECT_DIR$/src/core/config.js" />
-        <option value="$PROJECT_DIR$/src/core/bootstrap.js" />
         <option value="$PROJECT_DIR$/src/core/store.js" />
         <option value="$PROJECT_DIR$/src/components/item-chat-panel.vue" />
         <option value="$PROJECT_DIR$/src/core/component-mixin.js" />
@@ -133,6 +167,7 @@
         <option value="$PROJECT_DIR$/src/components/file-upload-panel.vue" />
         <option value="$PROJECT_DIR$/src/components/list-panel.vue" />
         <option value="$PROJECT_DIR$/src/core/services.js" />
+        <option value="$PROJECT_DIR$/src/core/bootstrap.js" />
         <option value="$PROJECT_DIR$/src/components/app-layout.vue" />
       </list>
     </option>
@@ -386,6 +421,24 @@
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vue-webpack-project" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vue-webpack-project" />
+              <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="config" />
               <option name="myItemType" value="com.jetbrains.php.projectView.PhpTreeStructureProvider$1" />
             </PATH_ELEMENT>
@@ -542,12 +595,12 @@
       <workItem from="1488960674166" duration="3756000" />
       <workItem from="1488976228235" duration="619000" />
       <workItem from="1489090470102" duration="3006000" />
-      <workItem from="1489333024154" duration="2327000" />
+      <workItem from="1489333024154" duration="3598000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="227847000" />
+    <option name="totallyTimeSpent" value="229118000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -790,13 +843,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/bootstrap.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="61" column="23" lean-forward="false" selection-start-line="61" selection-start-column="18" selection-end-line="61" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/views/auth/login.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -818,24 +864,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/item-chat-panel.vue">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="114">
           <caret line="6" column="77" lean-forward="false" selection-start-line="6" selection-start-column="59" selection-end-line="6" selection-end-column="77" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/component-mixin.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="134">
-          <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -897,6 +929,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/bootstrap.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="26" column="0" lean-forward="true" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="12" column="0" lean-forward="true" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/core/config.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="242">
@@ -908,24 +956,37 @@
     <entry file="file://$PROJECT_DIR$/dist/static/js/app.8196d5e4ad4cab85d949.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="157">
-          <caret line="0" column="1604" lean-forward="false" selection-start-line="0" selection-start-column="1604" selection-end-line="0" selection-end-column="1604" />
+          <caret line="0" column="6057" lean-forward="false" selection-start-line="0" selection-start-column="6057" selection-end-line="0" selection-end-column="6057" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/core/services.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-341">
-          <caret line="24" column="6" lean-forward="false" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+        <state relative-caret-position="198">
+          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/component-mixin.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="550">
+          <caret line="25" column="29" lean-forward="false" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/components/app-layout.vue">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="486" column="44" lean-forward="false" selection-start-line="486" selection-start-column="44" selection-end-line="486" selection-end-column="44" />
-          <folding />
+        <state relative-caret-position="143">
+          <caret line="410" column="28" lean-forward="false" selection-start-line="410" selection-start-column="12" selection-end-line="410" selection-end-column="28" />
+          <folding>
+            <element signature="e#14923#15879#0" expanded="false" />
+            <element signature="e#16031#16152#0" expanded="false" />
+            <element signature="e#16557#16779#0" expanded="false" />
+            <element signature="e#16886#17102#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

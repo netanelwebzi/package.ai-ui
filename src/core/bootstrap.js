@@ -26,7 +26,7 @@ Vue.use(VueMaterial)
 Vue.mixin(componentMixin)
 
 // Pusher
-Pusher.logToConsole = true
+Pusher.logToConsole = false
 let pusher = new Pusher(config.pusher.key, {
 	encrypted: true,
 	cluster: config.pusher.cluster,

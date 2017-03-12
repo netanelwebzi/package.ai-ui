@@ -352,7 +352,7 @@
 				this.displayOverlay = true
 				this.$localStorage.set('phase', this.phase)
 
-				if(this.phase == 'monitoring'){
+				if(this.phase == 'jenny'){
 					this.listenForUpdates()
 //					this.$services.Plans.metrics(this.routePlan.id).then((metrics) => {
 //						this.metrics = metrics
@@ -363,7 +363,7 @@
 			}
 		},
 		created() {
-			if(this.onPhaseMonitoring()){
+			if(this.onPhaseJenny()){
 				setTimeout(() => {
 					this.listenForUpdates()
 				}, 5000)
@@ -412,6 +412,7 @@
 				let channel = this.$services.pusher.subscribe(`private-only_tenant.qa.plans.${this.routePlan.id}.upload`)
 				let that = this
 				channel.bind_global((event, data) => {
+					console.info('pusher event ' + data.subResourceName + '@' + event)
 					if(event == 'UPDATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations' && data.payload.lastMessageText !== undefined){
 						const foundConversation = _.findWhere(that.conversations, {id: data.subResourceId})
 						if(data.payload !== undefined && Object.keys(data.payload).length > 0 && foundConversation !== undefined && foundConversation !== null) {
