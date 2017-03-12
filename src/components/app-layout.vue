@@ -434,13 +434,13 @@
 					}
 
 					if(event == 'UPDATED' && data.subResourceName !== undefined && (data.subResourceName == 'deliveries' || data.subResourceName == 'conversations')){
-						debugger
 						this.$services.Plans.metrics(that.routePlan.id).then((metrics) => {
 							that.metrics = metrics
 						})
 					}
 
 					if(event == 'CREATED' && data.subResourceName !== undefined && data.subResourceName == 'conversations'){
+						console.info('conversation created')
 						this.$services.loadMergedData(this.moment(this.currentDate).format('YYYY-MM-DD'))
 					}
 
@@ -501,6 +501,7 @@
 				this.selectedItem = null
 				this.$services.Plans.schedule(this.moment(this.currentDate).format('YYYY-MM-DD')).then((response) => {
 					this.routePlanId = response.routePlanId
+//					this.$services.loadRoutePlans()
 				}).catch((error) => {
 					this.displayOverlay = false
 					alert(error.response.data.message)

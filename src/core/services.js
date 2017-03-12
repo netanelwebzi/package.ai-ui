@@ -56,10 +56,34 @@ const loadMergedData = (date) => {
 		})
 	})
 }
+
+const loadRoutePlans = (date) => {
+	date = date || moment(store.currentDate).format('YYYY-MM-DD')
+	store.selectedItem = null
+	store.routePlan = {}
+	store.availableRoutePlans = []
+	store.deliveries = []
+	store.displayOverlay = true
+
+	Plans.get(date).then((plan) => {
+		if (plan.length > 0) {
+			store.availableRoutePlans = plan
+			if (store.currentRoutePlanId == null) {
+				plan = plan[0]
+				store.currentRoutePlanId = plan.id
+			} else {
+				plan = _.findWhere(plan, {id: store.currentRoutePlanId})
+			}
+			store.routePlan = plan
+		}
+	})
+}
+
 const init = (date) => {
 	date = date || moment(store.currentDate).format('YYYY-MM-DD')
 	store.selectedItem = null
 	store.routePlan = {}
+	store.availableRoutePlans = []
 	store.deliveries = []
 	store.displayOverlay = true
 
@@ -276,5 +300,6 @@ export {
 	Conversations,
 	Recipients,
 	init,
-	loadMergedData
+	loadMergedData,
+	loadRoutePlans
 }
