@@ -363,7 +363,7 @@
 			}
 		},
 		created() {
-			if(this.onPhaseJenny()){
+			if(this.onPhaseJenny() || this.onPhaseMonitoring()){
 				setTimeout(() => {
 					this.listenForUpdates()
 				}, 5000)
