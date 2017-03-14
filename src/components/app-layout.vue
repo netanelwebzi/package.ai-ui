@@ -352,7 +352,7 @@
 				this.displayOverlay = true
 				this.$localStorage.set('phase', this.phase)
 
-				if(this.phase == 'jenny'){
+				if(this.phase == 'jenny' || this.phase == 'monitoring'){
 					this.listenForUpdates()
 //					this.$services.Plans.metrics(this.routePlan.id).then((metrics) => {
 //						this.metrics = metrics
